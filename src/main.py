@@ -11,17 +11,30 @@ def main():
     # Main loop
     while running:
         for event in pygame.event.get():
+<<<<<<< HEAD
             if event.type == pygame.QUIT: # pygame.QUIT event means the user clicked the x
                 running = False # So the loop will stop running and finish the game
             game.handle_event(event) # Handle other events like keyboard
             
         # Update game state
         game.update() 
+=======
+            if event.type == pygame.QUIT:
+                running = False
+            game.handle_event(event)
+            
+        # Update game state
+        game.update()
+>>>>>>> 4520943 (I created the initial game configuration)
 
         # Screen rendering
         screen.fill((0, 0, 0))
         game.draw(screen)
+<<<<<<< HEAD
         pygame.display.flip() # Display the updated screen
+=======
+        pygame.display.flip()
+>>>>>>> 4520943 (I created the initial game configuration)
 
         # Control frame rate
         clock.tick(60)

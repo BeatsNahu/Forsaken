@@ -1,5 +1,6 @@
 import pygame
 from player import Player
+<<<<<<< HEAD
 import sys
 
 class Game: # Create a Game class to manage game state
@@ -22,6 +23,18 @@ class Game: # Create a Game class to manage game state
                 print("Enter") # It will print "Enter"
             
             ### self.player.handle_event(event)
+=======
+
+class Game:
+    def __init__(self):
+        self.player = Player()
+        self.all_sprites = pygame.sprite.Group()
+        self.all_sprites.add(self.player)
+
+    def handle_event(self, event):
+        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+            self.player.handle_event(event)
+>>>>>>> 4520943 (I created the initial game configuration)
 
     def update(self):
         self.all_sprites.update()
