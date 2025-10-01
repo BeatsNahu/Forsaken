@@ -3,6 +3,7 @@ import pygame
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from engine import Engine
 from scene_manager import SceneManager
 from scene import Scene
@@ -154,6 +155,20 @@ def main():
         for event in pygame.event.get():
 <<<<<<< HEAD
 >>>>>>> 4520943 (I created the initial game configuration)
+=======
+from game import Game
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((1080, 720))
+    pygame.display.set_caption("Forsaken")
+    clock = pygame.time.Clock()
+    running = True
+
+    # Main loop
+    while running:
+        for event in pygame.event.get():
+>>>>>>> 4520943 (I created the initial game configuration)
             if event.type == pygame.QUIT:
                 running = False
             game.handle_event(event)
@@ -162,6 +177,7 @@ def main():
         game.update()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 4520943 (I created the initial game configuration)
 =======
             if event.type == pygame.QUIT: # pygame.QUIT event means the user clicked the x
@@ -191,10 +207,13 @@ def main():
         # Update game state
         game.update() 
 >>>>>>> b6088aa (Merge)
+=======
+>>>>>>> 4520943 (I created the initial game configuration)
 
         # Screen rendering
         screen.fill((0, 0, 0))
         game.draw(screen)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -483,4 +502,15 @@ if __name__ == "__main__":
 =======
 if __name__ == "__main__": # If this script is run directly the game will start
 >>>>>>> 79b1b32 (style: center title and dialog text in Scene class)
+=======
+        pygame.display.flip()
+
+        # Control frame rate
+        clock.tick(60)
+
+    # Finalize
+    pygame.quit()
+
+if __name__ == "__main__":
+>>>>>>> 4520943 (I created the initial game configuration)
     main()
