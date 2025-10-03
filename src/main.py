@@ -216,6 +216,7 @@ def main():
     # Main loop
     while running:
         for event in pygame.event.get():
+<<<<<<< HEAD
 >>>>>>> 4520943 (I created the initial game configuration)
             if event.type == pygame.QUIT:
                 running = False
@@ -268,10 +269,19 @@ def main():
 >>>>>>> b6088aa (Merge)
 =======
 >>>>>>> 4520943 (I created the initial game configuration)
+=======
+            if event.type == pygame.QUIT: # pygame.QUIT event means the user clicked the x
+                running = False # So the loop will stop running and finish the game
+            game.handle_event(event) # Handle other events like keyboard
+            
+        # Update game state
+        game.update() 
+>>>>>>> b6088aa (Merge)
 
         # Screen rendering
         screen.fill((0, 0, 0))
         game.draw(screen)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -644,6 +654,9 @@ if __name__ == "__main__": # If this script is run directly the game will start
 >>>>>>> 79b1b32 (style: center title and dialog text in Scene class)
 =======
         pygame.display.flip()
+=======
+        pygame.display.flip() # Display the updated screen
+>>>>>>> b6088aa (Merge)
 
         # Control frame rate
         clock.tick(60)
