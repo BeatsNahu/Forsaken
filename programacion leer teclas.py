@@ -1,6 +1,9 @@
 import pygame
 import sys
 
+escenario=0
+salir="no seleccionado"
+jugar="seleccionado"
 # Inicializar Pygame
 pygame.init()
 
@@ -20,11 +23,24 @@ while True:
                 pygame.quit()
                 sys.exit()
             elif evento.key == pygame.K_UP:          # Si Tecla = Flecha Arriba
-                print("Arriba")
+                if escenario==0:
+                    jugar="seleccionado"
+                    if salir=="seleccionado":
+                        salir="no seleccionado"
             elif evento.key == pygame.K_DOWN:            # Si Tecla = Flecha Abajo
-                print("Abajo")
-            elif evento.key == pygame.K_KP_ENTER:                  # Si Tecla = a Enter 
-                print("Enter")
+                if escenario==0:
+                    salir="seleccionado"
+                    if jugar=="seleccionado":
+                        jugar="no seleccionado"
+            elif evento.key == pygame.K_RETURN:                  # Si Tecla = a Enter 
+                if escenario==0:
+                    if jugar=="seleccionado":
+                        escenario=1
+                        print(escenario)
+                    elif salir=="seleccionado":
+                        print("Saliendo...")
+                        pygame.quit()
+                        sys.exit()
     # Opcional: color de fondo
     pantalla.fill((30, 30, 30))
     pygame.display.flip()
