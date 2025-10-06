@@ -1,46 +1,33 @@
 import pygame
 import sys
+import eleccion_del_jugador
 
-escenario=0
-salir="no seleccionado"
-jugar="seleccionado"
-# Inicializar Pygame
+escenario = 0
+
 pygame.init()
 
-# Crear una ventana (requerido para recibir eventos)
 pantalla = pygame.display.set_mode((400, 300))
 pygame.display.set_caption("Lectura de teclas")
 
-# Bucle principal
 while True:
     for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:          # Si evento es = a Cerrar pygame
-            pygame.quit()                        # Cerrar Pygame
+        if evento.type == pygame.QUIT:
+            pygame.quit()
             sys.exit()
-        if evento.type == pygame.KEYDOWN:        # Si se presiona una tecla
-            if evento.key == pygame.K_ESCAPE:      # Si Tecla = Esc
+
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_ESCAPE:
                 print("Saliendo...")
                 pygame.quit()
                 sys.exit()
-            elif evento.key == pygame.K_UP:          # Si Tecla = Flecha Arriba
-                if escenario==0:
-                    jugar="seleccionado"
-                    if salir=="seleccionado":
-                        salir="no seleccionado"
-            elif evento.key == pygame.K_DOWN:            # Si Tecla = Flecha Abajo
-                if escenario==0:
-                    salir="seleccionado"
-                    if jugar=="seleccionado":
-                        jugar="no seleccionado"
-            elif evento.key == pygame.K_RETURN:                  # Si Tecla = a Enter 
-                if escenario==0:
-                    if jugar=="seleccionado":
-                        escenario=1
-                        print(escenario)
-                    elif salir=="seleccionado":
-                        print("Saliendo...")
-                        pygame.quit()
-                        sys.exit()
-    # Opcional: color de fondo
+            resultado = eleccion_del_jugador.select_scenary(evento.key)
+            if escenario == 0 and resultado is not None:
+                if resultado == "opcion1":
+                    print("Opción 1 seleccionada")
+                    escenario = 1
+                elif resultado == "opcion2":
+                    print("saliendo ...")
+                    pygame.quit()
+                    sys.exit()
     pantalla.fill((30, 30, 30))
     pygame.display.flip()
