@@ -1,5 +1,6 @@
 import pygame
 <<<<<<< HEAD
+<<<<<<< HEAD
 from engine import Engine
 from scene_manager import SceneManager
 from scene import Scene
@@ -61,6 +62,10 @@ def main():
 =======
 =======
 from game import Game
+=======
+from engine import Engine
+from scene_manager import SceneManager
+>>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
 
 def main():
     pygame.init()
@@ -71,6 +76,7 @@ def main():
 
     # Main loop
     while running:
+<<<<<<< HEAD
         for event in pygame.event.get():
 <<<<<<< HEAD
 >>>>>>> 4520943 (I created the initial game configuration)
@@ -212,6 +218,17 @@ def main():
 =======
         escene_manager.draw(screen) # The draw method of the scene manager will call the draw method of the current scene
 >>>>>>> 4fa55ba (Main.py - scene:manager and main_menu are working)
+=======
+        for event in pygame.event.get(): # Event handling loop
+            Engine.handle_event(event) # Handle other events like keyboard
+            
+        # Update game state
+        Engine.update() 
+
+        # Screen rendering
+        screen.fill((0, 0, 0))
+        Engine.draw(screen)
+>>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
         pygame.display.flip() # Display the updated screen
 <<<<<<< HEAD
 <<<<<<< HEAD

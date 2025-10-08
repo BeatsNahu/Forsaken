@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pygame
 <<<<<<< HEAD
 import random
@@ -467,3 +468,6 @@ class BattleManager(Scene):
 =======
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 SCENE_CLASS = BattleManager
+=======
+# Consult of HP, Status, Object, etc.
+>>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
