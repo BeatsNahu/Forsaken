@@ -5,6 +5,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pygame
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -718,3 +719,6 @@ SCENE_CLASS = BattleManager
 =======
 SCENE_CLASS = BattleManager
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
+=======
+# Consult of HP, Status, Object, etc.
+>>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)

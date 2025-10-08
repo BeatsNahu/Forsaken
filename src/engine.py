@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pygame
 import os
 <<<<<<< HEAD
@@ -519,6 +520,9 @@ class Engine:
 =======
 class Engine:
 <<<<<<< HEAD
+=======
+class Engine:
+>>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
     def __init__(self, name):
         self.name = name
 
@@ -551,6 +555,7 @@ class Engine:
 
 
     def stop(self):
+<<<<<<< HEAD
         print(f"{self.name} engine stopped.")
 >>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
 =======
@@ -605,3 +610,6 @@ class Engine:
                 if e.get("battle_module"):
                     self.scene_manager.load_scene(e.get("battle_module"))
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+        print(f"{self.name} engine stopped.")
+>>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
