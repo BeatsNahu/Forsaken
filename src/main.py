@@ -1,5 +1,6 @@
 import pygame
-from game import Game
+from engine import Engine
+from scene_manager import SceneManager
 
 def main():
     pygame.init()
@@ -10,6 +11,7 @@ def main():
 
     # Main loop
     while running:
+<<<<<<< HEAD
         for event in pygame.event.get():
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -41,6 +43,17 @@ def main():
         game.draw(screen)
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+        for event in pygame.event.get(): # Event handling loop
+            Engine.handle_event(event) # Handle other events like keyboard
+            
+        # Update game state
+        Engine.update() 
+
+        # Screen rendering
+        screen.fill((0, 0, 0))
+        Engine.draw(screen)
+>>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
         pygame.display.flip() # Display the updated screen
 =======
         pygame.display.flip()
