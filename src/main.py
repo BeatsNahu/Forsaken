@@ -2,8 +2,11 @@ import pygame
 from engine import Engine
 from scene_manager import SceneManager
 from scene import Scene
+<<<<<<< HEAD
 from transition_manager import TransitionManager
 
+=======
+>>>>>>> 5a11d94 (Completion of main.py and editing the menu.py file)
 
 def main():
     # Screen setup
@@ -15,6 +18,7 @@ def main():
     logo = pygame.transform.scale(icono, (96, 96))
     clock = pygame.time.Clock()
 
+<<<<<<< HEAD
     # With this part we avoid repeated code in every scene, because all scenes will have access to the screen and clock initialized in "Screen setup"
     engine = Engine() # Create an instance of the Engine
     engine.screen = screen # Assign the screen to the engine
@@ -121,6 +125,33 @@ def main():
 =======
         escene_manager.draw(screen) # The draw method of the scene manager will call the draw method of the current scene
 >>>>>>> 5b2e0a0 (Main.py - scene:manager and main_menu are working)
+=======
+    engine = Engine()
+    engine.screen = screen
+    engine.clock = clock
+
+    escene_manager = SceneManager(engine, Scene)
+    engine.scene_manager = escene_manager
+
+    escene_manager.load_scene("src.scripts.menu") # Load the menu scene
+
+
+    running = True
+    # Main loop
+    while running and not getattr(engine, "quit_flag", False):
+        dt = clock.tick(60) / 1000.0  # Delta time in seconds
+        for event in pygame.event.get(): # Event handling loop
+            if event.type == pygame.QUIT:
+                running = False
+                break  
+            SceneManager.handle_event(event) # Handle other events like keyboard
+            
+        # Update game state
+        SceneManager.update(dt)
+
+        # Screen rendering
+        SceneManager.draw(screen)
+>>>>>>> 5a11d94 (Completion of main.py and editing the menu.py file)
         pygame.display.flip() # Display the updated screen
 <<<<<<< HEAD
 =======
