@@ -3,6 +3,7 @@ import os
 from transition_manager import TransitionManager
 
 class Engine:
+<<<<<<< HEAD
     def __init__(self): # Buiilder of the engine
         self.name = None # Name of the engine
         self.scene_manager = None # Scene manager of the engine
@@ -153,3 +154,11 @@ class Engine:
                 # The battle module to load is specified in the effect
                 if e.get("battle_module"):
                     self.scene_manager.load_scene(e.get("battle_module"))
+=======
+    def __init__(self, name): # Constructor of the class
+        self.name = Forsaken # Name of the engine
+        self.scene_manager = None # Scene manager of the engine
+        self.screen = None # Screen of the engine
+        self.clock = None # Clock of the engine
+        self.quit_flag = False # Flag to indicate if the game should quit
+>>>>>>> 32ed7b6 (Edition and comments of main.py)

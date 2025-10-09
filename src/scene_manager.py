@@ -1,13 +1,20 @@
 import importlib
+<<<<<<< HEAD
 import pygame
 from scene import Scene as BaseScene
 class SceneManager: # Create a Game class to manage scene state
     def __init__(self, engine, scene_classes): # Initialize the game with a scene manager
+=======
+
+class SceneManager: # Create a Game class to manage scene state
+    def __init__(self): # Initialize the game with a scene manager
+>>>>>>> 32ed7b6 (Edition and comments of main.py)
         self.engine = engine # Reference to the game engine
         self.scene_classes = scene_classes # Dictionary of scene classes
         self.current_scene = None # Current active scene
 
     def load_scene(self, scene_name):
+<<<<<<< HEAD
         # Using the transition manager to load the scene with a fade effect
         if not self.engine.transition_manager.is_transitioning(): # Only load scene if not already transitioning
             self.engine.transition_manager.start_transition(scene_name) # Start the transition to the new scene
@@ -76,5 +83,24 @@ class SceneManager: # Create a Game class to manage scene state
             
         # Draw/Show the transition effect on top of the current scene
         self.engine.transition_manager.draw(screen)
+=======
+        mod = importlib.import_module(module.path) # Dynamically import the module
+        importlib.reload(mod) # Reload the module to get the latest changes
+        
+
+
+
+
+    def handle_event(self, event): # Handle events and delegate to the current scene
+        if self.current_scene: # If there is a current scene
+            self.current_scene.handle_event(event) # Delegate event handling to the current scene
+    
+    def update(self, dt): # Update the current scene with delta time, so the FPS will be the same on every computer
+        if self.current_scene:
+            self.current_scene.update(dt)
+    def draw(self, screen):
+        if self.current_scene:
+            self.current_scene.draw(screen)
+>>>>>>> 32ed7b6 (Edition and comments of main.py)
 
         
