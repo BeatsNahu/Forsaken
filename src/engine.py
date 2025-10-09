@@ -350,6 +350,7 @@ class Engine:
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
 class Engine:
+<<<<<<< HEAD
     def __init__(self, name):
         self.name = name
 
@@ -384,3 +385,11 @@ class Engine:
     def stop(self):
         print(f"{self.name} engine stopped.")
 >>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
+=======
+    def __init__(self, name): # Constructor of the class
+        self.name = Forsaken # Name of the engine
+        self.scene_manager = None # Scene manager of the engine
+        self.screen = None # Screen of the engine
+        self.clock = None # Clock of the engine
+        self.quit_flag = False # Flag to indicate if the game should quit
+>>>>>>> 32ed7b6 (Edition and comments of main.py)
