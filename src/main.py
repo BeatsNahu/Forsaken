@@ -22,6 +22,7 @@ from scene import Scene
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from transition_manager import TransitionManager
 
 =======
@@ -258,15 +259,28 @@ from game import Game
 from engine import Engine
 from scene_manager import SceneManager
 >>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
+=======
+>>>>>>> e6242d4 (Completion of main.py and editing the menu.py file)
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((1080, 720))
     pygame.display.set_caption("Forsaken")
     clock = pygame.time.Clock()
-    running = True
 
+    engine = Engine()
+    engine.screen = screen
+    engine.clock = clock
+
+    escene_manager = SceneManager(engine, Scene)
+    engine.scene_manager = escene_manager
+
+    escene_manager.load_scene("src.scripts.menu") # Load the menu scene
+
+
+    running = True
     # Main loop
+<<<<<<< HEAD
     while running:
 <<<<<<< HEAD
         for event in pygame.event.get():
@@ -699,16 +713,27 @@ def main():
         escene_manager.draw(screen) # The draw method of the scene manager will call the draw method of the current scene
 >>>>>>> 5b2e0a0 (Main.py - scene:manager and main_menu are working)
 =======
+=======
+    while running and not getattr(engine, "quit_flag", False):
+        dt = clock.tick(60) / 1000.0  # Delta time in seconds
+>>>>>>> e6242d4 (Completion of main.py and editing the menu.py file)
         for event in pygame.event.get(): # Event handling loop
-            Engine.handle_event(event) # Handle other events like keyboard
+            if event.type == pygame.QUIT:
+                running = False
+                break  
+            SceneManager.handle_event(event) # Handle other events like keyboard
             
         # Update game state
-        Engine.update() 
+        SceneManager.update(dt)
 
         # Screen rendering
+<<<<<<< HEAD
         screen.fill((0, 0, 0))
         Engine.draw(screen)
 >>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
+=======
+        SceneManager.draw(screen)
+>>>>>>> e6242d4 (Completion of main.py and editing the menu.py file)
         pygame.display.flip() # Display the updated screen
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -816,7 +841,6 @@ if __name__ == "__main__": # If this script is run directly the game will start
 >>>>>>> b6088aa (Merge)
 
         # Control frame rate
-        clock.tick(60)
 
     # Finalize
     pygame.quit()
