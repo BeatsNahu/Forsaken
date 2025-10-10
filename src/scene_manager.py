@@ -86,8 +86,23 @@ class SceneManager: # Create a Game class to manage scene state
 =======
         mod = importlib.import_module(module.path) # Dynamically import the module
         importlib.reload(mod) # Reload the module to get the latest changes
-        
+        if hasattr(mod, "SCENE_CLASS"):
+            cls = mod.SCENE_CLASS
+            scene = cls(self.engine)
+        elif hasattr(mod, "SCENE"):
+            data = mod.SCENE
+            scene = self.scene_class(self.engine, data)
+        elif hasattr(mod, "create") and callable(mod.create):
+            scene = mod.create(self.engine)   
+        else:
+            raise RuntimeError("Módulo de escena inválido: " + scene_name)
 
+        if self.current_scene and hasattr(self.current_scene, "exit"):
+            self.current_scene.exit()
+        self.current_scene = scene
+        self.engine.state["current_scene"] = getattr(scene, "id", None)
+        scene.enter()
+        return scene
 
 
 
