@@ -4,9 +4,8 @@ from scene import Scene
 
 class MainMenu(Scene):
     def __init__(self, engine):
-        super().__init__(engine, {"id":"main_menu"})
+        super().__init__(engine, {"id":"menu"})
         self.options = [
-            {"text":"Comenzar", "action": lambda: engine.scene_manager.load_scene("src.scripts.ch0")},
             {"text":"Salir", "action": lambda: setattr(engine, "quit_flag", True)}
         ]
         self.sel = 0
