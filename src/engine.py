@@ -15,6 +15,7 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
     def __init__(self): # Buiilder of the engine
@@ -388,6 +389,10 @@ class Engine:
 =======
     def __init__(self, name): # Constructor of the class
         self.name = Forsaken # Name of the engine
+=======
+    def __init__(self): # Constructor of the class
+        self.name = None # Name of the engine
+>>>>>>> b4d0ed7 (Run and debug)
         self.scene_manager = None # Scene manager of the engine
         self.screen = None # Screen of the engine
         self.clock = None # Clock of the engine
