@@ -5,3 +5,5 @@ class Engine:
         self.screen = None # Screen of the engine
         self.clock = None # Clock of the engine
         self.quit_flag = False # Flag to indicate if the game should quit
+        self.state = {}
+    
