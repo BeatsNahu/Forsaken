@@ -277,7 +277,7 @@ def main():
     escene_manager = SceneManager(engine, Scene) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 
 
-    escene_manager.load_scene("scrips.menu") # Load the initial scene
+    escene_manager.load_scene("scripts.menu") # Load the initial scene, in this case the menu scene
 
     # Main game loop
     running = True
