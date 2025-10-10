@@ -27,8 +27,6 @@ class SceneManager: # Create a Game class to manage scene state
         scene.enter()
         return scene
 
-
-
     def handle_event(self, event): # Handle events and delegate to the current scene
         if self.current_scene: # If there is a current scene
             self.current_scene.handle_event(event) # Delegate event handling to the current scene
@@ -36,6 +34,7 @@ class SceneManager: # Create a Game class to manage scene state
     def update(self, dt): # Update the current scene with delta time, so the FPS will be the same on every computer
         if self.current_scene:
             self.current_scene.update(dt)
+
     def draw(self, screen):
         if self.current_scene:
             self.current_scene.draw(screen)

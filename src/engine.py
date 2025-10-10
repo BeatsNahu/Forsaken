@@ -98,6 +98,7 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
@@ -1296,3 +1297,7 @@ class Engine:
         self.clock = None # Clock of the engine
         self.quit_flag = False # Flag to indicate if the game should quit
 >>>>>>> 32ed7b6 (Edition and comments of main.py)
+=======
+        self.state = {}
+    
+>>>>>>> 5b2e0a0 (Main.py - scene:manager and main_menu are working)
