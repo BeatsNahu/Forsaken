@@ -6,7 +6,7 @@ screen = pygame.display.set_mode((1920, 1080))
 pygame.display.set_caption("Forsaken")
 clock = pygame.time.Clock()
 
-test_font = pygame.font.Font("assets/fonts/Pixeltype.ttf", 50)
+test_font = pygame.font.Font("assets/fonts/press-start.k.ttf", 50)
 
 jail_surface = pygame.image.load("assets/backgrounds/Jail.png").convert()
 jail_surface = pygame.transform.scale(jail_surface, (1920, 1080))
