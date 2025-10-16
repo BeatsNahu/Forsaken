@@ -112,7 +112,7 @@ class SceneManager: # Create a Game class to manage scene state
         if self.current_scene:
             self.current_scene.update(dt)
 
-    def draw(self, screen):
+    def draw(self, screen): # Draw the current scene
         if self.current_scene:
             self.current_scene.draw(screen)
 >>>>>>> 32ed7b6 (Edition and comments of main.py)
