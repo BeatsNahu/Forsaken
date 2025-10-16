@@ -170,21 +170,21 @@ from scene_manager import SceneManager
 def main():
     # Screen setup
     pygame.init()
-    screen = pygame.display.set_mode((1080, 720))
+    screen = pygame.display.set_mode((1920, 1080))
     pygame.display.set_caption("Forsaken")
     clock = pygame.time.Clock()
 
-    # With this part we avoid repeated code in every scene, because all scenes will have access to the escreen and clock initialized in "Screen setup"
+    # With this part we avoid repeated code in every scene, because all scenes will have access to the screen and clock initialized in "Screen setup"
     engine = Engine() # Create an instance of the Engine
     engine.screen = screen # Assign the screen to the engine
     engine.clock = clock # Assign the clock to the engine
 
     escene_manager = SceneManager(engine, Scene) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 
-
-    escene_manager.load_scene('scripts.main_menu') # Load the initial scene, in this case the menu scene
-
+    
+    escene_manager.load_scene("scripts.main_menu") # Load the main menu scene
     # Main game loop
+    dt = clock.tick(60) / 1000.0  # Delta time is used to make the game frame rate independent of the cpu speed, with this we can make the game run at the same speed on different computers
     running = True
 <<<<<<< HEAD
     # Main loop
@@ -285,12 +285,16 @@ def main():
 >>>>>>> 59da024 (Finish the window menu, we need to can select one option and swap the scene or exit the game)
 =======
     while running and not getattr(engine, "quit_flag", False): # While running is True and the quit_flag is not set from any scene
+<<<<<<< HEAD
         dt = clock.tick(60) / 1000.0  # Delta time is used to make the game frame rate independent of the cpu speed, with this we can make the game run at the same speed on different computers
 >>>>>>> 32ed7b6 (Edition and comments of main.py)
+=======
+>>>>>>> 59da024 (Finish the window menu, we need to can select one option and swap the scene or exit the game)
         for event in pygame.event.get(): # In every second we have diferents events, so with this we are trying to get all the events
             if event.type == pygame.QUIT: # and if one is an event of type QUIT, we will stop the loop
                 running = False # Running is set to False and the loop will 
                 break  # Exit the event loop
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -498,6 +502,11 @@ def main():
 =======
 >>>>>>> 5b2e0a0 (Main.py - scene:manager and main_menu are working)
             
+=======
+
+        escene_manager.handle_event(event) # The handle_event method of the scene manager will call the handle_event method of the current scene, passing the event as argument
+
+>>>>>>> 59da024 (Finish the window menu, we need to can select one option and swap the scene or exit the game)
         # Update game state
         escene_manager.update(dt) # The update method of the scene manager will call the update method of the current scene, passing the delta time as argument
 
