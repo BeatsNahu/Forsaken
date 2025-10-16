@@ -9,11 +9,11 @@ class SceneManager: # Create a Game class to manage scene state
     def load_scene(self, scene_name):
         mod = importlib.import_module(scene_name) # Dynamically import the module
         importlib.reload(mod) # Reload the module to get the latest changes
-        if hasattr(mod, "SCENE_CLASS"):
-            cls = mod.SCENE_CLASS
-            scene = cls(self.engine)
-        elif hasattr(mod, "SCENE"):
-            data = mod.SCENE
+        if hasattr(mod, "SCENE_CLASS"): # If the module has a SCENE_CLASS attribute, use it to create the scene
+            cls = mod.SCENE_CLASS # Get the scene class
+            scene = cls(self.engine) # Create an instance of the scene class
+        elif hasattr(mod, "SCENE"): # If the module has a SCENE attribute, use it to create the scene
+            data = mod.SCENE # Get the scene data
             scene = self.scene_class(self.engine, data)
         elif hasattr(mod, "create") and callable(mod.create):
             scene = mod.create(self.engine)   
@@ -35,7 +35,7 @@ class SceneManager: # Create a Game class to manage scene state
         if self.current_scene:
             self.current_scene.update(dt)
 
-    def draw(self, screen):
+    def draw(self, screen): # Draw the current scene
         if self.current_scene:
             self.current_scene.draw(screen)
 
