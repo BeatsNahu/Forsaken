@@ -1322,6 +1322,7 @@ class Scene:
         self._line_index = 0
 
     def enter(self): pass
+        
     def exit(self): pass
 
     def handle_event(self, event):
@@ -1334,7 +1335,6 @@ class Scene:
             self._line_index += 1
         else:
             if self.choices:
-                # abrir UI para elegir (delegar a engine.ui o implementar directo)
                 pass
             elif "next" in self.data:
                 self.apply_effects(self.data.get("effects", []))
