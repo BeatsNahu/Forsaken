@@ -1,4 +1,6 @@
 # scene.py
+import pygame
+
 class Scene:
     def __init__(self, engine, data=None):
         self.engine = engine
