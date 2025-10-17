@@ -439,6 +439,8 @@ class Scene:
 >>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
 =======
 # scene.py
+import pygame
+
 class Scene:
     def __init__(self, engine, data=None):
         self.engine = engine

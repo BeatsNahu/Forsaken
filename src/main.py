@@ -88,7 +88,6 @@ def main():
     
     escene_manager.load_scene("scripts.main_menu") # Load the main menu scene
     # Main game loop
-    dt = clock.tick(60) / 1000.0  # Delta time is used to make the game frame rate independent of the cpu speed, with this we can make the game run at the same speed on different computers
     running = True
 <<<<<<< HEAD
     # Main loop
@@ -145,6 +144,7 @@ def main():
 =======
     while running and not getattr(engine, "quit_flag", False): # While running is True and the quit_flag is not set from any scene
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     while running and not getattr(engine, "quit_flag", False): # While running is True and the quit_flag is not set from any scene
 <<<<<<< HEAD
@@ -168,12 +168,15 @@ def main():
             
 =======
 =======
+=======
+>>>>>>> 09fc689 (the menu has been repaired and scenes started to be created)
         # Process all events and forward each one to the current scene
         for event in pygame.event.get(): # collect events
             if event.type == pygame.QUIT:
                 running = False
                 break
             escene_manager.handle_event(event) # forward every event immediately to the scene manager
+<<<<<<< HEAD
 >>>>>>> 09fc689 (the menu has been repaired and scenes started to be created)
 
         # Delta time should be computed once per frame, after processing events
@@ -231,6 +234,11 @@ def main():
 
         # Delta time should be computed once per frame, after processing events
         dt = clock.tick(60) / 1000.0  # Delta time is used to make the game frame rate independent of the cpu speed
+=======
+
+        # Delta time should be computed once per frame, after processing events
+        dt = clock.tick(60) / 1000.0  # Delta time is used to make the game frame rate independent of the cpu speed
+>>>>>>> 09fc689 (the menu has been repaired and scenes started to be created)
 
         # Update game state
         escene_manager.update(dt) # The update method of the scene manager will call the update method of the current scene, passing the delta time as argument
@@ -289,6 +297,7 @@ def main():
         pygame.display.flip() # Display the updated screen
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         pygame.display.flip()
 >>>>>>> 4520943 (I created the initial game configuration)
@@ -314,6 +323,8 @@ if __name__ == "__main__": # If this script is run directly the game will start
 
         # Control frame rate
 
+=======
+>>>>>>> 09fc689 (the menu has been repaired and scenes started to be created)
     # Finalize
     pygame.quit()
 
