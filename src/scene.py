@@ -697,8 +697,16 @@ class Scene:
             elif e.get("type") == "start_battle":
                 self.engine.scene_manager.load_scene(e["battle_module"])
 
-    def update(self, dt): pass
+    def update(self, dt): 
+        pass
+
     def draw(self, surface): 
-        # dibujar background y texto actual
+        if self.background:
+            try:
+                bg_image = pygame.image.load(self.background).convert()
+                bg_image = pygame.transform.scale(bg_image, self.engine.screen.get_size())
+                surface.blit(bg_image, (0, 0))
+            except Exception:
+                pass
         pass
 >>>>>>> b4d0ed7 (Run and debug)

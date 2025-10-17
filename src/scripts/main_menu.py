@@ -486,7 +486,7 @@ SCENE_CLASS = MainMenu
 <<<<<<< HEAD
 =======
             {"text":"Exit", "action": lambda: setattr(engine, "quit_flag", True)}, # Exit action
-            {"text":"Start Game", "action": lambda: engine.scene_manager.load_scene("scripts.ch0.py")} # Start game action
+            {"text":"Start Game", "action": lambda: engine.scene_manager.load_scene("scripts.ch0")} # Start game action
         ]
         self.font = pygame.font.Font("assets/fonts/press-start.k.ttf", 50) # Load the font
         self.selection = 0 # Selected option index
