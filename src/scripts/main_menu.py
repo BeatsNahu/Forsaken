@@ -32,6 +32,10 @@ class MainMenu(Scene):
         except Exception:
             # fallback: create directly
             self.font = pygame.font.Font(self._font_path if os.path.exists(self._font_path) else None, 50)
+            {"text":"Exit", "action": lambda: setattr(engine, "quit_flag", True)}, # Exit action
+            {"text":"Start Game", "action": lambda: engine.scene_manager.load_scene("scripts.ch0")} # Start game action
+        ]
+        self.font = pygame.font.Font("assets/fonts/press-start.k.ttf", 50) # Load the font
         self.selection = 0 # Selected option index
 
         # Used images 
