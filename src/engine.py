@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pygame
 import os
 <<<<<<< HEAD
@@ -21,6 +22,11 @@ import os
 =======
 from transition_manager import TransitionManager
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+import pygame
+import os
+
+>>>>>>> d07fceb (Create def draw in the scene file to load data driven)
 
 class Engine:
 <<<<<<< HEAD
@@ -262,6 +268,7 @@ class Engine:
 >>>>>>> 32ed7b6 (Edition and comments of main.py)
 =======
         self.state = {}
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         # TransitionManager requires engine.screen to be available.
@@ -632,3 +639,31 @@ class Engine:
         self.state = {}
     
 >>>>>>> 5b2e0a0 (Main.py - scene:manager and main_menu are working)
+=======
+        # simple resource caches
+        self._font_cache = {}
+
+    def load_font(self, path, size):
+        """Load and cache pygame Font instances.
+
+        Returns a pygame.font.Font for the given path and size. If the
+        file does not exist, falls back to the default pygame font.
+        Cached by (path, size) to avoid reloading every frame.
+        """
+        key = (path, size)
+        if key in self._font_cache:
+            return self._font_cache[key]
+
+        try:
+            if path and os.path.exists(path):
+                f = pygame.font.Font(path, size)
+            else:
+                f = pygame.font.Font(None, size)
+        except Exception:
+            # On any failure, fallback to default font
+            f = pygame.font.Font(None, size)
+
+        self._font_cache[key] = f
+        return f
+    
+>>>>>>> d07fceb (Create def draw in the scene file to load data driven)
