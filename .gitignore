@@ -1,0 +1,4 @@
+# Ignore cache of src and src/scripts
+
+src/__pycache__/
+src/scripts/__pycache__/
