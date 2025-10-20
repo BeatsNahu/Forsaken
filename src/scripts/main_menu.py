@@ -39,6 +39,7 @@ import os
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
 =======
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
@@ -98,12 +99,15 @@ import pygame
 =======
 import pygame,sys
 >>>>>>> 59da024 (Finish the window menu, we need to can select one option and swap the scene or exit the game)
+=======
+>>>>>>> d07fceb (Create def draw in the scene file to load data driven)
 from scene import Scene
 
 class MainMenu(Scene):
     def __init__(self, engine): # Initialize the scene with a reference to the engine
         super().__init__(engine, {"id":"menu"}) # Call the parent constructor with the engine and scene data
         self.options = [
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -828,8 +832,21 @@ SCENE_CLASS = MainMenu
 =======
             {"text":"Exit", "action": lambda: setattr(engine, "quit_flag", True)}, # Exit action
             {"text":"Start Game", "action": lambda: engine.scene_manager.load_scene("scripts.ch0")} # Start game action
+=======
+            {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)},
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch0")}
+>>>>>>> d07fceb (Create def draw in the scene file to load data driven)
         ]
-        self.font = pygame.font.Font("assets/fonts/press-start.k.ttf", 50) # Load the font
+        # Preload fonts via engine cache to avoid recreating them every frame
+        font_path = os.path.join("assets", "fonts", "press-start.k.ttf")
+        # keep path on self so other methods (draw) can reference it
+        self._font_path = font_path
+        # body font (used for menu options)
+        try:
+            self.font = self.engine.load_font(self._font_path, 50)
+        except Exception:
+            # fallback: create directly
+            self.font = pygame.font.Font(self._font_path if os.path.exists(self._font_path) else None, 50)
         self.selection = 0 # Selected option index
         self.bg = None # Background image
         self.title = "Forsaken" # Title text
@@ -932,8 +949,14 @@ SCENE_CLASS = MainMenu
             label = self.font.render(opt["text"], True, color) # Render the option text
             surface.blit(label, (740, 450 + i*60)) # Draw the option
         if self.title: # If there is a title
-            title_font = pygame.font.Font("assets/fonts/press-start.k.ttf", 125) # Load a larger font for the title
-            title_surf = title_font.render(self.title, True, (255,255,255)) # Render the title text
+            # use cached title font from engine if available, else create once on demand
+            # If self.title_font exists but is None (inherited from Scene), treat it as missing.
+            if not self.title_font:
+                try:
+                    self.title_font = self.engine.load_font(self._font_path, 125)
+                except Exception:
+                    self.title_font = pygame.font.Font(self._font_path if os.path.exists(self._font_path) else None, 125)
+            title_surf = self.title_font.render(self.title, True, (255,255,255)) # Render the title text
             surface.blit(title_surf, (465, 120)) # Draw the title        
     
 >>>>>>> 59da024 (Finish the window menu, we need to can select one option and swap the scene or exit the game)
