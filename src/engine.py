@@ -1,6 +1,10 @@
 import pygame
 import os
+<<<<<<< HEAD
 from transition_manager import TransitionManager
+=======
+
+>>>>>>> d07fceb (Create def draw in the scene file to load data driven)
 
 class Engine:
 <<<<<<< HEAD
@@ -11,6 +15,7 @@ class Engine:
         self.screen = None # Screen of the engine
         self.clock = None # Clock of the engine
         self.quit_flag = False # Flag to indicate if the game should quit
+<<<<<<< HEAD
         self.state = {
             "inventory": [],
             "game_vars": {}
@@ -167,3 +172,32 @@ class Engine:
         self.clock = None # Clock of the engine
         self.quit_flag = False # Flag to indicate if the game should quit
 >>>>>>> 32ed7b6 (Edition and comments of main.py)
+=======
+        self.state = {}
+        # simple resource caches
+        self._font_cache = {}
+
+    def load_font(self, path, size):
+        """Load and cache pygame Font instances.
+
+        Returns a pygame.font.Font for the given path and size. If the
+        file does not exist, falls back to the default pygame font.
+        Cached by (path, size) to avoid reloading every frame.
+        """
+        key = (path, size)
+        if key in self._font_cache:
+            return self._font_cache[key]
+
+        try:
+            if path and os.path.exists(path):
+                f = pygame.font.Font(path, size)
+            else:
+                f = pygame.font.Font(None, size)
+        except Exception:
+            # On any failure, fallback to default font
+            f = pygame.font.Font(None, size)
+
+        self._font_cache[key] = f
+        return f
+    
+>>>>>>> d07fceb (Create def draw in the scene file to load data driven)
