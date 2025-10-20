@@ -9,7 +9,7 @@ turno="jugador"
 pygame.init()
 pantalla = pygame.display.set_mode((400, 300))     #hay que borrarlo
 pygame.display.set_caption("Menu principal")
-pelea="rata"
+monstruo="rata"
 escenario = 0
 def pelea(monstruo):
     while True:
