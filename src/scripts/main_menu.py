@@ -45,8 +45,12 @@ class MainMenu(Scene):
             {"text":"Start Game", "action": lambda: engine.scene_manager.load_scene("scripts.ch0")} # Start game action
 =======
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)},
+<<<<<<< HEAD
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch0")}
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
+=======
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")}
+>>>>>>> c79f79d (canvio en que main vaya a chapter 1 en vez de a chapter 0)
         ]
         # Preload fonts via engine cache to avoid recreating them every frame
         font_path = os.path.join("assets", "fonts", "press-start.k.ttf")
