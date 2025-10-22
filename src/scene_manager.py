@@ -22,14 +22,14 @@ class SceneManager: # Create a Game class to manage scene state
                 cls = self.scene_classes
             # Fallback to the base Scene class from scene module
             from scene import Scene as BaseScene
-            if cls:
-                scene = cls(self.engine, data)
+            if cls: # If a scene class is found, create an instance of it
+                scene = cls(self.engine, data) # Create an instance of the scene class
             else:
-                scene = BaseScene(self.engine, data)
-        elif hasattr(mod, "create") and callable(mod.create):
-            scene = mod.create(self.engine)   
+                scene = BaseScene(self.engine, data) # Create an instance of the base Scene class
+        elif hasattr(mod, "create") and callable(mod.create): # If the module has a create function, use it to create the scene
+            scene = mod.create(self.engine) # Call the create function to get the scene instance
         else:
-            raise RuntimeError("Módulo de escena inválido: " + scene_name)
+            raise RuntimeError("Módulo de escena inválido: " + scene_name) # Raise an error if the module is invalid
 
         if self.current_scene and hasattr(self.current_scene, "exit"):
             self.current_scene.exit()
