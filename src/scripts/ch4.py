@@ -1,5 +1,5 @@
 SCENE = {
-    "id": "ch0_intro",
+    "id": "ch4_rana",
     "title": "Chapter 0: The Beginning",
     "background": "assets.backgrounds.Jail.png",
     "lines": [
@@ -8,7 +8,7 @@ SCENE = {
     "choises": [
         {
             "text": "Acariciar.",
-            "target": "scripts.ch0_option1",
+            "target": "scripts.ch5o1",
         },
         {
         "text": "Darle un patada.",
