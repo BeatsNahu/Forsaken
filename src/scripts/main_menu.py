@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Description: Main menu scene for the game
 import pygame
 =======
 # src/scenes/main_menu.py
+=======
+# Description: Main menu scene for the game
+>>>>>>> c402bd6 (refactor: improve code readability with comments and remove unused file)
 import pygame,sys
 import os
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)

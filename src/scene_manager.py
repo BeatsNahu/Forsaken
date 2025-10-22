@@ -46,6 +46,7 @@ class SceneManager: # Create a Game class to manage scene state
                 scene = BaseScene(self.engine, data) # Create an instance of the base Scene class
         elif hasattr(mod, "create") and callable(mod.create): # If the module has a create function, use it to create the scene
             scene = mod.create(self.engine) # Call the create function to get the scene instance
+<<<<<<< HEAD
         else:
             raise RuntimeError("Módulo de escena inválido: " + scene_name) # Raise an error if the module is invalid
 
@@ -94,8 +95,10 @@ class SceneManager: # Create a Game class to manage scene state
             scene = self.scene_class(self.engine, data)
         elif hasattr(mod, "create") and callable(mod.create):
             scene = mod.create(self.engine)   
+=======
+>>>>>>> c402bd6 (refactor: improve code readability with comments and remove unused file)
         else:
-            raise RuntimeError("Módulo de escena inválido: " + scene_name)
+            raise RuntimeError("Módulo de escena inválido: " + scene_name) # Raise an error if the module is invalid
 
         if self.current_scene and hasattr(self.current_scene, "exit"):
             self.current_scene.exit()
