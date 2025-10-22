@@ -888,6 +888,10 @@ if __name__ == "__main__": # If this script is run directly the game will start
     # Finalize
     pygame.quit()
 
+<<<<<<< HEAD
 if __name__ == "__main__":
 >>>>>>> 4520943 (I created the initial game configuration)
+=======
+if __name__ == "__main__": # If this script is run directly the game will start
+>>>>>>> 79b1b32 (style: center title and dialog text in Scene class)
     main()
