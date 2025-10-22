@@ -1,11 +1,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Description: Main menu scene for the game
 import pygame
 <<<<<<< HEAD
 =======
 # src/scenes/main_menu.py
+=======
+# Description: Main menu scene for the game
+>>>>>>> c402bd6 (refactor: improve code readability with comments and remove unused file)
 =======
 # Description: Main menu scene for the game
 >>>>>>> c402bd6 (refactor: improve code readability with comments and remove unused file)

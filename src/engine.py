@@ -414,27 +414,27 @@ class Engine:
         # simple resource caches
         self._font_cache = {}
 
-    def load_font(self, path, size):
-        """Load and cache pygame Font instances.
-
-        Returns a pygame.font.Font for the given path and size. If the
-        file does not exist, falls back to the default pygame font.
-        Cached by (path, size) to avoid reloading every frame.
-        """
-        key = (path, size)
-        if key in self._font_cache:
-            return self._font_cache[key]
+    def load_font(self, path, size): # Load a font from a given path and size
+        key = (path, size) # Create a key for the font cache based on path and size
+        if key in self._font_cache: # If the font is already in the cache, return it
+            return self._font_cache[key] # Return the cached font
 
         try:
-            if path and os.path.exists(path):
-                f = pygame.font.Font(path, size)
+            if path and os.path.exists(path): # If the path is valid and the file exists, load the font from the given path
+                f = pygame.font.Font(path, size) # Load the font from the given path
             else:
-                f = pygame.font.Font(None, size)
+                f = pygame.font.Font(None, size) # Load the default font
         except Exception:
             # On any failure, fallback to default font
-            f = pygame.font.Font(None, size)
+            f = pygame.font.Font(None, size) # Load the default font
 
+<<<<<<< HEAD
         self._font_cache[key] = f
         return f
     
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
+=======
+        self._font_cache[key] = f # Cache the loaded font
+        return f # Return the loaded font
+    
+>>>>>>> c402bd6 (refactor: improve code readability with comments and remove unused file)
