@@ -740,6 +740,8 @@ class Scene:
         else:
             if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                 self._advance()
+        if event.key == pygame.K_ESCAPE:
+            setattr(self.engine, "quit_flag", True)
 
     def _advance(self):
         # Move to the next line, reveal choices, or follow the 'next' key.
