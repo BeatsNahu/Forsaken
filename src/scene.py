@@ -133,6 +133,7 @@ class Scene:
             if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                 self._advance()
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         if event.key == pygame.K_ESCAPE:
             setattr(self.engine, "quit_flag", True)
@@ -177,6 +178,10 @@ class Scene:
         
         # Load target scene
 =======
+=======
+        if event.key == pygame.K_ESCAPE:
+            setattr(self.engine, "quit_flag", True)
+>>>>>>> b3233ed (feat: add escape key functionality to quit the game and delete images)
 
     def _advance(self):
         # Move to the next line, reveal choices, or follow the 'next' key.
