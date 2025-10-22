@@ -1,5 +1,5 @@
 SCENE = {
-    "id": "ch2_eleccion",
+    "id": "ch2_celdas",
     "title": "Chapter 2: The Beginning",
     "background": "assets.backgrounds.Jail.png",
     "lines": [
