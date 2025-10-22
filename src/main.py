@@ -131,5 +131,5 @@ def main():
     # Finalize
     pygame.quit()
 
-if __name__ == "__main__":
+if __name__ == "__main__": # If this script is run directly the game will start
     main()
