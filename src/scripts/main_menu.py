@@ -20,10 +20,13 @@ class MainMenu(Scene):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
 =======
 =======
 >>>>>>> af4af9d (Create def draw in the scene file to load data driven)
+=======
+>>>>>>> 049ad1e (feat: implement buttons and characters)
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
 >>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
 =======
@@ -55,9 +58,13 @@ class MainMenu(Scene):
 =======
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")}
 >>>>>>> c79f79d (canvio en que main vaya a chapter 1 en vez de a chapter 0)
+=======
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
+            {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)}
+>>>>>>> a9e0d67 (feat: implement buttons and characters)
         ]
         # Preload fonts via engine cache to avoid recreating them every frame
-        font_path = os.path.join("assets", "fonts", "press-start.k.ttf")
+        font_path = "assets/fonts/press-start.k.ttf"
         # keep path on self so other methods (draw) can reference it
         self._font_path = font_path
         # body font (used for menu options)
@@ -76,10 +83,12 @@ class MainMenu(Scene):
         self._img_exit = None
 =======
         self.title = "Forsaken" # Title text
-        # Image placeholders (will be loaded in enter)
+
+        # Image Options
         self._img_title = None
         self._img_start = None
         self._img_exit = None
+<<<<<<< HEAD
         # store scaled rects for layout
         self._title_rect = None
         self._option_rects = []
@@ -163,6 +172,29 @@ class MainMenu(Scene):
                 r.y = base_y + i * (r.height + gap)
             self._option_rects.append(r)
 >>>>>>> f0f2483 (feat: enhance battle manager and main menu with image support and improved layout)
+=======
+
+    def enter(self): # Called when the scene is entered
+        try: # Try to load the background image
+            self.bg = pygame.image.load("assets/backgrounds/Menu_v.1.0.png").convert() # Load the background image
+            self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size()) # Scale the image to fit the screen
+            
+            # Load option images
+            self._img_title = pygame.image.load("assets/button/Title.png").convert_alpha() # Load the title image
+            self._img_title = pygame.transform.scale(self._img_title,self.engine.screen.get_size()) # Scale the title image to fit the screen
+            
+            self._img_start = pygame.image.load("assets/button/Start.png").convert_alpha() # Load the start button image
+            self._img_start = pygame.transform.scale(self._img_start, (512,512)) # Scale the start button image
+            
+            self._img_exit = pygame.image.load("assets/button/Exit.png").convert_alpha() # Load the exit button image
+            self._img_exit = pygame.transform.scale(self._img_exit, (512,512)) # Scale the exit button image
+        
+        except Exception: # If there is an error loading the image
+            self.bg = None # Set background to None
+            self._img_title = None
+            self._img_start = None
+            self._img_exit = None
+>>>>>>> a9e0d67 (feat: implement buttons and characters)
 
     def handle_event(self, event): # Handle events
         if event.type == pygame.KEYDOWN: # If a key is pressed
@@ -178,6 +210,7 @@ class MainMenu(Scene):
     def draw(self, surface):
         if self.bg:
             surface.blit(self.bg, (0,0)) # Draw the background image
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -258,5 +291,23 @@ class MainMenu(Scene):
             # existing text-based title handled above as fallback
             pass
 >>>>>>> f0f2483 (feat: enhance battle manager and main menu with image support and improved layout)
+=======
+
+        if self._img_start and self._img_exit:
+            surface.blit(self._img_start, (700, 300))
+            surface.blit(self._img_exit, (700, 500))
+            if False:
+                color = (255,255,0)
+                label = self.font.render(opt["text"], True, color) # Render the option text
+                surface.blit(label, (740, 450 + 60)) # Draw the option
+        
+        if self._img_title:
+            surface.blit(self._img_title, (0,0))
+        else:
+            title_font = self.engine.load_font(self._font_path, 100)
+            title_label = title_font.render(self.title, True, (255, 255, 255))
+            surface.blit(title_label, (800, 200))
+        pass
+>>>>>>> a9e0d67 (feat: implement buttons and characters)
     
 SCENE_CLASS = MainMenu
