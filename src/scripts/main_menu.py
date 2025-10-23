@@ -125,6 +125,9 @@ class MainMenu(Scene):
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> fb203c9 (Merge remote-tracking branch 'origin/main' into Antonio)
+=======
 >>>>>>> fb203c9 (Merge remote-tracking branch 'origin/main' into Antonio)
 =======
 >>>>>>> fb203c9 (Merge remote-tracking branch 'origin/main' into Antonio)
