@@ -3,7 +3,8 @@ SCENE = {
     "title": "Chapter 2: The Beginning",
     "background": "assets.backgrounds.Jail.png",
     "lines": [
-        {"speaker": "Narrator", "text": "Al acercarte, miras alrededor y no ves nada destacable. Sales de tu celda y vas a otra."},
+        {"speaker": "Narrator", "text": "Al acercarte, miras alrededor y no ves nada destacable."},
+        {"speaker": "Narrator", "text": "Sales de tu celda y vas a otra."},
     ],
     "choises": [
         {
