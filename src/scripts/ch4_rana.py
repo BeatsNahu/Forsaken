@@ -8,7 +8,7 @@ SCENE = {
     "choises": [
         {
             "text": "Acariciar.",
-            "target": "scripts.ch5o1",
+            "target": "scripts.ch5_envenenado",
         },
         {
         "text": "Darle un patada.",

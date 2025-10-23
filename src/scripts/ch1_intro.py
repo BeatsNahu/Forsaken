@@ -9,7 +9,7 @@ SCENE = {
     "choises": [
         {
             "text": "Acércate a la puerta",
-            "target": "scripts.ch2",
+            "target": "scripts.ch2_celdas",
         }
     ]
 }
