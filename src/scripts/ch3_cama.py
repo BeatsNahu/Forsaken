@@ -14,6 +14,7 @@ SCENE = {
         {
             "text": "Sí",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "effects": [
                 {"type": "give_item", "id": "Tenedor"},
                 {"type": "add_fragment", "id": "frag_A"}
@@ -21,6 +22,9 @@ SCENE = {
 =======
             "give_item": "tenedor",
 >>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
+=======
+            "give_item": "tenedor",                 #hay que canviarlo
+>>>>>>> abdd92e (feat: implement battle scene structure and enhance enemy interactions)
             "target": "scripts.ch4_rana",
         },
         {
