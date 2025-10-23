@@ -21,12 +21,15 @@ class MainMenu(Scene):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
 =======
 =======
 >>>>>>> af4af9d (Create def draw in the scene file to load data driven)
 =======
 >>>>>>> 049ad1e (feat: implement buttons and characters)
+=======
+>>>>>>> c98b9a9 (Merge remote-tracking branch 'origin/main' into Antonio)
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
 >>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
 =======

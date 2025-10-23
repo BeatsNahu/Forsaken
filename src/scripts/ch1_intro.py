@@ -13,6 +13,7 @@ SCENE = {
         {"speaker": "Narrator", "text": "Ves la puerta de tu celda abierta, ¿qué haces?."},
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
     "choices": [
         {
             "text": "Acércate a la puerta",
@@ -20,6 +21,9 @@ SCENE = {
             "sfx": None
 =======
     "choises": [
+=======
+    "choices": [
+>>>>>>> fb203c9 (Merge remote-tracking branch 'origin/main' into Antonio)
         {
             "text": "Acércate a la puerta",
             "target": "scripts.ch2_celdas",
