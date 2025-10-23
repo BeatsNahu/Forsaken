@@ -8,7 +8,7 @@ SCENE = {
     "choises": [
         {
             "text": "Sí",
-            "give_item": "tenedor",
+            "give_item": "tenedor",                 #hay que canviarlo
             "target": "scripts.ch4_rana",
         },
         {
