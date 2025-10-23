@@ -9,6 +9,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "background": "assets.backgrounds.Battle_scenary.png",
 =======
     "background": "assets.backgrounds.Jail.png",
@@ -34,6 +35,9 @@ SCENE = {
 =======
     "background": "assets.backgrounds.Battle_scenary.png",
 >>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
+=======
+    "background": "assets.backgrounds.Jail.png",
+>>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
     "lines": [
         {"speaker": "Narrator", "text": "La rana se enfada y te ataca."},
     ],
@@ -47,6 +51,7 @@ SCENE = {
         "target": "scripts.ch0_option2",
         }
     ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -109,4 +114,6 @@ SCENE = {
 >>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
 =======
 >>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
+=======
+>>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
 }

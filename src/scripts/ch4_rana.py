@@ -61,6 +61,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "target": "scripts.ch5_pelearana",
 =======
         "target": "scripts.ch0_option2",
@@ -101,6 +102,9 @@ SCENE = {
 =======
         "target": "scripts.ch0_option2",
 >>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
+=======
+        "target": "scripts.ch5_peleanata",
+>>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
         }
     ]
 }
