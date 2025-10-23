@@ -8,12 +8,8 @@ SCENE = {
     ],
     "choises": [
         {
-            "text": "Option 1",
-            "target": "scripts.ch0_option1",
-        },
-        {
-        "text": "Option 2",
-        "target": "scripts.ch0_option2",
+            "text": "volver a intentar",
+            "target": "ch1_intro",
         }
     ]
 }
