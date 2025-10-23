@@ -8,8 +8,17 @@ SCENE = {
     ],
     "choises": [
         {
+<<<<<<< HEAD
             "text": "volver a intentar",
             "target": "ch1_intro",
+=======
+            "text": "Option 1",
+            "target": "scripts.ch0_option1",
+        },
+        {
+        "text": "Option 2",
+        "target": "scripts.ch0_option2",
+>>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
         }
     ]
 }

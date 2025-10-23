@@ -1,7 +1,12 @@
 SCENE = {
     "id": "ch2_celdas",
+<<<<<<< HEAD
     "background": "assets/backgrounds/Doors_scenary.png",
     "music": "assets/Sounds/soundtrack.ogg", 
+=======
+    "title": "Chapter 2: The Beginning",
+    "background": "assets.backgrounds.Jail.png",
+>>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
     "lines": [
         {"speaker": "Narrator", "text": "Al acercarte, miras alrededor y no ves nada destacable."},
         {"speaker": "Narrator", "text": "Sales de tu celda y vas a otra."},
