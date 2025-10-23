@@ -1,4 +1,4 @@
-# src/scenes/main_menu.py
+# Description: Main menu scene for the game
 import pygame,sys
 import os
 from scene import Scene
