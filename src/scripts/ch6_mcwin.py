@@ -8,8 +8,17 @@ SCENE = {
     ],
     "choises": [
         {
+<<<<<<< HEAD
             "text": "volver al inicio",
             "target": "scripts.ch1_intro",
+=======
+            "text": "Option 1",
+            "target": "scripts.ch0_option1",
+        },
+        {
+        "text": "Option 2",
+        "target": "scripts.ch0_option2",
+>>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
         }
     ]
 }

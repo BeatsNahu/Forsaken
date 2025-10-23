@@ -1,7 +1,11 @@
 SCENE = {
     "id": "ch0_intro",
     "title": "Chapter 0: The Beginning",
+<<<<<<< HEAD
     "background": "assets.backgrounds.Battle_scenary.png",
+=======
+    "background": "assets.backgrounds.Jail.png",
+>>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
     "lines": [
         {"speaker": "Narrator", "text": "La rana se enfada y te ataca."},
     ],
@@ -15,6 +19,7 @@ SCENE = {
         "target": "scripts.ch0_option2",
         }
     ]
+<<<<<<< HEAD
 }
 SCENE = {
   "start_battle": {
@@ -41,4 +46,6 @@ SCENE = {
     "on_victory_target": "scripts.ch6_mcwin",
     "on_defeat_target": "scripts.ch6_crias"
   }
+=======
+>>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
 }

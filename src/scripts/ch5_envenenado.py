@@ -9,6 +9,7 @@ SCENE = {
     "choises": [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "text": "volver a intentar",
             "target": "ch1_intro",
 =======
@@ -19,6 +20,10 @@ SCENE = {
         "text": "Option 2",
         "target": "scripts.ch0_option2",
 >>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
+=======
+            "text": "volver a intentar",
+            "target": "ch1_intro",
+>>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
         }
     ]
 }
