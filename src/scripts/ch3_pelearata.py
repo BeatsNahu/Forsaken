@@ -1,5 +1,6 @@
 SCENE = {
     "id": "ch3_pelearata",
+<<<<<<< HEAD
     "class": "BattleManager",  # Tell the engine to use BattleManager for this scene
     
     # --- ASSETS ---
@@ -58,4 +59,20 @@ SCENE = {
     
     "on_victory_target": "scripts.ch4_pivecuchillo",
     "on_defeat_target": "scripts.ch4_ratatecome"
+=======
+    "title": "Chapter 0: The Beginning",
+    "background": "assets.backgrounds.Jail.png",
+    "lines": [
+        {"speaker": "Narrator", "text": "Te acercas y ves en la esquina varias latas de comida, pero al acercarte aparece una rata mutante."},
+    ]
+    "start_battle": {
+        "background": "assets.backgrounds.Jail.png",
+        "player":{
+            "initiaol_hp": null
+        },
+        "enemies": {
+            
+        }
+    }
+>>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
 }
