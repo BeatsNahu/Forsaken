@@ -9,11 +9,11 @@ SCENE = {
     "choises": [
         {
             "text": "Revisar la celda Nª 002.",
-            "target": "scripts.ch3o1",
+            "target": "scripts.ch3_pelearata",
         },
         {
             "text": "Revisar la celda Nª XXX.",
-            "target": "scripts.ch3o2",
+            "target": "scripts.ch3_cama",
         }
     ]
 }

@@ -9,11 +9,11 @@ SCENE = {
         {
             "text": "Sí",
             "give_item": "tenedor",
-            "target": "scripts.ch4",
+            "target": "scripts.ch4_rana",
         },
         {
             "text": "No",
-            "target": "scripts.ch4",
+            "target": "scripts.ch4_rana",
         }
     ]
 }
