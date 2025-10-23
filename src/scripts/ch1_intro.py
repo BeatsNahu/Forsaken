@@ -6,7 +6,7 @@ SCENE = {
         {"speaker": "Narrator", "text": "Estás en una especie de celda, pero no recuerdas cómo llegaste allí."},
         {"speaker": "Narrator", "text": "Ves la puerta de tu celda abierta, ¿qué haces?."},
     ],
-    "choises": [
+    "choices": [
         {
             "text": "Acércate a la puerta",
             "target": "scripts.ch2_celdas",
