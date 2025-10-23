@@ -47,14 +47,6 @@ class Scene:
             self.font = None
             self.title_font = None
 
-        # optional music control via engine
-        music = self.data.get("music")
-        if music and hasattr(self.engine, "play_music"):
-            try:
-                self.engine.play_music(music)
-            except Exception:
-                pass
-
     def exit(self):
         # Placeholder for cleanup when a scene is replaced
         return
@@ -74,6 +66,8 @@ class Scene:
         else:
             if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                 self._advance()
+        if event.key == pygame.K_ESCAPE:
+            setattr(self.engine, "quit_flag", True)
 
     def _advance(self):
         # Move to the next line, reveal choices, or follow the 'next' key.
@@ -120,15 +114,20 @@ class Scene:
     def draw(self, surface):
         # Draw background, title, current dialog line, and choices.
         if self._bg_surf:
-            surface.blit(self._bg_surf, (0, 0))
+            surface.blit(self._bg_surf, (0, 0)) # Draw background image
         else:
             surface.fill((0, 0, 0))
 
         title = self.data.get("title")
+        # Title: centered at the top of the screen
         if title and self.title_font:
             surf = self.title_font.render(title, True, (255, 255, 255))
-            surface.blit(surf, (50, 30))
+            rect = surf.get_rect()
+            rect.centerx = surface.get_width() // 2
+            rect.y = 20
+            surface.blit(surf, rect)
 
+        # Current dialog/text: centered near the bottom of the screen
         if self.lines:
             ln = self.lines[self._line_index]
             if isinstance(ln, dict):
@@ -139,7 +138,11 @@ class Scene:
                 display = str(ln)
             if self.font:
                 txt_surf = self.font.render(display, True, (255, 255, 255))
-                surface.blit(txt_surf, (60, 200))
+                txt_rect = txt_surf.get_rect()
+                txt_rect.centerx = surface.get_width() // 2
+                # place the line ~60px above the bottom edge
+                txt_rect.y = surface.get_height() - 60 - txt_rect.height // 2
+                surface.blit(txt_surf, txt_rect)
 
         if self._line_index >= max(0, len(self.lines) - 1) and self.choices:
             base_y = 300
@@ -152,15 +155,15 @@ class Scene:
 
     def _is_showing_choices(self):
         # True when at last line and choices exist
-        return self._line_index >= max(0, len(self.lines) - 1) and bool(self.choices)
+        return self._line_index >= max(0, len(self.lines) - 1) and bool(self.choices) # The utility function checks if the scene is currently displaying choices to the player
 
     def _normalize_path(self, p):
         # If path exists return it; otherwise try dotted->filesystem conversion
-        if os.path.exists(p):
-            return p
-        parts = p.split('.')
-        if len(parts) >= 3:
-            newp = os.path.join(*parts[:-1]) + '.' + parts[-1]
-            if os.path.exists(newp):
-                return newp
-        return p
+        if os.path.exists(p): # If the path exists,
+            return p # return it as is
+        parts = p.split('.') # Split the path by dots
+        if len(parts) >= 3: # If there are at least 3 parts,
+            newp = os.path.join(*parts[:-1]) + '.' + parts[-1] # Join all parts except the last one with os separators and add the last part with a dot
+            if os.path.exists(newp): # If the new path exists,
+                return newp # return the new path
+        return p # Return the original path if no valid path is found
