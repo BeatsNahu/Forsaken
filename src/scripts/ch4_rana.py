@@ -12,7 +12,7 @@ SCENE = {
         },
         {
         "text": "Darle un patada.",
-        "target": "scripts.ch0_option2",
+        "target": "scripts.ch5_peleanata",
         }
     ]
 }
