@@ -69,6 +69,9 @@ class MainMenu(Scene):
 =======
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)},
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")}
+<<<<<<< HEAD
+>>>>>>> fb203c9 (Merge remote-tracking branch 'origin/main' into Antonio)
+=======
 >>>>>>> fb203c9 (Merge remote-tracking branch 'origin/main' into Antonio)
         ]
         # Preload fonts via engine cache to avoid recreating them every frame
