@@ -6,6 +6,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "background": "assets/backgrounds/Doors_scenary.png",
     "music": "assets/Sounds/soundtrack.ogg", 
 =======
@@ -32,6 +33,10 @@ SCENE = {
     "background": "assets/backgrounds/Doors_scenary.png",
     "music": "assets/Sounds/soundtrack.ogg", 
 >>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
+=======
+    "title": "Chapter 2: The Beginning",
+    "background": "assets.backgrounds.Jail.png",
+>>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
     "lines": [
         {"speaker": "Narrator", "text": "Al acercarte, miras alrededor y no ves nada destacable."},
         {"speaker": "Narrator", "text": "Sales de tu celda y vas a otra."},

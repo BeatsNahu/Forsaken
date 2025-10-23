@@ -6,6 +6,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "background": "assets/backgrounds/Bed.png",
     "music": "assets/Sounds/soundtrack.ogg", 
 =======
@@ -32,12 +33,17 @@ SCENE = {
     "background": "assets/backgrounds/Bed.png",
     "music": "assets/Sounds/soundtrack.ogg", 
 >>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
+=======
+    "title": "Chapter 0: The Beginning",
+    "background": "assets.backgrounds.Jail.png",
+>>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
     "lines": [
         {"speaker": "Narrator", "text": "¿Revisas debajo de la cama?."},
     ],
     "choises": [
         {
             "text": "Sí",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -70,6 +76,9 @@ SCENE = {
 >>>>>>> abdd92e (feat: implement battle scene structure and enhance enemy interactions)
 =======
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+            "give_item": "tenedor",
+>>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
             "target": "scripts.ch4_rana",
         },
         {
