@@ -47,6 +47,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "choices": [
         {
             "text": "Acércate a la puerta",
@@ -78,6 +79,9 @@ SCENE = {
 >>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
 =======
     "choises": [
+=======
+    "choices": [
+>>>>>>> fb203c9 (Merge remote-tracking branch 'origin/main' into Antonio)
         {
             "text": "Acércate a la puerta",
             "target": "scripts.ch2_celdas",
