@@ -2,10 +2,14 @@ SCENE = {
     "id": "ch0_intro",
     "title": "Chapter 0: The Beginning",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "background": "assets.backgrounds.Battle_scenary.png",
 =======
     "background": "assets.backgrounds.Jail.png",
 >>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
+=======
+    "background": "assets.backgrounds.Battle_scenary.png",
+>>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
     "lines": [
         {"speaker": "Narrator", "text": "La rana se enfada y te ataca."},
     ],
