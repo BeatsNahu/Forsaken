@@ -3,8 +3,7 @@ SCENE = {
     "title": "Chapter 0: The Beginning",
     "background": "assets.backgrounds.Jail.png",
     "lines": [
-        {"speaker": "Narrator", "text": "Te comes a la rana. Al comerla, te vuelves más fuerte y destruyes la pared"},
-        {"speaker": "Narrator", "text": "Has escapado y has ido en busca de tu familia."},
+        {"speaker": "Narrator", "text": "Mueres por sangrado y la rata acaba comiéndote."},
     ],
     "choises": [
         {
