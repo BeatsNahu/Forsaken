@@ -9,6 +9,7 @@ SCENE = {
     "choises": [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "text": "volver al inicio",
             "target": "scripts.ch1_intro",
 =======
@@ -19,6 +20,10 @@ SCENE = {
         "text": "Option 2",
         "target": "scripts.ch0_option2",
 >>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
+=======
+            "text": "volver al inicio",
+            "target": "scripts.ch1_intro",
+>>>>>>> 15014cc (refactor: update scene choices and remove unused chapter scripts)
         }
     ]
 }
