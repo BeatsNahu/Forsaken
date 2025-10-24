@@ -4,6 +4,7 @@ SCENE = {
     "background": "assets.backgrounds.Jail.png",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "player": {                     	# parámetros opcionales de apoyo
   	  "party": ["hero","companion"],
@@ -11,6 +12,11 @@ SCENE = {
 >>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 =======
 >>>>>>> 715058c (feat: add game icon and update battle scene structure)
+=======
+    "player": {                     	# parámetros opcionales de apoyo
+  	  "party": ["hero","companion"],
+  	  "initial_hp": null          	# null = usar stats actuales del engine
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
     },
     "enemies": [
   	  {"id":"pivecuchillo","type":"pivecuchillo"},
@@ -30,6 +36,7 @@ SCENE = {
     "on_defeat_target": "scripts.ch6_finaltortura"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 =======
   }
@@ -38,3 +45,7 @@ SCENE = {
 =======
     }
 >>>>>>> 715058c (feat: add game icon and update battle scene structure)
+=======
+  }
+}
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
