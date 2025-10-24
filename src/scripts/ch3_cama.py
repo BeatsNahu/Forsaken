@@ -16,6 +16,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "background": "assets/backgrounds/Bed.png",
     "music": "assets/Sounds/soundtrack.ogg", 
 =======
@@ -82,6 +83,10 @@ SCENE = {
     "title": "Chapter 0: The Beginning",
     "background": "assets.backgrounds.Jail.png",
 >>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
+=======
+    "title": "Chapter 0: The ------",
+    "background": "assets.backgrounds.Bed.png",
+>>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
     "lines": [
         {"speaker": "Narrator", "text": "¿Revisas debajo de la cama?."},
     ],
