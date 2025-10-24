@@ -5,6 +5,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "player": {                     	# parámetros opcionales de apoyo
   	  "party": ["hero","companion"],
@@ -17,6 +18,8 @@ SCENE = {
   	  "party": ["hero","companion"],
   	  "initial_hp": null          	# null = usar stats actuales del engine
 >>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
+=======
+>>>>>>> 715058c (feat: add game icon and update battle scene structure)
     },
     "enemies": [
   	  {"id":"pivecuchillo","type":"pivecuchillo"},
@@ -37,6 +40,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 =======
   }
@@ -49,3 +53,6 @@ SCENE = {
   }
 }
 >>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
+=======
+    }
+>>>>>>> 715058c (feat: add game icon and update battle scene structure)
