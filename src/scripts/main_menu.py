@@ -98,6 +98,7 @@ class MainMenu(Scene):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
 =======
 =======
@@ -114,6 +115,9 @@ class MainMenu(Scene):
 >>>>>>> 4b44c82 (feat: add battle scene structure and dialogue for new encounters)
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
 >>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
+=======
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 =======
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
 >>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
