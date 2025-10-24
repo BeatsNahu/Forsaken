@@ -6,7 +6,7 @@ SCENE = {
         {"speaker": "Narrator", "text": "AAAAAAAA."},
         {"speaker": "Narrator", "text": "BBBBBBBb."},
     ],
-    "choises": [
+    "choices": [
         {
             "text": "Option 1",
             "target": "scripts.ch0_option1",
