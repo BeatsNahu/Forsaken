@@ -8,7 +8,11 @@ SCENE = {
     ],
     "choises": [
         {
+<<<<<<< HEAD
             "text": "volver a intentarlo",
+=======
+            "text": "volver a intentar",
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
             "target": "scripts.ch1_intro",
         }
     ]

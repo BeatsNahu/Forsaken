@@ -24,6 +24,9 @@ SCENE = {
         }
     ]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 }
 SCENE = {
   "start_battle": {
@@ -50,6 +53,9 @@ SCENE = {
     "on_victory_target": "scripts.ch6_mcwin",
     "on_defeat_target": "scripts.ch6_crias"
   }
+<<<<<<< HEAD
 =======
 >>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
+=======
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 }
