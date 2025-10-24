@@ -1,3 +1,4 @@
+
 SCENE = {
     "id": "ch2_celdas",
     "title": "Chapter 2: The Beginning",

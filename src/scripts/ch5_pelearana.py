@@ -1,7 +1,7 @@
 SCENE = {
     "id": "ch0_intro",
     "title": "Chapter 0: The Beginning",
-    "background": "assets.backgrounds.Jail.png",
+    "background": "assets.backgrounds.Battle_scenary.png",
     "lines": [
         {"speaker": "Narrator", "text": "La rana se enfada y te ataca."},
     ],

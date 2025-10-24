@@ -31,7 +31,7 @@ class MainMenu(Scene):
 
     def enter(self): # Called when the scene is entered
         try: # Try to load the background image
-            self.bg = pygame.image.load("assets/backgrounds/Menu_v.1.0.png").convert() # Load the background image
+            self.bg = pygame.image.load("assets/backgrounds/Menu_scenary.png").convert() # Load the background image
             self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size()) # Scale the image to fit the screen
             
             # Load option images
