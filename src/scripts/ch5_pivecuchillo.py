@@ -12,7 +12,7 @@ SCENE = {
         },
         {
         "text": "Huir.",
-        "target": "scripts.ch7",
+        "target": "scripts.ch6_finaltortura",
         }
     ]
 }
