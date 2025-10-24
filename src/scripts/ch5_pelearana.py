@@ -64,6 +64,9 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 =======
 >>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 =======
@@ -102,6 +105,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
 =======
@@ -120,4 +124,6 @@ SCENE = {
 >>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 =======
 >>>>>>> e6b00af (refactor: remove unused battle script and update scene targets for consistency)
+=======
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
 }
