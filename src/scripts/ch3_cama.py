@@ -1,7 +1,7 @@
 SCENE = {
     "id": "ch3_cama",
-    "title": "Chapter 0: The Beginning",
-    "background": "assets.backgrounds.Jail.png",
+    "title": "Chapter 0: The ------",
+    "background": "assets.backgrounds.Bed.png",
     "lines": [
         {"speaker": "Narrator", "text": "¿Revisas debajo de la cama?."},
     ],
