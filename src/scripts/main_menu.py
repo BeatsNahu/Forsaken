@@ -7,7 +7,7 @@ class MainMenu(Scene):
     def __init__(self, engine): # Initialize the scene with a reference to the engine
         super().__init__(engine, {"id":"menu"}) # Call the parent constructor with the engine and scene data
         self.options = [
-            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)}
         ]
         # Preload fonts via engine cache to avoid recreating them every frame
@@ -31,7 +31,7 @@ class MainMenu(Scene):
 
     def enter(self): # Called when the scene is entered
         try: # Try to load the background image
-            self.bg = pygame.image.load("assets/backgrounds/Menu_v.1.0.png").convert() # Load the background image
+            self.bg = pygame.image.load("assets/backgrounds/Menu_scenary.png").convert() # Load the background image
             self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size()) # Scale the image to fit the screen
             
             # Load option images
