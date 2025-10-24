@@ -1453,10 +1453,7 @@ class Scene:
         # Title: centered at the top of the screen
         if title and self.title_font:
             surf = self.title_font.render(title, True, (255, 255, 255))
-            rect = surf.get_rect()
-            rect.centerx = surface.get_width() // 2
-            rect.y = 20
-            surface.blit(surf, rect)
+            surface.blit(surf, ((surface.get_width() - surf.get_width()) // 2, 20))
 
         # Current dialog/text: centered near the bottom of the screen
         if self.lines:
@@ -1469,11 +1466,7 @@ class Scene:
                 display = str(ln)
             if self.font:
                 txt_surf = self.font.render(display, True, (255, 255, 255))
-                txt_rect = txt_surf.get_rect()
-                txt_rect.centerx = surface.get_width() // 2
-                # place the line ~60px above the bottom edge
-                txt_rect.y = surface.get_height() - 60 - txt_rect.height // 2
-                surface.blit(txt_surf, txt_rect)
+                surface.blit(txt_surf, (80, surface.get_height() - 150))
 
         if self._line_index >= max(0, len(self.lines) - 1) and self.choices:
             base_y = 300
