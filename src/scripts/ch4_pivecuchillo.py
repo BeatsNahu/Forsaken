@@ -8,11 +8,11 @@ SCENE = {
     "choises": [
         {
             "text": "Pelear.",
-            "target": "scripts.ch0_option1",
+            "target": "scripts.ch5_peleapivecuchillo",
         },
         {
         "text": "Huir.",
-        "target": "scripts.ch6_finaltortura",
+        "target": "scripts.ch5_finaltortura",
         }
     ]
 }

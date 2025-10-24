@@ -8,10 +8,14 @@ class MainMenu(Scene):
         self.options = [
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
 =======
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
 >>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
+=======
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
+>>>>>>> 83239ec (feat: add battle scene structure and dialogue for new encounters)
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)}
 =======
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)},
