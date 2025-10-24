@@ -2,9 +2,6 @@ SCENE = {
   "start_battle": {
     "battle_id": "btl_01_bandits",  	# id único
     "background": "assets.backgrounds.Jail.png",
-    "player": {                     	# parámetros opcionales de apoyo
-  	  "party": ["hero","companion"],
-  	  "initial_hp": null          	# null = usar stats actuales del engine
     },
     "enemies": [
   	  {"id":"pivecuchillo","type":"pivecuchillo"},
@@ -22,5 +19,4 @@ SCENE = {
     },
     "on_victory_target": "scripts.ch7_salir",
     "on_defeat_target": "scripts.ch6_finaltortura"
-  }
-}
+    }

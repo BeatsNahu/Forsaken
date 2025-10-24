@@ -9,6 +9,9 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((1920, 1080))
     pygame.display.set_caption("Forsaken")
+    icono = pygame.image.load("assets/button/logo.png")
+    pygame.display.set_icon(icono)
+    logo = pygame.transform.scale(icono, (96, 96))
     clock = pygame.time.Clock()
 
     # With this part we avoid repeated code in every scene, because all scenes will have access to the screen and clock initialized in "Screen setup"
