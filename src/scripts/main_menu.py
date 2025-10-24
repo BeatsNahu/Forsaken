@@ -94,6 +94,7 @@ class MainMenu(Scene):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
 =======
 =======
@@ -622,6 +623,9 @@ SCENE_CLASS = MainMenu
 >>>>>>> c79f79d (canvio en que main vaya a chapter 1 en vez de a chapter 0)
 =======
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1")},
+=======
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
+>>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)}
 >>>>>>> a9e0d67 (feat: implement buttons and characters)
         ]
@@ -646,7 +650,7 @@ SCENE_CLASS = MainMenu
 
     def enter(self): # Called when the scene is entered
         try: # Try to load the background image
-            self.bg = pygame.image.load("assets/backgrounds/Menu_v.1.0.png").convert() # Load the background image
+            self.bg = pygame.image.load("assets/backgrounds/Menu_scenary.png").convert() # Load the background image
             self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size()) # Scale the image to fit the screen
             
             # Load option images
