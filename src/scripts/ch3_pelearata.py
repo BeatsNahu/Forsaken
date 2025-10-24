@@ -2,10 +2,6 @@ SCENE = {
   "start_battle": {
     "battle_id": "btl_01_bandits",  	# id único
     "background": "assets.backgrounds.Jail.png",
-    "player": {                     	# parámetros opcionales de apoyo
-  	  "party": ["hero","companion"],
-  	  "initial_hp": null          	# null = usar stats actuales del engine
-    },
     "enemies": [
   	  {"id":"rat","type":"rat"},
     ],
@@ -22,7 +18,7 @@ SCENE = {
   	  "add_fragments": ["frag_B"]
     },
     "on_victory_target": "scrips.ch4_pivecuchillo",
-    "on_defeat_target": "scrips.ch4_ratatecome"
+    "on_defeat_target": "scrips.ch4_ratatecome",
     "post_battle_dialogue": [        	# si hay diálogo previo, opcional
   	  {"speaker":"Narrator","text":"Después de tu pelea, te acercas a la pila de latas y encuentras comida."},
   	  {"speaker":"Narrator","text":"La vida aumenta +x."}
