@@ -688,11 +688,13 @@ class Scene:
         # Load background image (if provided) and initialize fonts. Non-fatal on error.
         if self.background:
             path = self._normalize_path(self.background)
-            try:
-                surf = pygame.image.load(path)
+        try:
+        # ANTES: surf = pygame.image.load(path)
+            surf = self.engine.load_image(path) # <--- MODIFICADO
+            if surf:
                 self._bg_surf = pygame.transform.scale(surf, self.engine.screen.get_size())
-            except Exception:
-                self._bg_surf = None
+        except Exception:
+            self._bg_surf = None
 
         # Prefer the bundled 'press-start.k.ttf' if available, otherwise fall back
         # to the default pygame font. Use different sizes for body and title.
@@ -761,28 +763,16 @@ class Scene:
             self.engine.scene_manager.load_scene(self.data["next"])
 
     def _choose(self, idx):
-        # Execute effects for the chosen option and navigate if a target exists.
         if idx < 0 or idx >= len(self.choices):
             return
         choice = self.choices[idx]
-        self.apply_effects(choice.get("effects", []))
+
+    # ¡DELEGA! El motor sabe cómo manejar los efectos.
+        self.engine.apply_effects(choice.get("effects", [])) 
+
         target = choice.get("target") or choice.get("next") or choice.get("scene")
         if target:
             self.engine.scene_manager.load_scene(target)
-
-    def apply_effects(self, effects):
-        # Apply simple, engine-specific effects described as dicts.
-        for e in effects:
-            if not isinstance(e, dict):
-                continue
-            t = e.get("type")
-            if t == "give_item" and hasattr(self.engine, "add_item"):
-                self.engine.add_item(e.get("item"))
-            elif t == "set_var" and hasattr(self.engine, "set_var"):
-                self.engine.set_var(e.get("name"), e.get("value"))
-            elif t == "start_battle":
-                if e.get("battle_module"):
-                    self.engine.scene_manager.load_scene(e.get("battle_module"))
 
     def update(self, dt):
         # Per-frame updates (no-op by default).
