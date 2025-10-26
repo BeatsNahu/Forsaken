@@ -1,5 +1,6 @@
 import importlib
-
+import pygame
+from scene import Scene as BaseScene
 class SceneManager: # Create a Game class to manage scene state
     def __init__(self, engine, scene_classes): # Initialize the game with a scene manager
         self.engine = engine # Reference to the game engine
@@ -7,8 +8,23 @@ class SceneManager: # Create a Game class to manage scene state
         self.current_scene = None # Current active scene
 
     def load_scene(self, scene_name):
+        """
+        Método PÚBLICO para solicitar un cambio de escena.
+        Inicia el fundido a negro (fade-out).
+        """
+        # No cargamos la escena AHORA.
+        # Se lo pedimos al gestor de transiciones.
+        if not self.engine.transition_manager.is_transitioning():
+            self.engine.transition_manager.start_transition(scene_name)
+        else:
+            print(f"Advertencia: Se intentó cargar {scene_name} durante una transición.")
+
+    def perform_scene_load(self, scene_name):
         mod = importlib.import_module(scene_name) # Dynamically import the module
         importlib.reload(mod) # Reload the module to get the latest changes
+        
+        scene = None 
+
         if hasattr(mod, "SCENE_CLASS"): # If the module has a SCENE_CLASS attribute, use it to create the scene
             cls = mod.SCENE_CLASS # Get the scene class
             scene = cls(self.engine) # Create an instance of the scene class
@@ -39,15 +55,31 @@ class SceneManager: # Create a Game class to manage scene state
         return scene
 
     def handle_event(self, event): # Handle events and delegate to the current scene
-        if self.current_scene: # If there is a current scene
-            self.current_scene.handle_event(event) # Delegate event handling to the current scene
-    
-    def update(self, dt): # Update the current scene with delta time, so the FPS will be the same on every computer
+        # --- NUEVA REGLA ---
+        # No procesar eventos del juego (click, etc.) si estamos en transición
+        if self.engine.transition_manager.is_transitioning():
+            # Solo permitir salir del juego
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                setattr(self.engine, "quit_flag", True)
+            return
+
         if self.current_scene:
+            self.current_scene.handle_event(event)
+        
+    def update(self, dt): # Update the current scene with delta time, so the FPS will be the same on every computer
+        # Actualizamos el gestor de transiciones SIEMPRE
+        self.engine.transition_manager.update(dt)
+
+        # No actualizamos la escena si estamos en transición
+        if self.current_scene and not self.engine.transition_manager.is_transitioning():
             self.current_scene.update(dt)
 
     def draw(self, screen): # Draw the current scene
+        # Dibujamos la escena actual SIEMPRE
         if self.current_scene:
             self.current_scene.draw(screen)
+            
+        # Dibujamos el gestor de transiciones SIEMPRE (encima de la escena)
+        self.engine.transition_manager.draw(screen)
 
         

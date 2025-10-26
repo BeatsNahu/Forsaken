@@ -2,6 +2,7 @@ import pygame
 from engine import Engine
 from scene_manager import SceneManager
 from scene import Scene
+from transition_manager import TransitionManager
 
 
 def main():
@@ -18,6 +19,8 @@ def main():
     engine = Engine() # Create an instance of the Engine
     engine.screen = screen # Assign the screen to the engine
     engine.clock = clock # Assign the clock to the engine
+    # Now that the engine has a screen, create the TransitionManager which needs screen size
+    engine.transition_manager = TransitionManager(engine)
 
     escene_manager = SceneManager(engine, Scene) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 
