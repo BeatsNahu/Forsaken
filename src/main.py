@@ -23,6 +23,7 @@ from scene import Scene
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from transition_manager import TransitionManager
 
 =======
@@ -261,6 +262,9 @@ from scene_manager import SceneManager
 >>>>>>> 9dd9a3f (Editing the main - engine - escene_maganer files and configuring them and eliminating extra files. I'm trying to do the first escene)
 =======
 >>>>>>> e6242d4 (Completion of main.py and editing the menu.py file)
+=======
+from transition_manager import TransitionManager
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 
 
 def main():
@@ -274,6 +278,8 @@ def main():
     engine = Engine() # Create an instance of the Engine
     engine.screen = screen # Assign the screen to the engine
     engine.clock = clock # Assign the clock to the engine
+    # Now that the engine has a screen, create the TransitionManager which needs screen size
+    engine.transition_manager = TransitionManager(engine)
 
     escene_manager = SceneManager(engine, Scene) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 
