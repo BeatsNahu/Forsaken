@@ -47,8 +47,12 @@ from transition_manager import TransitionManager
 =======
 import pygame
 import os
+<<<<<<< HEAD
 
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
+=======
+from transition_manager import TransitionManager
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 
 class Engine:
 <<<<<<< HEAD
@@ -87,6 +91,9 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
@@ -107,6 +114,7 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 =======
@@ -290,6 +298,16 @@ class Engine:
     def fadeout_music(self, duration_ms):
         pygame.mixer.music.fadeout(duration_ms)
         self._current_music_path = None
+=======
+        # TransitionManager requires engine.screen to be available.
+        # We delay its creation until the screen is assigned by the caller (see main.py).
+        self.transition_manager = None
+
+        # simple resource caches
+        self._font_cache = {}
+        self._image_cache = {}
+        self._sound_cache = {}
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 
     def load_font(self, path, size): # Load a font from a given path and size
         key = (path, size) # Create a key for the font cache based on path and size
@@ -309,6 +327,7 @@ class Engine:
         return f # Return the loaded font
 
     def load_image(self, path):
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -610,10 +629,35 @@ class Engine:
 =======
             # Cache and return
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
+=======
+        """Carga una imagen desde un path, la cachea y la devuelve."""
+        if path in self._image_cache:
+            return self._image_cache[path] # Devuelve la copia en memoria
+
+        if not path or not os.path.exists(path):
+            print(f"Error: No se encontró la imagen {path}")
+            return None 
+
+        try:
+            # 1. Cargar la imagen SIN convertirla todavía
+            image = pygame.image.load(path)
+
+            # 2. ¡LA CORRECCIÓN!
+            # Detectar si la imagen tiene canal alfa (transparencia)
+            if image.get_alpha():
+                # Si tiene, usar convert_alpha()
+                image = image.convert_alpha()
+            else:
+                # Si no tiene (es opaca, como un JPG), usar convert()
+                image = image.convert()
+            
+            # 3. Guardar la imagen correctamente convertida en el caché
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
             self._image_cache[path] = image
             return image
             
         except Exception as e:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -626,6 +670,8 @@ class Engine:
     def play_sound(self, path):
         # Check cache
 =======
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
@@ -637,6 +683,7 @@ class Engine:
         """Carga un sonido, lo cachea y lo reproduce."""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
             print(f"Error al cargar imagen {path}: {e}") # Print an error message if loading fails
@@ -663,6 +710,8 @@ class Engine:
     def play_sound(self, path):
         # Check cache
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
         if path not in self._sound_cache:
             if not path or not os.path.exists(path):
                 print(f"Error: No se encontró el sonido {path}")
@@ -674,6 +723,7 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 # Charge from disk
 =======
                 # Carga del disco
@@ -693,6 +743,9 @@ class Engine:
 =======
                 # Charge from disk
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
+=======
+                # Carga del disco
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
                 self._sound_cache[path] = pygame.mixer.Sound(path)
             except Exception as e:
                 print(f"Error al cargar sonido {path}: {e}")
@@ -704,12 +757,15 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         # Play sound cached
         self._sound_cache[path].play()
 
     def add_item(self, item_id):
         # Add an item to the inventory
 =======
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
@@ -721,6 +777,7 @@ class Engine:
         """Añade un item al inventario global."""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
         # Play sound cached
@@ -747,6 +804,8 @@ class Engine:
     def add_item(self, item_id):
         # Add an item to the inventory
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
         if item_id and item_id not in self.state["inventory"]:
             self.state["inventory"].append(item_id)
             print(f"[Engine] Item añadido: {item_id}")
@@ -758,6 +817,7 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         # Set a global state variable for example, "has_key" = True or "player_health" = 100
 =======
         """Establece una variable de estado global."""
@@ -777,6 +837,9 @@ class Engine:
 =======
         # Set a global state variable for example, "has_key" = True or "player_health" = 100
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
+=======
+        """Establece una variable de estado global."""
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
         if var_name:
             self.state["game_vars"][var_name] = value
             print(f"[Engine] Variable: {var_name} = {value}")
@@ -788,12 +851,15 @@ class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         # Get a global state variable
         return self.state["game_vars"].get(var_name)
     
     def apply_effects(self, effects):
         # Apply a list of effects to the game state
 =======
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
@@ -805,6 +871,7 @@ class Engine:
         """Procesa una lista de efectos de datos (de ex_base.py)."""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 =======
         # Get a global state variable
@@ -831,6 +898,8 @@ class Engine:
     def apply_effects(self, effects):
         # Apply a list of effects to the game state
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
         if not effects:
             return
 
@@ -845,6 +914,7 @@ class Engine:
             elif t == "set_var":
                 self.set_var(e.get("name"), e.get("value"))
             elif t == "start_battle":
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1113,3 +1183,8 @@ class Engine:
         return f # Return the loaded font
     
 >>>>>>> c402bd6 (refactor: improve code readability with comments and remove unused file)
+=======
+                # El motor es responsable de cargar escenas
+                if e.get("battle_module"):
+                    self.scene_manager.load_scene(e.get("battle_module"))
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
