@@ -54,6 +54,7 @@ class Scene:
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
         if self.background:
             path = self._normalize_path(self.background)
+<<<<<<< HEAD
             try:
 <<<<<<< HEAD
                 surf = self.engine.load_image(self.background)
@@ -85,9 +86,15 @@ class Scene:
         # Handle keydown events for dialogue progression and choices
 =======
                 surf = pygame.image.load(path)
+=======
+        try:
+        # ANTES: surf = pygame.image.load(path)
+            surf = self.engine.load_image(path) # <--- MODIFICADO
+            if surf:
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
                 self._bg_surf = pygame.transform.scale(surf, self.engine.screen.get_size())
-            except Exception:
-                self._bg_surf = None
+        except Exception:
+            self._bg_surf = None
 
         # Prefer the bundled 'press-start.k.ttf' if available, otherwise fall back
         # to the default pygame font. Use different sizes for body and title.
@@ -190,16 +197,23 @@ class Scene:
             self.engine.scene_manager.load_scene(self.data["next"])
 
     def _choose(self, idx):
-        # Execute effects for the chosen option and navigate if a target exists.
         if idx < 0 or idx >= len(self.choices):
             return
         choice = self.choices[idx]
+<<<<<<< HEAD
         self.apply_effects(choice.get("effects", []))
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
+=======
+
+    # ¡DELEGA! El motor sabe cómo manejar los efectos.
+        self.engine.apply_effects(choice.get("effects", [])) 
+
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
         target = choice.get("target") or choice.get("next") or choice.get("scene")
         if target:
             self.engine.scene_manager.load_scene(target)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     def update(self, dt):
         # Update chapter title (if any)
@@ -223,6 +237,8 @@ class Scene:
                 if e.get("battle_module"):
                     self.engine.scene_manager.load_scene(e.get("battle_module"))
 
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
     def update(self, dt):
         # Per-frame updates (no-op by default).
         return

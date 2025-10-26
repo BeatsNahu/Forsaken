@@ -3,10 +3,14 @@ from engine import Engine
 from scene_manager import SceneManager
 from scene import Scene
 <<<<<<< HEAD
+<<<<<<< HEAD
 from transition_manager import TransitionManager
 
 =======
 >>>>>>> 5a11d94 (Completion of main.py and editing the menu.py file)
+=======
+from transition_manager import TransitionManager
+>>>>>>> be8071d ( implement transition manager and refactor scene loading with image caching)
 
 
 def main():
@@ -31,6 +35,7 @@ def main():
     engine.clock = clock # Assign the clock to the engine
     # Now that the engine has a screen, create the TransitionManager which needs screen size
     engine.transition_manager = TransitionManager(engine)
+<<<<<<< HEAD
 
     escene_manager = SceneManager(engine, Scene) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 
@@ -144,6 +149,8 @@ def main():
     engine.screen = screen # Assign the screen to the engine
     engine.clock = clock # Assign the clock to the engine
 >>>>>>> 17a30bb (Edition and comments of main.py)
+=======
+>>>>>>> be8071d ( implement transition manager and refactor scene loading with image caching)
 
     escene_manager = SceneManager(engine, Scene) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 

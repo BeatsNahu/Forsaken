@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 # Description: Main menu scene for the game
 import pygame
+<<<<<<< HEAD
 =======
 # src/scenes/main_menu.py
 =======
@@ -10,6 +11,8 @@ import pygame
 import pygame,sys
 import os
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 from scene import Scene
 
 class MainMenu(Scene):
@@ -83,6 +86,7 @@ class MainMenu(Scene):
             # fallback: create directly
             self.font = pygame.font.Font(self._font_path if os.path.exists(self._font_path) else None, 50)
         self.selection = 0 # Selected option index
+<<<<<<< HEAD
 
         # Used images 
         self.bg = None # Background image
@@ -92,8 +96,11 @@ class MainMenu(Scene):
         self._img_exit = None
 =======
         self.title = "Forsaken" # Title text
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
 
-        # Image Options
+        # Used images 
+        self.bg = None # Background image
         self._img_title = None
         self._img_start = None
         self._img_exit = None
@@ -184,19 +191,19 @@ class MainMenu(Scene):
 =======
 
     def enter(self): # Called when the scene is entered
-        try: # Try to load the background image
-            self.bg = pygame.image.load("assets/backgrounds/Menu_scenary.png").convert() # Load the background image
-            self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size()) # Scale the image to fit the screen
-            
-            # Load option images
-            self._img_title = pygame.image.load("assets/button/Title.png").convert_alpha() # Load the title image
-            self._img_title = pygame.transform.scale(self._img_title,self.engine.screen.get_size()) # Scale the title image to fit the screen
-            
-            self._img_start = pygame.image.load("assets/button/Start.png").convert_alpha() # Load the start button image
-            self._img_start = pygame.transform.scale(self._img_start, (512,512)) # Scale the start button image
-            
-            self._img_exit = pygame.image.load("assets/button/Exit.png").convert_alpha() # Load the exit button image
-            self._img_exit = pygame.transform.scale(self._img_exit, (512,512)) # Scale the exit button image
+        try:
+    # Usamos self.engine.load_image()
+            self.bg = self.engine.load_image("assets/backgrounds/Menu_scenary.png")
+            self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size()) 
+    
+            self._img_title = self.engine.load_image("assets/button/Title.png")
+            self._img_title = pygame.transform.scale(self._img_title, self.engine.screen.get_size())
+    
+            self._img_start = self.engine.load_image("assets/button/Start.png")
+            self._img_start = pygame.transform.scale(self._img_start, (512,512))
+    
+            self._img_exit = self.engine.load_image("assets/button/Exit.png")
+            self._img_exit = pygame.transform.scale(self._img_exit, (512,512))
         
         except Exception: # If there is an error loading the image
             self.bg = None # Set background to None
@@ -305,18 +312,17 @@ class MainMenu(Scene):
         if self._img_start and self._img_exit:
             surface.blit(self._img_start, (700, 300))
             surface.blit(self._img_exit, (700, 500))
-            if False:
-                color = (255,255,0)
-                label = self.font.render(opt["text"], True, color) # Render the option text
-                surface.blit(label, (740, 450 + 60)) # Draw the option
-        
+
         if self._img_title:
             surface.blit(self._img_title, (0,0))
+<<<<<<< HEAD
         else:
             title_font = self.engine.load_font(self._font_path, 100)
             title_label = title_font.render(self.title, True, (255, 255, 255))
             surface.blit(title_label, (800, 200))
         pass
 >>>>>>> a9e0d67 (feat: implement buttons and characters)
+=======
+>>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
     
 SCENE_CLASS = MainMenu
