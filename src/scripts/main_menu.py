@@ -724,6 +724,7 @@ SCENE_CLASS = MainMenu
         if self._img_title:
             surface.blit(self._img_title, (0,0))
     
+<<<<<<< HEAD
 >>>>>>> 59da024 (Finish the window menu, we need to can select one option and swap the scene or exit the game)
 SCENE_CLASS = MainMenu
 
@@ -744,3 +745,6 @@ SCENE_CLASS = MainMenu
 >>>>>>> 6044657 (refactor: clean up comments and improve enemy initialization in BattleManager)
 =======
 >>>>>>> 5b2e0a0 (Main.py - scene:manager and main_menu are working)
+=======
+SCENE_CLASS = MainMenu
+>>>>>>> 6044657 (refactor: clean up comments and improve enemy initialization in BattleManager)
