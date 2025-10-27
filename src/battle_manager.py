@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pygame
 import random
 from scene import Scene
@@ -232,6 +233,9 @@ from the provided `data` dictionary.
 
 import pygame,sys
 >>>>>>> f0f2483 (feat: enhance battle manager and main menu with image support and improved layout)
+=======
+import pygame
+>>>>>>> 6044657 (refactor: clean up comments and improve enemy initialization in BattleManager)
 import os
 import random
 from scene import Scene
@@ -241,21 +245,17 @@ class BattleManager(Scene):
     def __init__(self, engine, data=None):
         super().__init__(engine, data or {"id": "battle_manager"})
 
-        # Player choices
-        self.options = [
-            {"text": "1) Strong Punch (3 dmg, -1 player hp)"},
-            {"text": "2) Weak Kick (1 dmg, +1 player hp)"},
-        ]
-
-        # Runtime state
+        self.ui_state = "CHOOSE_ACTION"  # "CHOOSE_ACTION", "CHOOSE_TARGET", "CHOOSE_ITEM"
+        self.player_skills = [
+            {"text": "Puño", "type": "ATTACK", "dmg": 5, "cost": 1},
+            {"text": "Patada", "type": "ATTACK", "dmg": 2, "cost": 0},
+            {"text": "Defensa", "type": "DEFEND"},
+            {"text": "Item", "type": "ITEM_MENU"},
+            ]
+        self.enemies = [] # Lista de enemigos vivos (diccionarios)
         self.player_selection = 0
-        self.life_player = 10
-        self.life_monster = 0
-        self.turn = 0  # 0: player, 1: monster
-        self.monster_type = None
-        self.attack_damage = (1, 2)
-        self.punch = 3
-        self.kick = 1
+        self.target_selection = 0
+        self.player_is_defending = False
 
         # Monster timing (so monster action is delayed slightly)
         self._monster_delay = 0.0
@@ -273,17 +273,42 @@ class BattleManager(Scene):
         self.title = "Battle"
 
     def enter(self):
-        # load background if available
+    # 1. LLAMAR AL PADRE para cargar fuentes (¡Importante!)
+        super().enter() 
+
+    # 2. Usar el CACHÉ del motor
+        bg_path = self.data.get("background", "assets/backgrounds/battle_scene.png")
         try:
-            self.bg = pygame.image.load("assets/backgrounds/battle_scene.png").convert()
-            self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size())
-        except Exception:
+            surf = self.engine.load_image(bg_path)
+            if surf:
+                self.bg = pygame.transform.scale(surf, self.engine.screen.get_size())
+        except Exception as e:
+            print(f"Error al cargar fondo de batalla: {e}")
             self.bg = None
 
-        # If the scene was created with data specifying a monster, start it
-        mt = self.data.get("monster_type")
-        if mt:
-            self.start_battle(mt)
+    # 3. LEER los datos de la batalla (de ex_pelea.py)
+        self.enemies_data = self.data.get("enemies", [])
+        self.rules = self.data.get("rules", {})
+        self.rewards = self.data.get("rewards", {})
+    
+    # 4. Crear los enemigos "vivos"
+        self.enemies = []
+        for enemy_def in self.enemies_data:
+            self.enemies.append({
+                "id": enemy_def.get("id"),
+                "type": enemy_def.get("type"),
+                "hp": enemy_def.get("hp", 10),
+                "max_hp": enemy_def.get("hp", 10),
+                "attack_min": enemy_def.get("attack_min", 1),
+                "attack_max": enemy_def.get("attack_max", 3)
+            })
+    
+    # 5. Cargar estado del jugador desde el ENGINE
+        self.life_player = self.engine.state.get("player_max_hp", 10) # Asumiendo 10 como default
+        self.player_hearts = self.engine.get_hearts()
+    
+    # ... (Decidir turno inicial basado en self.rules)
+        self.turn = 0 # 0: player
 
     def start_battle(self, monster_type):
         # configure monster stats by type
