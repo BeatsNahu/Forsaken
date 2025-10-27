@@ -1,28 +1,7 @@
 SCENE = {
-    "id": "ch0_intro",
-    "title": "Chapter 0: The Beginning",
-    "background": "assets.backgrounds.Battle_scenary.png",
-    "lines": [
-        {"speaker": "Narrator", "text": "La rana se enfada y te ataca."},
-    ],
-    "choises": [
-        {
-            "text": "ganar",
-            "target": "scripts.ch0_option1",
-        },
-        {
-        "text": "perder",
-        "target": "scripts.ch0_option2",
-        }
-    ]
-}
-SCENE = {
   "start_battle": {
     "battle_id": "btl_01_bandits",  	# id único
     "background": "assets.backgrounds.Jail.png",
-    "player": {                     	# parámetros opcionales de apoyo
-  	  "party": ["hero","companion"],
-  	  "initial_hp": null          	# null = usar stats actuales del engine
     },
     "enemies": [
   	  {"id":"pivecuchillo","type":"pivecuchillo"},
@@ -38,7 +17,6 @@ SCENE = {
     "rewards": {                    	# aplicarse al ganar
   	  "add_fragments": ["frag_B"]
     },
-    "on_victory_target": "scripts.ch6_mcwin",
-    "on_defeat_target": "scripts.ch6_crias"
-  }
-}
+    "on_victory_target": "scripts.ch7_salir",
+    "on_defeat_target": "scripts.ch6_finaltortura"
+    }
