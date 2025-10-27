@@ -80,8 +80,3 @@ class MainMenu(Scene):
             surface.blit(self._img_title, (0,0))
     
 SCENE_CLASS = MainMenu
-
-
-
-
-
