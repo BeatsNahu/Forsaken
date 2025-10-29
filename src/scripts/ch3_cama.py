@@ -38,12 +38,16 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
 =======
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
             "effects": [
                 {"type": "give_item", "id": "Tenedor"},
                 {"type": "add_fragment", "id": "frag_A"}
             ],
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
             "give_item": "tenedor",
@@ -59,6 +63,8 @@ SCENE = {
 =======
             "give_item": "tenedor",                 #hay que canviarlo
 >>>>>>> abdd92e (feat: implement battle scene structure and enhance enemy interactions)
+=======
+>>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
             "target": "scripts.ch4_rana",
         },
         {
