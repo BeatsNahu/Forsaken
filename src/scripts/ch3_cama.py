@@ -8,7 +8,10 @@ SCENE = {
     "choises": [
         {
             "text": "Sí",
-            "give_item": "tenedor",                 #hay que canviarlo
+            "effects": [
+                {"type": "give_item", "id": "Tenedor"},
+                {"type": "add_fragment", "id": "frag_A"}
+            ],
             "target": "scripts.ch4_rana",
         },
         {
