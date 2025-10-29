@@ -9,6 +9,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "background": "assets/backgrounds/Jail_scenary.png",
     "music": "assets/Sounds/soundtrack.ogg", 
     "sfx_on_enter": None, 
@@ -42,6 +43,9 @@ SCENE = {
 =======
     "background": "assets.backgrounds.Jail_scenary.png",
 >>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
+=======
+    "background": "assets/backgrounds/Jail_scenary.png",
+>>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
     "lines": [
         {"speaker": "Narrator", "text": "Estás en una especie de celda, pero no recuerdas cómo llegaste allí."},
         {"speaker": "Narrator", "text": "Ves la puerta de tu celda abierta, ¿qué haces?."},
