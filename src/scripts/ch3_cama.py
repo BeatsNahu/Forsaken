@@ -92,6 +92,9 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
 =======
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
 =======
@@ -108,6 +111,7 @@ SCENE = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             "give_item": "tenedor",
 >>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
@@ -146,6 +150,8 @@ SCENE = {
 =======
             "give_item": "tenedor",                 #hay que canviarlo
 >>>>>>> abdd92e (feat: implement battle scene structure and enhance enemy interactions)
+=======
+>>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
             "target": "scripts.ch4_rana",
         },
         {
