@@ -893,9 +893,15 @@ SCENE_CLASS = MainMenu
     
             self._img_start = self.engine.load_image("assets/button/Start.png")
             self._img_start = pygame.transform.scale(self._img_start, (512,512))
+
+            self._img_start_selected = self.engine.load_image("assets/button/Start_selected.png")
+            self._img_start_selected = pygame.transform.scale(self._img_start_selected, (512,512))
     
             self._img_exit = self.engine.load_image("assets/button/Exit.png")
             self._img_exit = pygame.transform.scale(self._img_exit, (512,512))
+
+            self._img_exit_selected = self.engine.load_image("assets/button/Exit_selected.png")
+            self._img_exit_selected = pygame.transform.scale(self._img_exit_selected, (512,512))
         
         except Exception: # If there is an error loading the image
             self.bg = None # Set background to None
@@ -990,8 +996,13 @@ SCENE_CLASS = MainMenu
             surface.blit(self.bg, (0,0)) # Draw the background image
 
         if self._img_start and self._img_exit:
-            surface.blit(self._img_start, (700, 300))
-            surface.blit(self._img_exit, (700, 500))
+            if self.selection == 0:
+                surface.blit(self._img_start_selected, (700, 300))
+                surface.blit(self._img_exit, (700, 500))
+            else:
+                surface.blit(self._img_start, (700, 300))
+                surface.blit(self._img_exit_selected, (700, 500))
+
 
         if self._img_title:
             surface.blit(self._img_title, (0,0))
