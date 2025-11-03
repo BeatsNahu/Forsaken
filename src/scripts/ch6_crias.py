@@ -8,7 +8,7 @@ SCENE = {
     ],
     "choises": [
         {
-            "text": "volver a intentar",
+            "text": "volver a intentarlo",
             "target": "scripts.ch1_intro",
         }
     ]
