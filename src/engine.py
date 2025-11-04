@@ -300,14 +300,48 @@ class Engine:
         self._current_music_path = None
 =======
         # TransitionManager requires engine.screen to be available.
-        # We delay its creation until the screen is assigned by the caller (see main.py).
         self.transition_manager = None
 
-        # simple resource caches
+        # Simple resource caches
         self._font_cache = {}
         self._image_cache = {}
         self._sound_cache = {}
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+
+        self._current_music_path = None
+
+    def play_music(self, path, loop=-1, volume=0.7):
+        # Play background music from a given path
+        if not path:
+            return
+        
+        # Avoid restarting the same music
+        if path == self._current_music_path:
+            return
+            
+        try:
+            # Stop current music
+            pygame.mixer.music.stop()
+            
+            # Load and play new music
+            pygame.mixer.music.load(path)
+            pygame.mixer.music.set_volume(volume)
+            pygame.mixer.music.play(loop) # loop=-1 Loop indefinitely
+            
+            self._current_music_path = path
+            print(f"[Engine] Reproduciendo música: {path}")
+            
+        except Exception as e:
+            print(f"Error al reproducir música {path}: {e}")
+            self._current_music_path = None
+
+    def stop_music(self):
+        pygame.mixer.music.stop()
+        self._current_music_path = None
+
+    def fadeout_music(self, duration_ms):
+        pygame.mixer.music.fadeout(duration_ms)
+        self._current_music_path = None
 
     def load_font(self, path, size): # Load a font from a given path and size
         key = (path, size) # Create a key for the font cache based on path and size
@@ -327,6 +361,7 @@ class Engine:
         return f # Return the loaded font
 
     def load_image(self, path):
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -631,6 +666,8 @@ class Engine:
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 =======
         """Carga una imagen desde un path, la cachea y la devuelve."""
+=======
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         if path in self._image_cache:
             return self._image_cache[path] # Devuelve la copia en memoria
 
@@ -639,20 +676,23 @@ class Engine:
             return None 
 
         try:
-            # 1. Cargar la imagen SIN convertirla todavía
+            # 
             image = pygame.image.load(path)
 
-            # 2. ¡LA CORRECCIÓN!
-            # Detectar si la imagen tiene canal alfa (transparencia)
+            # 
             if image.get_alpha():
-                # Si tiene, usar convert_alpha()
+                # 
                 image = image.convert_alpha()
             else:
-                # Si no tiene (es opaca, como un JPG), usar convert()
+                # 
                 image = image.convert()
             
+<<<<<<< HEAD
             # 3. Guardar la imagen correctamente convertida en el caché
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+            # 
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
             self._image_cache[path] = image
             return image
             
