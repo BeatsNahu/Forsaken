@@ -1,27 +1,61 @@
 SCENE = {
-  "start_battle": {
-    "battle_id": "btl_01_bandits",  	# id único
-    "background": "assets.backgrounds.Jail.png",
+    "id": "ch3_pelearata",
+    "class": "BattleManager",  # Tell the engine to use BattleManager for this scene
+    
+    # --- ASSETS ---
+    "background": "assets/backgrounds/Battle_scenary.png",
+    "music": "assets/Sounds/battle_theme.ogg",
+
+    # --- BATTLE SETUP ---
+    "player": {
+        # Define the player's skills for this battle
+        "skills": [
+            {"id": "punch", "text": "Puño", "type": "ATTACK", "dmg": 5, "cost": 1, "cost_type": "HP"},
+            {"id": "kick", "text": "Patada", "type": "ATTACK", "dmg": 2, "cost": 0},
+            {"id": "defend", "text": "Defensa", "type": "DEFEND"},
+            {"id": "item", "text": "Item", "type": "ITEM_MENU"}
+        ]
+    },
     "enemies": [
-  	  {"id":"rat","type":"rat"},
+        # Define the enemy rat
+        {
+            "id": "rat", 
+            "type": "rat", 
+            "hp": 10, 
+            "max_hp": 10,
+            "sprite": "sprites/rat_mutant.png", # Sprite path
+            "pos": [1400, 300],
+            "skills": [
+                {"type": "ATTACK", "dmg_min": 1, "dmg_max": 3, "text": "Bite"}
+            ]
+        }
+        # Podrías añadir otra rata aquí
+        # { "id": "rata_2", "type": "rat", "hp": 8, ... }
     ],
-    "rules": {                      	# reglas del encuentro (gran ayuda para data-driven)
-  	  "win_condition": "all_enemies_dead",
-  	  "lose_condition": "party_dead",
+
+    # --- RULES ---
+    "rules": {
+        "turn_order": "player_first", # "player_first", "enemy_first", "speed"
+        "win_condition": "all_enemies_dead",
+        "lose_condition": "player_dead"
     },
-    "pre_battle_dialogue": [        	# si hay diálogo previo, opcional
-  	  {"speaker":"Narrator","text":"Te acercas y ves en la esquina varias latas de comida,"},
-  	  {"speaker":"Narrator","text":"pero al acercarte aparece una rata mutante..."}
+    
+    # --- DIALOGUE ---
+    "pre_battle_dialogue": [
+        {"speaker":"Narrator","text":"¡Una rata mutante aparece!"}
     ],
-    "rewards": {                    	# aplicarse al ganar
-  	  "items": ["Lata_alubias"],
-  	  "add_fragments": ["frag_B"]
+    "post_battle_dialogue": [
+        {"speaker":"Narrator","text":"La rata cae. Encuentras comida."}
+    ],
+
+    # --- REWARDS AND NEXT SCENES ---
+    "rewards_on_victory": {
+        "effects": [
+            {"type": "give_item", "item": "Lata_alubias"},
+            {"type": "set_var", "name": "player_hp", "value": "+10"} # IDEAL: Heal player by 10 HP
+        ]
     },
-    "on_victory_target": "scrips.ch4_pivecuchillo",
-    "on_defeat_target": "scrips.ch4_ratatecome",
-    "post_battle_dialogue": [        	# si hay diálogo previo, opcional
-  	  {"speaker":"Narrator","text":"Después de tu pelea, te acercas a la pila de latas y encuentras comida."},
-  	  {"speaker":"Narrator","text":"La vida aumenta +x."}
-    ]
-  }
+    
+    "on_victory_target": "scripts.ch4_pivecuchillo",
+    "on_defeat_target": "scripts.ch4_ratatecome"
 }
