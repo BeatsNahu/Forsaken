@@ -4,7 +4,7 @@ SCENE = {
     "background": "assets.backgrounds.Jail.png",
     "lines": [
         {"speaker": "Narrator", "text": "Después de un par de horas caminando, encuentras un pueblo."},
-        {"speaker": "Narrator", "text": "BBBBBBBb."},
+        {"speaker": "Narrator", "text": "Ahora eres libre."},
     ],
     "choises": [
         {

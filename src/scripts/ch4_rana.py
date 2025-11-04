@@ -1,7 +1,7 @@
 SCENE = {
     "id": "ch4_rana",
     "title": "Chapter 0: The Beginning",
-    "background": "assets.backgrounds.Jail.png",
+    "background": "assets.backgrounds.Pantalla_rana.png",
     "lines": [
         {"speaker": "Narrator", "text": "En una esquina ves una rana."},
     ],
@@ -12,7 +12,7 @@ SCENE = {
         },
         {
         "text": "Darle un patada.",
-        "target": "scripts.ch5_peleanata",
+        "target": "scripts.ch5_pelearana",
         }
     ]
 }

@@ -18,5 +18,5 @@ SCENE = {
   	  "add_fragments": ["frag_B"]
     },
     "on_victory_target": "scripts.ch7_salir",
-    "on_defeat_target": "scripts.ch6_finaltortura"
+    "on_defeat_target": "scripts.ch5_finaltortura"
     }

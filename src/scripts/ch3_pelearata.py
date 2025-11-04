@@ -19,7 +19,7 @@ SCENE = {
     },
     "on_victory_target": "scrips.ch4_pivecuchillo",
     "on_defeat_target": "scrips.ch4_ratatecome",
-    "post_battle_dialogue": [        	# si hay diálogo previo, opcional
+    "post_battle_dialogue": [        	# si hay diálogo despues, opcional
   	  {"speaker":"Narrator","text":"Después de tu pelea, te acercas a la pila de latas y encuentras comida."},
   	  {"speaker":"Narrator","text":"La vida aumenta +x."}
     ]

@@ -4,12 +4,13 @@ SCENE = {
     "background": "assets.backgrounds.Jail.png",
     "lines": [
         {"speaker": "Narrator", "text": "El señor te atrapa y empieza a torturarte."},
-        {"speaker": "Narrator", "text": "Piensas que vas a morir, pero no parece que tengas razón, ya que desde eso han pasado meses..."},
+        {"speaker": "Narrator", "text": "Piensas que vas a morir, pero no parece que tengas razón,"},
+        {"speaker": "Narrator", "text": "ya que desde eso han pasado meses..."},
     ],
     "choises": [
         {
-            "text": "Option 1",
-            "target": "scripts.ch0_option1",
+            "text": "volver al inicio",
+            "target": "scripts.ch1_intro",
         }
     ]
 }
