@@ -41,6 +41,11 @@ class MainMenu(Scene):
         self._img_exit = None
 
     def enter(self): # Called when the scene is entered
+        super().enter()
+
+        # Sounds
+        self.engine.play_music("assets/Sounds/main_track.ogg", loop=-1) # Background music
+
         try:
     # Usamos self.engine.load_image()
             self.bg = self.engine.load_image("assets/backgrounds/Menu_scenary.png")
