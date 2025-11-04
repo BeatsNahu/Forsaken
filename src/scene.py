@@ -1,5 +1,5 @@
-# scene.py
 import pygame
+<<<<<<< HEAD
 <<<<<<< HEAD
 from ui import DialogueBox, ChapterTitle
 =======
@@ -10,6 +10,9 @@ import os
 =======
 from ui import DialogueBox, ChapterTitle #
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+from ui import DialogueBox, ChapterTitle
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
 
 class Scene:
     def __init__(self, engine, data=None):
@@ -18,6 +21,7 @@ class Scene:
         self.data = data or {}
         self.id = self.data.get("id", "unnamed")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         # Scene content
         self.background = self.data.get("background")
@@ -42,25 +46,28 @@ class Scene:
         self._bg_surf = None
 =======
         # scene content
+=======
+        # Scene content
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         self.background = self.data.get("background")
         self.lines = self.data.get("lines", [])
         self.choices = self.data.get("choices") or self.data.get("choises") or []
 
-        # runtime indexes and cached surfaces
+        # Runtime indexes and cached surfaces
         self._line_index = 0
         self._choice_index = 0
         self._bg_surf = None
 
-        # --- ARREGLADO ---
-        # Carga la UI que SÍ sabe dibujar texto
+        # Runtime UI components 
         self.ui = DialogueBox(self.engine) #
 
         # Chapter title component (if any)
         self.chapter_title = None
         if self.data.get("title"):
-            self.chapter_title = ChapterTitle(self.engine, self.data.get("title")) #
+            self.chapter_title = ChapterTitle(self.engine, self.data.get("title"))
 
     def enter(self):
+<<<<<<< HEAD
 <<<<<<< HEAD
         # Load background image (if provided) and initialize fonts. Non-fatal on error.
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
@@ -73,6 +80,10 @@ class Scene:
         # --- ARREGLADO ---
         # Código de fondo limpiado. Eliminado el error de 'path'.
         self._bg_surf = None # Empezar como None
+=======
+        # Load background image
+        self._bg_surf = None
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         if self.background:
             try:
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
@@ -84,6 +95,9 @@ class Scene:
                 self._bg_surf = None
         
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         # Logic to play music and sound effects upon entering the scene
         # 1. Play continuous music
         music_path = self.data.get("music")
@@ -94,6 +108,7 @@ class Scene:
         sfx_path = self.data.get("sfx_on_enter")
         if sfx_path:
             self.engine.play_sound(sfx_path)
+<<<<<<< HEAD
 
     def exit(self): 
         return # Placeholder for cleanup when a scene is replaced
@@ -133,12 +148,14 @@ class Scene:
 =======
         # ¡YA NO SE CARGAN FUENTES AQUÍ! La UI lo hace.
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
 
-    def exit(self):
-        # Placeholder for cleanup when a scene is replaced
-        return
+    def exit(self): 
+        return # Placeholder for cleanup when a scene is replaced
 
     def handle_event(self, event):
+<<<<<<< HEAD
 <<<<<<< HEAD
         # Handle key events: advance text or navigate/select choices.
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
@@ -148,6 +165,13 @@ class Scene:
              return 
 
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+        # If there is a chapter title being shown, block input until it finishes
+        if self.chapter_title and not self.chapter_title.is_finished():
+             return 
+
+        # Handle keydown events for dialogue progression and choices
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         if event.type != pygame.KEYDOWN:
             return
 
@@ -171,6 +195,7 @@ class Scene:
             setattr(self.engine, "quit_flag", True)
 
     def _advance(self):
+<<<<<<< HEAD
 <<<<<<< HEAD
         # Advance to the next line or show choices
         if self._line_index < len(self.lines):
@@ -222,20 +247,37 @@ class Scene:
         # ... (tu código _advance está bien) ...
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
         if self._line_index < len(self.lines) - 1:
+=======
+        # Advance to the next line or show choices
+        if self._line_index < len(self.lines):
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
             self._line_index += 1
-            return
-        if self.choices:
-            self._choice_index = 0
-            return
+
+            # Play SFX if the new line has one
+            if self._line_index < len(self.lines):
+                new_line = self.lines[self._line_index]
+                if isinstance(new_line, dict):
+                    sfx = new_line.get("sfx")
+                    if sfx:
+                        self.engine.play_sound(sfx)
+                return
+
+            # If we reached the end of lines, check for choices
+            if self.choices:
+                self._choice_index = 0 
+                return
+        
+        # No more lines and no choices, go to next scene if specified
         if "next" in self.data:
             self.engine.apply_effects(self.data.get("effects", []))
             self.engine.scene_manager.load_scene(self.data["next"])
 
     def _choose(self, idx):
-        # ... (tu código _choose está bien) ...
         if idx < 0 or idx >= len(self.choices):
             return
+        
         choice = self.choices[idx]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         self.apply_effects(choice.get("effects", []))
@@ -249,6 +291,18 @@ class Scene:
 =======
         self.engine.apply_effects(choice.get("effects", [])) 
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+
+        # Play choice SFX (if any)
+        sfx = choice.get("sfx")
+        if sfx:
+            self.engine.play_sound(sfx)
+
+        # Apply choice effects
+        self.engine.apply_effects(choice.get("effects", [])) 
+        
+        # Load target scene
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         target = choice.get("target") or choice.get("next") or choice.get("scene")
         if target:
             self.engine.scene_manager.load_scene(target)
@@ -282,15 +336,19 @@ class Scene:
     def update(self, dt):
         # Update chapter title (if any)
         if self.chapter_title:
-            self.chapter_title.update(dt) #
+            self.chapter_title.update(dt)
 
     def draw(self, surface):
+<<<<<<< HEAD
 <<<<<<< HEAD
         # Draw background, title, current dialog line, and choices.
 >>>>>>> d07fceb (Create def draw in the scene file to load data driven)
 =======
         # 1. Fondo (Capa 0)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+        # 1. Draw background 
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         if self._bg_surf:
             surface.blit(self._bg_surf, (0, 0))
         else:
@@ -321,32 +379,30 @@ class Scene:
 =======
 =======
         
+<<<<<<< HEAD
         # (Capa 1 - Actores/Animaciones: El AnimationManager lo dibuja automáticamente)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+        # HERE I WILL CREATE ANIMATION_MANAGER TO HANDLE ANIMATED BACKGROUNDS LATER
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
 
-        # --- ARREGLADO ---
-        # 2. Delegar el dibujado a la UI
-        # La UI decidirá si dibujar elecciones o texto
-        
+        # 2. Draw dialogue box or choices
         if self._is_showing_choices():
-            # Le pasamos las elecciones a la UI
-            self.ui.draw(surface, text=None, choices=self.choices, choice_idx=self._choice_index) #
+            self.ui.draw(surface, text=None, choices=self.choices, choice_idx=self._choice_index)
         
         elif self.lines:
-            # Conseguimos los datos de la línea actual
             ln = self.lines[self._line_index]
             text = ln.get("text", "") if isinstance(ln, dict) else str(ln)
             speaker = ln.get("speaker") if isinstance(ln, dict) else None
             
-            # Le pasamos el texto y el hablante a la UI
-            self.ui.draw(surface, text=text, speaker=speaker) #
+            self.ui.draw(surface, text=text, speaker=speaker)
 
-        # 3. Dibujar Título (Capa 3 - Encima de todo)
+        # 3. Draw chapter title (if any)
         if self.chapter_title:
-            self.chapter_title.draw(surface) #
-
-    
+            self.chapter_title.draw(surface)
+   
     def _is_showing_choices(self):
+<<<<<<< HEAD
         # True when at last line and choices exist
 <<<<<<< HEAD
         return self._line_index >= max(0, len(self.lines) - 1) and bool(self.choices) # The utility function checks if the scene is currently displaying choices to the player
@@ -376,3 +432,7 @@ class Scene:
 =======
         return self._line_index >= max(0, len(self.lines) - 1) and bool(self.choices)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+        # Returns True if we are at the end of lines and have choices to show
+        return self._line_index == len(self.lines) and bool(self.choices)
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)

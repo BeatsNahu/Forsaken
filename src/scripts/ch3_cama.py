@@ -2,6 +2,7 @@ SCENE = {
     "id": "ch3_cama",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "background": "assets/backgrounds/Bed.png",
     "music": "assets/Sounds/soundtrack.ogg", 
 =======
@@ -12,6 +13,10 @@ SCENE = {
     "title": "Chapter 0: The ------",
     "background": "assets.backgrounds.Bed.png",
 >>>>>>> c3173b0 (fix: update scene backgrounds and titles for consistency across chapters)
+=======
+    "background": "assets/backgrounds/Bed.png",
+    "music": "assets/Sounds/soundtrack.ogg", 
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
     "lines": [
         {"speaker": "Narrator", "text": "¿Revisas debajo de la cama?."},
     ],
