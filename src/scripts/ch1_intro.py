@@ -15,6 +15,7 @@ SCENE = {
     "sfx_on_enter": None, 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "background": "assets.backgrounds.Jail.png",
 >>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
@@ -46,6 +47,8 @@ SCENE = {
 =======
     "background": "assets/backgrounds/Jail_scenary.png",
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
     "lines": [
         {"speaker": "Narrator", "text": "Estás en una especie de celda, pero no recuerdas cómo llegaste allí."},
         {"speaker": "Narrator", "text": "Ves la puerta de tu celda abierta, ¿qué haces?."},
@@ -63,6 +66,7 @@ SCENE = {
             "sfx": None
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "choises": [
 =======
@@ -94,6 +98,8 @@ SCENE = {
             "text": "Acércate a la puerta",
             "target": "scripts.ch2_celdas",
 >>>>>>> f65941e (refactor: remove unused chapter scripts to streamline the project)
+=======
+>>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
         }
     ]
 }
