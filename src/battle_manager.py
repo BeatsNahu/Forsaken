@@ -540,7 +540,7 @@ class BattleManager(Scene):
                 "pos": enemy_data.get("pos", [1500, 300])
             })
         
-        # 4. Establecer Reglas
+        # Starting turn
         self.rules = self.data.get("rules", {})
         if self.rules.get("turn_order") == "player_first":
             self.turn = 0
@@ -557,11 +557,9 @@ class BattleManager(Scene):
         if event.key == pygame.K_ESCAPE:
             setattr(self.engine, "quit_flag", True)
             
-        # Bloquear input si no es turno del jugador
+        # Block input if it's not the player's turn
         if self.turn != 0:
             return
-
-        # --- Manejador de Estado de UI ---
         
         if self.ui_state == "CHOOSE_ACTION":
             # Navegar por el menú de habilidades
@@ -571,17 +569,6 @@ class BattleManager(Scene):
                 self.player_selection = (self.player_selection - 1) % len(self.player_skills)
             elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                 self._select_action()
-        
-        elif self.ui_state == "CHOOSE_TARGET":
-            # Navegar por los enemigos
-            if event.key == pygame.K_DOWN:
-                self.target_selection = (self.target_selection + 1) % len(self.enemies)
-            elif event.key == pygame.K_UP:
-                self.target_selection = (self.target_selection - 1) % len(self.enemies)
-            elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
-                self._confirm_target()
-            elif event.key == pygame.K_BACKSPACE: # Volver
-                self.ui_state = "CHOOSE_ACTION"
 
     def _select_action(self):
         """El jugador ha presionado Enter en una habilidad."""
@@ -713,7 +700,6 @@ SCENE_CLASS = BattleManager
 >>>>>>> c402bd6 (refactor: improve code readability with comments and remove unused file)
 =======
         # 3. UI (Capa de HUD)
-        # Delegamos TODO el dibujado de texto/barras a la UI
         self.ui.draw(
             surface,
             player_hp=self.life_player,
@@ -722,9 +708,13 @@ SCENE_CLASS = BattleManager
             selected_skill_idx=self.player_selection
         )
         
+<<<<<<< HEAD
         # (El TransitionManager dibuja el fundido encima de todo esto)
 
 
 # ¡No olvidar registrar la clase!
 SCENE_CLASS = BattleManager
 >>>>>>> 61b4333 (Perform a code debug by adding music and editing the data-driven files, as well as the scene and engine files.)
+=======
+SCENE_CLASS = BattleManager
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
