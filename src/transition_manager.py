@@ -1,4 +1,3 @@
-# transition_manager.py
 import pygame
 
 class TransitionManager:
@@ -6,51 +5,50 @@ class TransitionManager:
         self.engine = engine
         self.screen = engine.screen
         
-        # Estado: "idle", "fading_out" (volviéndose negro), "fading_in" (aclarando)
+        # State: "idle", "fading_out", "fading_in"
         self.state = "idle"
-        self.alpha = 0  # Nivel de oscuridad (0 = transparente, 255 = negro)
-        self.speed = 500  # Velocidad del fundido (píxeles de alfa por segundo)
+        self.alpha = 0  # Level of oscurity (255 = Totally dark) 
+        self.speed = 500 # Velocity the fade 
         
-        self.target_scene = None # La escena a la que queremos ir
+        self.target_scene = None # The scene to load after fade out
         
-        # Creamos una superficie (Surface) del tamaño de la pantalla
-        # SRCAHPLA permite que la superficie maneje transparencia por píxel
+        # Create a surface for the veil which has the screen size
+        # SRCAHPLA allows do transparency
         self.veil = pygame.Surface(self.screen.get_size(), pygame.SRCALPHA)
-        self.veil.fill((0, 0, 0, 0)) # Rellenar con negro transparente
+        self.veil.fill((0, 0, 0, 0)) # Refill with transparent black
 
     def start_transition(self, target_scene_name: str):
-        """Inicia el proceso de fundido para cargar una nueva escena."""
+        # Ready to start a transition if we are idle
         if self.state == "idle":
             self.target_scene = target_scene_name
             self.state = "fading_out"
             print(f"[Transition] Empezando fundido a negro hacia: {self.target_scene}")
 
     def update(self, dt: float):
-        """Actualiza el estado del fundido (alpha)."""
+        # Update 
         if self.state == "fading_out":
             self.alpha += self.speed * dt
             if self.alpha >= 255:
                 self.alpha = 255
-                # --- ¡PUNTO CLAVE! ---
-                # Hemos llegado a negro. Ahora cargamos la nueva escena.
+                # When
                 self.engine.scene_manager.perform_scene_load(self.target_scene)
-                # Y empezamos el fundido de entrada
+                # Start 
                 self.state = "fading_in"
         
         elif self.state == "fading_in":
             self.alpha -= self.speed * dt
             if self.alpha <= 0:
                 self.alpha = 0
-                self.state = "idle" # Terminamos la transición
+                self.state = "idle"
                 self.target_scene = None
 
     def draw(self, surface):
-        """Dibuja el velo negro si no estamos inactivos."""
+        # If 
         if self.state != "idle":
-            # Rellenamos el velo con el nivel de oscuridad (alpha) actual
+            # Refill 
             self.veil.fill((0, 0, 0, self.alpha))
             surface.blit(self.veil, (0, 0))
 
     def is_transitioning(self) -> bool:
-        """Helper para saber si estamos en medio de un fundido."""
+        # Used f
         return self.state != "idle"
