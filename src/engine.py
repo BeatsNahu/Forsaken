@@ -13,6 +13,9 @@ from transition_manager import TransitionManager
 class Engine:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
     def __init__(self): # Buiilder of the engine
         self.name = None # Name of the engine
         self.scene_manager = None # Scene manager of the engine
@@ -28,6 +31,9 @@ class Engine:
             "game_vars": {}
         } 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 
         # TransitionManager requires engine.screen to be available.
         self.transition_manager = None
@@ -92,6 +98,7 @@ class Engine:
     def load_image(self, path):
         if path in self._image_cache:
             return self._image_cache[path] # Return cached image
+<<<<<<< HEAD
 
         if not path or not os.path.exists(path):
             print(f"Error: No se encontró la imagen {path}") # If the path is invalid or the file does not exist, print an error message
@@ -261,65 +268,67 @@ class Engine:
     def load_image(self, path):
         if path in self._image_cache:
             return self._image_cache[path] # Devuelve la copia en memoria
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 
         if not path or not os.path.exists(path):
-            print(f"Error: No se encontró la imagen {path}")
+            print(f"Error: No se encontró la imagen {path}") # If the path is invalid or the file does not exist, print an error message
             return None 
 
         try:
-            # 
+            # From disk
             image = pygame.image.load(path)
 
-            # 
+            # If the image has an alpha channel, convert with alpha (png, gif, etc.)
             if image.get_alpha():
-                # 
+                # Use the alpha channel
                 image = image.convert_alpha()
             else:
-                # 
+                # It's a simple image without alpha (jpg, bmp, etc.)
                 image = image.convert()
             
-            # 
+            # Cache and return
             self._image_cache[path] = image
             return image
             
         except Exception as e:
-            print(f"Error al cargar imagen {path}: {e}")
+            print(f"Error al cargar imagen {path}: {e}") # Print an error message if loading fails
             return None
         
     def play_sound(self, path):
-        """Carga un sonido, lo cachea y lo reproduce."""
+        # Check cache
         if path not in self._sound_cache:
             if not path or not os.path.exists(path):
                 print(f"Error: No se encontró el sonido {path}")
                 return
             try:
-                # Carga del disco
+                # Charge from disk
                 self._sound_cache[path] = pygame.mixer.Sound(path)
             except Exception as e:
                 print(f"Error al cargar sonido {path}: {e}")
                 return
         
-        # Reproduce el sonido cacheado
+        # Play sound cached
         self._sound_cache[path].play()
 
     def add_item(self, item_id):
-        """Añade un item al inventario global."""
+        # Add an item to the inventory
         if item_id and item_id not in self.state["inventory"]:
             self.state["inventory"].append(item_id)
             print(f"[Engine] Item añadido: {item_id}")
 
     def set_var(self, var_name, value):
-        """Establece una variable de estado global."""
+        # Set a global state variable for example, "has_key" = True or "player_health" = 100
         if var_name:
             self.state["game_vars"][var_name] = value
             print(f"[Engine] Variable: {var_name} = {value}")
     
     def get_var(self, var_name):
-        """Consulta una variable de estado global."""
+        # Get a global state variable
         return self.state["game_vars"].get(var_name)
     
     def apply_effects(self, effects):
-        """Procesa una lista de efectos de datos (de ex_base.py)."""
+        # Apply a list of effects to the game state
         if not effects:
             return
 
@@ -334,7 +343,7 @@ class Engine:
             elif t == "set_var":
                 self.set_var(e.get("name"), e.get("value"))
             elif t == "start_battle":
-                # El motor es responsable de cargar escenas
+                # The battle module to load is specified in the effect
                 if e.get("battle_module"):
                     self.scene_manager.load_scene(e.get("battle_module"))
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)

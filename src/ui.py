@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pygame
 import os
 
@@ -45,71 +46,74 @@ class DialogueBox:
         # 
 =======
 # ui.py
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 import pygame
 import os
 
-# ---------------------------------------------------------------------------
-# CLASE 1: La caja de diálogo (para scene.py)
-# ---------------------------------------------------------------------------
 class DialogueBox:
-    """
-    Dibuja la caja de diálogo y el texto/opciones DENTRO de ella.
-    Sabe dónde posicionar todo.
-    """
     def __init__(self, engine, image_path="assets/UI/Box_dialogue.png"):
         self.engine = engine
         
-        # 1. Carga el RECUADRO (usando el caché del engine)
+        # 1
         original_image = self.engine.load_image(image_path)
         
-        # 2. Carga las FUENTES (esto no cambia)
+        # 2
         font_path = os.path.join("assets", "fonts", "press-start.k.ttf")
         font_path = font_path if os.path.exists(font_path) else None
         self.font = self.engine.load_font(font_path, 20)
         self.speaker_font = self.engine.load_font(font_path, 24)
         
-        # 3. Define el LAYOUT
+        # 3
         if original_image:
             target_width = int(self.engine.screen.get_size()[0] * 0.85)
             
-            # B. Calcula la altura proporcional para que no se deforme
+            # 
             original_width, original_height = original_image.get_size()
             aspect_ratio = original_height / original_width
             target_height = int(target_width * aspect_ratio)
             
-            # C. Escala la imagen UNA SOLA VEZ y guárdala
+            # 
             self.box_image = pygame.transform.scale(original_image, (target_width, target_height))
             
-            # D. Ahora, el centrado usará las NUEVAS dimensiones (escaladas)
+            #
             self.x = (self.engine.screen.get_width() - self.box_image.get_width()) // 2
             self.y = self.engine.screen.get_height() - self.box_image.get_height() - 100
         
         else:
-            # Fallback si la imagen no se cargó
+            #
             self.box_image = None
             self.x, self.y = 50, engine.screen.get_height()
 
-        # Posiciones relativas para el texto (layout interno)
+        #
         self.speaker_pos = (self.x + 130, self.y + 630)
         self.text_pos = (self.x + 160, self.y + 720)
-        self.choice_pos = (self.x + 160, self.y + 750) # Las opciones irán aquí
+        self.choice_pos = (self.x + 160, self.y + 750) #
 
     def draw(self, surface, text, speaker=None, choices=None, choice_idx=0):
+<<<<<<< HEAD
         """
         El método principal. scene.py solo llama a este.
         """
         # 1. Dibujar el recuadro
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+        # 
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         if self.box_image:
             surface.blit(self.box_image, (self.x, self.y))
         else:
             pygame.draw.rect(surface, (10, 10, 40), (self.x, self.y, 800, 150))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         # 
 =======
         # 2. Dibujar elecciones (si las hay)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+        # 
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         if choices:
             for i, c in enumerate(choices):
                 text_c = c.get("text") or str(c)
@@ -118,10 +122,14 @@ class DialogueBox:
                 surface.blit(surf, (self.choice_pos[0], self.choice_pos[1] + i * 40))
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         # 
 =======
         # 3. Dibujar texto de diálogo (si no hay elecciones)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+        # 
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         elif text:
             if speaker and self.speaker_font:
                 spk_surf = self.speaker_font.render(f"{speaker}:", True, (255, 255, 0))
@@ -132,6 +140,7 @@ class DialogueBox:
                 surface.blit(txt_surf, self.text_pos)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class BattleHUD:
     def __init__(self, engine):
         self.engine = engine
@@ -139,26 +148,31 @@ class BattleHUD:
 # ---------------------------------------------------------------------------
 # CLASE 2: El HUD de batalla (para battle_manager.py)
 # ---------------------------------------------------------------------------
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 class BattleHUD:
-    """
-    Dibuja toda la interfaz de batalla. Es específica para esa escena.
-    """
     def __init__(self, engine):
         self.engine = engine
+<<<<<<< HEAD
         
         # Carga sus propias fuentes (usando el caché)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         font_path = os.path.join("assets", "fonts", "press-start.k.ttf")
         font_path = font_path if os.path.exists(font_path) else None
         self.font = self.engine.load_font(font_path, 28)
         self.hp_font = self.engine.load_font(font_path, 20)
         
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         # Carga sus propios recuadros (usando el caché)
         # self.menu_bg = self.engine.load_image("assets/ui/battle_menu_bg.png")
 
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
     def draw(self, surface, player_hp, enemies, skills, selected_skill_idx):
         # ... (Aquí va toda la lógica de draw() que tenías en battle_manager.py)
         # 1. Dibujar Stats
@@ -178,6 +192,7 @@ class BattleHUD:
             surface.blit(lbl, (base_x, base_y + i * 40))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class ChapterTitle:
     def __init__(self, engine, text, duration=1.5):
         self.engine = engine
@@ -188,25 +203,30 @@ class ChapterTitle:
 # ---------------------------------------------------------------------------
 # CLASE 3: Tu idea - El título de capítulo (Temporal)
 # ---------------------------------------------------------------------------
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 class ChapterTitle:
-    """
-    Un recuadro temporal que se muestra y desaparece.
-    """
-    def __init__(self, engine, text, duration=3.0):
+    def __init__(self, engine, text, duration=1.5):
         self.engine = engine
         self.text = text
-        self.timer = duration # 3 segundos
+        self.timer = duration # 1.5 seconds
         
+<<<<<<< HEAD
         # Carga su fuente (usando el caché)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         font_path = os.path.join("assets", "fonts", "press-start.k.ttf")
         font_path = font_path if os.path.exists(font_path) else None
         self.font = self.engine.load_font(font_path, 50)
         
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         # Pre-renderiza el texto (porque no cambia)
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         self.text_surf = self.font.render(self.text, True, (255, 255, 255))
         self.pos = (
             (engine.screen.get_width() - self.text_surf.get_width()) // 2,
@@ -220,15 +240,20 @@ class ChapterTitle:
     def draw(self, surface):
         if self.timer > 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
             # Draw fade effect
 =======
             # Dibuja un fondo negro semitransparente
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+            # Draw fade effect
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
             s = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
             alpha = min(200, (self.timer / 1.5) * 200) # Fade out
             s.fill((0, 0, 0, alpha))
             surface.blit(s, (0, 0))
             
+<<<<<<< HEAD
 <<<<<<< HEAD
             # Draw text
             surface.blit(self.text_surf, self.pos)
@@ -241,5 +266,13 @@ class ChapterTitle:
             surface.blit(self.text_surf, self.pos)
 
 >>>>>>> a910009 (improve scene management and UI integration in scene.py; fix DialogueBox class for better text rendering in ui.py)
+=======
+            # Draw text
+            surface.blit(self.text_surf, self.pos)
+
+            # Draw surface on top
+            
+
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
     def is_finished(self):
         return self.timer <= 0
