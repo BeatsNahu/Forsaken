@@ -1,6 +1,5 @@
 SCENE = {
-    "id": "ch0_intro",
-    "title": "Chapter 0: The Beginning",
+    "id": "ch8_finalbosque",
     "background": "assets.backgrounds.Jail.png",
     "lines": [
         {"speaker": "Narrator", "text": "Después de un par de horas caminando, encuentras un pueblo."},

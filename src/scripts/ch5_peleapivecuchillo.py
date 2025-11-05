@@ -1,6 +1,6 @@
 SCENE = {
   "start_battle": {
-    "battle_id": "btl_01_bandits",  	# id único
+    "battle_id": "btl_01_knifeguy",  	# id único
     "background": "assets.backgrounds.Jail.png",
     },
     "enemies": [

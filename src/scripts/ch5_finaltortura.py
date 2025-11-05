@@ -1,7 +1,7 @@
 SCENE = {
-    "id": "ch0_intro",
-    "title": "Chapter 0: The Beginning",
-    "background": "assets.backgrounds.Jail.png",
+    "id": "ch5_finaltortura",
+    "background": "assets.backgrounds.final_torture.png",
+    "sfx_on_enter": "assets/Sounds/scream.ogg", 
     "lines": [
         {"speaker": "Narrator", "text": "El señor te atrapa y empieza a torturarte."},
         {"speaker": "Narrator", "text": "Piensas que vas a morir, pero no parece que tengas razón,"},

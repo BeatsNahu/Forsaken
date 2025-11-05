@@ -1,6 +1,6 @@
 SCENE = {
     "id": "ch1_intro",
-    "title": "Chapter 1: The Beginning",
+    "title": "Chapter 1: Los dos caminos",
     "background": "assets/backgrounds/Jail_scenary.png",
     "music": "assets/Sounds/soundtrack.ogg", 
     "sfx_on_enter": None, 
