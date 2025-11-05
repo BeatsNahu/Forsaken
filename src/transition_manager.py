@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 # transition_manager.py
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
@@ -16,6 +17,8 @@
 =======
 # transition_manager.py
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 import pygame
 
 class TransitionManager:
@@ -28,6 +31,7 @@ class TransitionManager:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         # State: "idle", "fading_out", "fading_in"
         self.state = "idle"
         self.alpha = 0  # Level of oscurity (255 = Totally dark) 
@@ -90,20 +94,27 @@ class TransitionManager:
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 =======
         # Estado: "idle", "fading_out" (volviéndose negro), "fading_in" (aclarando)
+=======
+        # State: "idle", "fading_out", "fading_in"
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         self.state = "idle"
-        self.alpha = 0  # Nivel de oscuridad (0 = transparente, 255 = negro)
-        self.speed = 500  # Velocidad del fundido (píxeles de alfa por segundo)
+        self.alpha = 0  # Level of oscurity (255 = Totally dark) 
+        self.speed = 500 # Velocity the fade 
         
-        self.target_scene = None # La escena a la que queremos ir
+        self.target_scene = None # The scene to load after fade out
         
-        # Creamos una superficie (Surface) del tamaño de la pantalla
-        # SRCAHPLA permite que la superficie maneje transparencia por píxel
+        # Create a surface for the veil which has the screen size
+        # SRCAHPLA allows do transparency
         self.veil = pygame.Surface(self.screen.get_size(), pygame.SRCALPHA)
-        self.veil.fill((0, 0, 0, 0)) # Rellenar con negro transparente
+        self.veil.fill((0, 0, 0, 0)) # Refill with transparent black
 
     def start_transition(self, target_scene_name: str):
+<<<<<<< HEAD
         """Inicia el proceso de fundido para cargar una nueva escena."""
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+        # Ready to start a transition if we are idle
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         if self.state == "idle":
             self.target_scene = target_scene_name
             self.state = "fading_out"
@@ -115,6 +126,7 @@ class TransitionManager:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         # Update 
 =======
         """Actualiza el estado del fundido (alpha)."""
@@ -131,10 +143,14 @@ class TransitionManager:
 =======
         """Actualiza el estado del fundido (alpha)."""
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+        # Update 
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         if self.state == "fading_out":
             self.alpha += self.speed * dt
             if self.alpha >= 255:
                 self.alpha = 255
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -169,6 +185,11 @@ class TransitionManager:
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 =======
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+                # When
+                self.engine.scene_manager.perform_scene_load(self.target_scene)
+                # Start 
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
                 self.state = "fading_in"
         
         elif self.state == "fading_in":
@@ -180,6 +201,7 @@ class TransitionManager:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 self.state = "idle"
                 self.target_scene = None
 
@@ -221,13 +243,20 @@ class TransitionManager:
 >>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
 =======
                 self.state = "idle" # Terminamos la transición
+=======
+                self.state = "idle"
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
                 self.target_scene = None
 
     def draw(self, surface):
-        """Dibuja el velo negro si no estamos inactivos."""
+        # If 
         if self.state != "idle":
+<<<<<<< HEAD
             # Rellenamos el velo con el nivel de oscuridad (alpha) actual
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+            # Refill 
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
             self.veil.fill((0, 0, 0, self.alpha))
             surface.blit(self.veil, (0, 0))
 
@@ -237,6 +266,7 @@ class TransitionManager:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         # Used f
 =======
         """Helper para saber si estamos en medio de un fundido."""
@@ -253,4 +283,7 @@ class TransitionManager:
 =======
         """Helper para saber si estamos en medio de un fundido."""
 >>>>>>> 8530cab ( implement transition manager and refactor scene loading with image caching)
+=======
+        # Used f
+>>>>>>> 66d7783 (refactor: clean up comments and improve event handling in BattleManager and SceneManager.)
         return self.state != "idle"
