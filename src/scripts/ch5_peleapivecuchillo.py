@@ -1,6 +1,6 @@
 SCENE = {
   "start_battle": {
-    "battle_id": "btl_01_bandits",  	# id único
+    "battle_id": "btl_01_knifeguy",  	# id único
     "background": "assets.backgrounds.Jail.png",
     },
     "enemies": [
@@ -18,5 +18,5 @@ SCENE = {
   	  "add_fragments": ["frag_B"]
     },
     "on_victory_target": "scripts.ch7_salir",
-    "on_defeat_target": "scripts.ch6_finaltortura"
+    "on_defeat_target": "scripts.ch5_finaltortura"
     }

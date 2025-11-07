@@ -1,7 +1,9 @@
 SCENE = {
     "id": "ch4_rana",
-    "title": "Chapter 0: The Beginning",
-    "background": "assets.backgrounds.Frog_scenary.png",
+    "title": "Chapter 2: Croar de la Victoria",
+    "background": "assets/backgrounds/Frog_scenary.png",
+    "music": "assets/Sounds/soundtrack.ogg", 
+    "sfx_on_enter": None,
     "lines": [
         {"speaker": "Narrator", "text": "En una esquina ves una rana."},
     ],
