@@ -23,7 +23,6 @@ class BattleManager(Scene):
 
         # Visual elements
         self.static_layers = [] # For (base, light, floor)
-        self.enemies = []       # List of enemy dicts (from data)
         
         # Temp variables for enemy turn timing
         self._enemy_turn_timer = 0.0
@@ -37,6 +36,7 @@ class BattleManager(Scene):
         for layer_data in self.data.get("static_layers", []):
             surf = self.engine.load_image(layer_data.get("image"))
             if not surf:
+                print(f"Advertencia: No se pudo cargar la capa {layer_data.get('image')}")
                 continue
             
             # Scale if needed
@@ -50,10 +50,6 @@ class BattleManager(Scene):
         self.life_player = self.engine.state.get("player_hp", 10)
         self.player_skills = self.data.get("player", {}).get("skills", [])
 
-        # Load background   
-        if self.bg:
-            self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size())
-        
         # Load music
         music_path = self.data.get("music")
         if music_path:
@@ -62,6 +58,23 @@ class BattleManager(Scene):
         # Load enemies
         self.enemies = []
         for enemy_data in self.data.get("enemies", []):
+            
+            # Cargar y escalar Sprite de Enemigo
+            sprite_surf = self.engine.load_image(enemy_data.get("sprite"))
+            scale_factor_s = enemy_data.get("sprite_scale_factor", 1.0) # Default 1 (sin escala)
+            if sprite_surf and scale_factor_s != 1.0:
+                new_size = (int(sprite_surf.get_width() * scale_factor_s), 
+                            int(sprite_surf.get_height() * scale_factor_s))
+                sprite_surf = pygame.transform.scale(sprite_surf, new_size)
+
+            # Cargar y escalar Barra de HP
+            hp_bar_surf = self.engine.load_image(enemy_data.get("hp_bar_sprite"))
+            scale_factor_hp = enemy_data.get("hp_bar_scale_factor", 1.0)
+            if hp_bar_surf and scale_factor_hp != 1.0:
+                new_size = (int(hp_bar_surf.get_width() * scale_factor_hp), 
+                            int(hp_bar_surf.get_height() * scale_factor_hp))
+                hp_bar_surf = pygame.transform.scale(hp_bar_surf, new_size)
+
             enemy = {
                 "id": enemy_data.get("id"),
                 "type": enemy_data.get("type"),
@@ -70,9 +83,9 @@ class BattleManager(Scene):
                 "skills": enemy_data.get("skills", []),
                 "pos": enemy_data.get("pos", [1500, 300]),
                 
-                # Load sprites of enemies
-                "sprite": self.engine.load_image(enemy_data.get("sprite")),
-                "hp_bar_sprite": self.engine.load_image(enemy_data.get("hp_bar_sprite")),
+                # Store the loaded and scaled surfaces
+                "sprite": sprite_surf,
+                "hp_bar_sprite": hp_bar_surf,
                 "hp_bar_pos": enemy_data.get("hp_bar_pos", [1500, 250])
             }
             self.enemies.append(enemy)
@@ -108,15 +121,17 @@ class BattleManager(Scene):
                 self._select_action()
 
     def _select_action(self):
-        """El jugador ha presionado Enter en una habilidad."""
+        """The player has selected an action from the menu."""
         skill = self.player_skills[self.player_selection]
         
         if skill["type"] == "ATTACK":
-            self.ui_state = "CHOOSE_TARGET" # Pasar a elegir objetivo
-            self.target_selection = 0
+            self.target_selection = 0 
+            self._confirm_target()
+
         elif skill["type"] == "DEFEND":
             self.player_is_defending = True
             self._end_player_turn()
+
         elif skill["type"] == "ITEM_MENU":
             print("UI: Abriendo menú de items (no implementado)")
             # self.ui_state = "CHOOSE_ITEM"

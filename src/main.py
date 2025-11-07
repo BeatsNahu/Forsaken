@@ -3,7 +3,7 @@ from engine import Engine
 from scene_manager import SceneManager
 from scene import Scene
 from transition_manager import TransitionManager
-
+from battle_manager import BattleManager
 
 def main():
     # Screen setup
@@ -22,7 +22,13 @@ def main():
     # Now that the engine has a screen, create the TransitionManager which needs screen size
     engine.transition_manager = TransitionManager(engine)
 
-    escene_manager = SceneManager(engine, Scene) # Create an instance of the SceneManager using the Engine and Scene classes
+    # Dictionary of scene classes available in the game
+    scene_classes = {
+        "default": Scene,
+        "BattleManager": BattleManager,
+    }
+
+    escene_manager = SceneManager(engine, scene_classes) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 
     
     escene_manager.load_scene("scripts.main_menu") # Load the main menu scene
