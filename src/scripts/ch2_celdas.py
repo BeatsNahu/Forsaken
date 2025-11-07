@@ -1,7 +1,7 @@
 SCENE = {
     "id": "ch2_celdas",
     "background": "assets/backgrounds/Doors_scenary.png",
-    "music": "assets/Sounds/soundtrack.ogg", 
+    "music": "assets/sounds/soundtrack.ogg", 
     "lines": [
         {"speaker": "Narrator", "text": "Al acercarte, miras alrededor y no ves nada destacable."},
         {"speaker": "Narrator", "text": "Sales de tu celda y vas a otra."},

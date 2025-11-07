@@ -20,35 +20,62 @@ class BattleManager(Scene):
         self.player_skills = [] # List of player skills (from data)
         self.enemies = []       # List of enemy dicts (from data)
         self.life_player = 10
+
+        # Visual elements
+        self.static_layers = [] # For (base, light, floor)
+        self.enemies = []       # List of enemy dicts (from data)
         
         # Temp variables for enemy turn timing
         self._enemy_turn_timer = 0.0
         self._enemy_action_pending = False
 
     def enter(self):
-        bg_path = self.data.get("background")
-        self.bg = self.engine.load_image(bg_path)
+        # Load static layers
+        self.static_layers = [] # (base, light, floor) 
+        screen_size = self.engine.screen.get_size() 
+
+        for layer_data in self.data.get("static_layers", []):
+            surf = self.engine.load_image(layer_data.get("image"))
+            if not surf:
+                continue
+            
+            # Scale if needed
+            if layer_data.get("scale_to_screen", False):
+                surf = pygame.transform.scale(surf, screen_size)
+
+            pos = layer_data.get("pos", [0, 0])
+            self.static_layers.append( (surf, pos) ) # Store tuple (surface, position)
+
+        # Load player data 
+        self.life_player = self.engine.state.get("player_hp", 10)
+        self.player_skills = self.data.get("player", {}).get("skills", [])
+
+        # Load background   
         if self.bg:
             self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size())
         
+        # Load music
         music_path = self.data.get("music")
         if music_path:
             self.engine.play_music(music_path, loop=-1)
-
-        self.life_player = self.engine.state.get("player_hp", 10) # 10 es default
-        self.player_skills = self.data.get("player", {}).get("skills", [])
         
+        # Load enemies
         self.enemies = []
         for enemy_data in self.data.get("enemies", []):
-            self.enemies.append({
+            enemy = {
                 "id": enemy_data.get("id"),
                 "type": enemy_data.get("type"),
                 "hp": enemy_data.get("hp", 10),
                 "max_hp": enemy_data.get("max_hp", 10),
                 "skills": enemy_data.get("skills", []),
+                "pos": enemy_data.get("pos", [1500, 300]),
+                
+                # Load sprites of enemies
                 "sprite": self.engine.load_image(enemy_data.get("sprite")),
-                "pos": enemy_data.get("pos", [1500, 300])
-            })
+                "hp_bar_sprite": self.engine.load_image(enemy_data.get("hp_bar_sprite")),
+                "hp_bar_pos": enemy_data.get("hp_bar_pos", [1500, 250])
+            }
+            self.enemies.append(enemy)
         
         # Starting turn
         self.rules = self.data.get("rules", {})
@@ -182,30 +209,29 @@ class BattleManager(Scene):
             self.engine.scene_manager.load_scene(target)
 
     def update(self, dt: float):
-        # Manejar el temporizador del turno enemigo
+        # Update enemy turn timer
         if self._enemy_action_pending:
             self._enemy_turn_timer -= dt
             if self._enemy_turn_timer <= 0:
                 self._execute_enemy_turn()
 
     def draw(self, surface):
-        # 1. Fondo
-        if self.bg:
-            surface.blit(self.bg, (0, 0))
-        else:
-            surface.fill((20, 20, 20))
+        # 1. Stage Layers (base, light, floor)
+        for surf, pos in self.static_layers:
+            surface.blit(surf, pos)
             
-        # 2. Sprites (Capa de Actores)
-        # (El AnimationManager podría manejar esto, pero por ahora lo dibujamos directo)
+        # 2. Layer of "Actors" (Enemies and their UI)
         for enemy in self.enemies:
             if enemy["sprite"]:
                 surface.blit(enemy["sprite"], enemy["pos"])
-                # Dibujar cursor de objetivo (si aplica)
-                if self.ui_state == "CHOOSE_TARGET" and self.enemies[self.target_selection] == enemy:
-                    pygame.draw.rect(surface, (255,0,0), (enemy["pos"][0], enemy["pos"][1] + 100, 50, 10), 2)
+            
+            # Draw the HP bar
+            if enemy["hp_bar_sprite"]:
+                surface.blit(enemy["hp_bar_sprite"], enemy["hp_bar_pos"])
+                # (Here's how to draw the red HP bar:
+                # based on enemy["hp"] / enemy["max_hp"])
 
-
-        # 3. UI (Capa de HUD)
+        # 3. Fixed UI Layer (Stats Panel, Skills Text, Player HP)
         self.ui.draw(
             surface,
             player_hp=self.life_player,

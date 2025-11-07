@@ -70,7 +70,14 @@ class Scene:
                 self._choose(self._choice_index)
         else:
             if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
-                self._advance()
+                # Check if text is still being typed
+                if not self.ui.is_finished():
+                    # If still typing -> skip to full text
+                    self.ui.skip_typing()
+                else:
+                    # If text fully displayed -> advance to next line
+                    self.engine.play_sound("assets/sfx/dialogue_next.ogg")
+                    self._advance()
         
         if event.key == pygame.K_ESCAPE:
             setattr(self.engine, "quit_flag", True)
@@ -119,9 +126,12 @@ class Scene:
             self.engine.scene_manager.load_scene(target)
 
     def update(self, dt):
-        # Update chapter title (if any)
+        # Update chapter title and UI components 
         if self.chapter_title:
             self.chapter_title.update(dt)
+
+        if self.ui:
+            self.ui.update(dt)
 
     def draw(self, surface):
         # 1. Draw background 

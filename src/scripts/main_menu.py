@@ -31,7 +31,7 @@ class MainMenu(Scene):
         super().enter()
 
         # Sounds
-        self.engine.play_music("assets/Sounds/main_track.ogg", loop=-1) # Background music
+        self.engine.play_music("assets/sounds/main_track.ogg", loop=-1) # Background music
 
         try:
     # Usamos self.engine.load_image()

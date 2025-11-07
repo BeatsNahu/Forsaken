@@ -12,11 +12,13 @@ class AnimationManager:
         self.screen = engine.screen
     
     def slide_in(self, target_pos, duration=1000):
-
+        pass
     def slide_out(self, target_pos, duration=1000):
+        pass
 
     def zoom_in(self, scale_factor, duration=1000):
-
+        pass
     def zoom_out(self, scale_factor, duration=1000):
-        
+        pass    
     def play_animation(self, animation_name, duration=1000):
+        pass

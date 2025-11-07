@@ -1,10 +1,14 @@
 SCENE = {
     "id": "ch3_pelearata",
     "class": "BattleManager",  # Tell the engine to use BattleManager for this scene
-    
-    # --- ASSETS ---
-    "background": "assets/backgrounds/Battle_scenary.png",
-    "music": "assets/Sounds/battle_theme.ogg",
+    "music": "assets/sounds/battle_theme.ogg",
+
+    # --- SCENARY SETUP ---
+    "static_layers": [
+        {"image": "assets/layers_battle/base.png", "pos": [0, 0], "scale_to_screen": True},
+        {"image": "assets/layers_battle/light.png", "pos": [600, 50]},
+        {"image": "assets/layers_battle/enemy_floor.png", "pos": [1350, 600]}
+    ],
 
     # --- BATTLE SETUP ---
     "player": {
@@ -23,14 +27,15 @@ SCENE = {
             "type": "rat", 
             "hp": 10, 
             "max_hp": 10,
-            "sprite": "sprites/rat_mutant.png", # Sprite path
-            "pos": [1400, 300],
+            "sprite": "assets/characters/rat_mutant.png", # Sprite path
+            "pos": [700, 400], # Position on screen
+            "hp_bar_sprite": "assets/layers_battle/hp_rat.png", 
+            "hp_bar_pos": [700, 200], 
+
             "skills": [
                 {"type": "ATTACK", "dmg_min": 1, "dmg_max": 3, "text": "Bite"}
             ]
         }
-        # Podrías añadir otra rata aquí
-        # { "id": "rata_2", "type": "rat", "hp": 8, ... }
     ],
 
     # --- RULES ---
