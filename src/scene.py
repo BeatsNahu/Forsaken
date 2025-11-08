@@ -81,7 +81,7 @@ class Scene:
                     self.engine.play_sound("assets/sfx/dialogue_next.ogg")
                     self._advance()
 
-        elif state == "CHOICES":
+        elif state in ("CHOICES", "CHOICES_VISIBLE"):
             if event.key == pygame.K_DOWN:
                 self._choice_index = (self._choice_index + 1) % max(1, len(self.choices))
                 self.engine.play_sound("assets/sfx/ui_navigate.ogg")
@@ -92,29 +92,26 @@ class Scene:
                 self._choose(self._choice_index)
 
     def _advance(self):
-        # Advance to the next line or show choices
+        # Advance to the next dialogue line or show choices
         if self._line_index < len(self.lines) - 1:
-            # Advance to next line
+            # Move to the next line
             self._line_index += 1
             if isinstance(self.lines[self._line_index], dict):
                 sfx = self.lines[self._line_index].get("sfx")
-                if sfx: self.engine.play_sound(sfx)
+                if sfx:
+                    self.engine.play_sound(sfx)
         else:
-            # Fish line reached
-            self._line_index += 1 # Move past the last line
+            # Last line reached
+            self._line_index += 1
             if self.choices:
-                # Start faded choices
+                # Start fading out dialogue box before showing choices
                 self.state = "FADE_OUT_DIALOGUE"
                 self.ui.fade_out()
             elif "next" in self.data:
-                # If there are no choices, go to next scene if specified
+                # No choices available — go directly to the next scene
                 self.engine.apply_effects(self.data.get("effects", []))
                 self.engine.scene_manager.load_scene(self.data["next"])
-        
-        # No more lines and no choices, go to next scene if specified
-        if "next" in self.data:
-            self.engine.apply_effects(self.data.get("effects", []))
-            self.engine.scene_manager.load_scene(self.data["next"])
+
 
     def _choose(self, idx):
         if idx < 0 or idx >= len(self.choices):
