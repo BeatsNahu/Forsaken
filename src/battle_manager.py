@@ -145,11 +145,11 @@ class BattleManager(Scene):
         if skill["type"] == "ATTACK":
             dmg = skill.get("dmg", 0)
             cost = skill.get("cost", 0)
-            
+            sfx = skill.get("sfx")
+            if sfx:
+                self.engine.play_sound(sfx) # Efecto de sonido de golpe
             target["hp"] -= dmg
             self.life_player -= cost
-
-            self.engine.play_sound("assets/sfx/punch_hit.ogg") # Efecto de sonido de golpe
             
             print(f"Jugador usó {skill['text']} en {target['id']} por {dmg} daño.")
 
