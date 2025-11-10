@@ -1,7 +1,7 @@
 SCENE = {
     "id": "ch3_pelearata",
     "class": "BattleManager",  # Tell the engine to use BattleManager for this scene
-    "music": "assets/sounds/battle_theme.ogg",
+    "music": "assets/audio/music/battle_theme.ogg",
 
     # --- SCENARY SETUP ---
     "static_layers": [

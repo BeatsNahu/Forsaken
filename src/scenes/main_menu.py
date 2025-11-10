@@ -7,7 +7,7 @@ class MainMenu(Scene):
     def __init__(self, engine): # Initialize the scene with a reference to the engine
         super().__init__(engine, {"id":"menu"}) # Call the parent constructor with the engine and scene data
         self.options = [
-            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scripts.ch1_intro")},
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scenes.ch1_intro")},
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)}
         ]
         # Preload fonts via engine cache to avoid recreating them every frame
@@ -32,26 +32,26 @@ class MainMenu(Scene):
         super().enter()
 
         # Sounds
-        self.engine.play_music("assets/sounds/main_track.ogg", loop=-1) # Background music
+        self.engine.play_music("assets/audio/music/main_track.ogg", loop=-1, volume=0.1) # Background music
 
         try:
     # Usamos self.engine.load_image()
-            self.bg = self.engine.load_image("assets/backgrounds/Menu_scenary.png")
+            self.bg = self.engine.load_image("assets/backgrounds/menu_scenery.png")
             self.bg = pygame.transform.scale(self.bg, self.engine.screen.get_size()) 
     
-            self._img_title = self.engine.load_image("assets/button/Title.png")
+            self._img_title = self.engine.load_image("assets/ui/title.png")
             self._img_title = pygame.transform.scale(self._img_title, self.engine.screen.get_size())
     
-            self._img_start = self.engine.load_image("assets/button/Start.png")
+            self._img_start = self.engine.load_image("assets/ui/buttons/start.png")
             self._img_start = pygame.transform.scale(self._img_start, (512,512))
 
-            self._img_start_selected = self.engine.load_image("assets/button/Start_selected.png")
+            self._img_start_selected = self.engine.load_image("assets/ui/buttons/start_selected.png")
             self._img_start_selected = pygame.transform.scale(self._img_start_selected, (512,512))
     
-            self._img_exit = self.engine.load_image("assets/button/Exit.png")
+            self._img_exit = self.engine.load_image("assets/ui/buttons/exit.png")
             self._img_exit = pygame.transform.scale(self._img_exit, (512,512))
 
-            self._img_exit_selected = self.engine.load_image("assets/button/Exit_selected.png")
+            self._img_exit_selected = self.engine.load_image("assets/ui/buttons/exit_selected.png")
             self._img_exit_selected = pygame.transform.scale(self._img_exit_selected, (512,512))
         
         except Exception: # If there is an error loading the image
@@ -65,11 +65,14 @@ class MainMenu(Scene):
             if event.key == pygame.K_ESCAPE:
                 setattr(self.engine, "quit_flag", True)
             elif event.key == pygame.K_DOWN: # If the down arrow key is pressed
-                self.selection = (self.selection + 1) % len(self.options) # Move selection down, wrapping around                
+                self.selection = (self.selection + 1) % len(self.options) # Move selection down, wrapping around
+                self.engine.play_sound("assets/audio/sfx/swap_option.ogg") # Play option select sound
             elif event.key == pygame.K_UP: # If the up arrow key is pressed
                 self.selection = (self.selection - 1) % len(self.options) # Move selection up, wrapping around
+                self.engine.play_sound("assets/audio/sfx/swap_option.ogg") # Play option select sound
             elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER): # If the enter key is pressed
                 self.options[self.selection]["action"]() # Execute the action of the selected option
+                self.engine.play_sound("assets/audio/sfx/option_selected.ogg") # Play option select sound
 
     def draw(self, surface):
         if self.bg:

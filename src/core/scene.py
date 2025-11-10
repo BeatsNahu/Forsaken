@@ -1,5 +1,5 @@
 import pygame
-from ui import DialogueBox, ChapterTitle
+from systems.ui_manager import DialogueBox, ChapterTitle
 
 class Scene:
     def __init__(self, engine, data=None):
@@ -11,7 +11,7 @@ class Scene:
         # Scene content
         self.background = self.data.get("background")
         self.lines = self.data.get("lines", [])
-        self.choices = self.data.get("choices") or self.data.get("choises") or []
+        self.choices = self.data.get("choices")
 
         # Runtime indexes and cached surfaces
         self._line_index = 0
@@ -78,18 +78,19 @@ class Scene:
                 if not self.ui.is_finished():
                     self.ui.skip_typing()
                 else:
-                    self.engine.play_sound("assets/sfx/dialogue_next.ogg")
+                    self.engine.play_sound("assets/audio/sfx/type_writing.ogg")
                     self._advance()
 
-        elif state == "CHOICES":
+        elif state == "CHOICES_VISIBLE":
             if event.key == pygame.K_DOWN:
                 self._choice_index = (self._choice_index + 1) % max(1, len(self.choices))
-                self.engine.play_sound("assets/sfx/ui_navigate.ogg")
+                self.engine.play_sound("assets/audio/sfx/swap_option.ogg")
             elif event.key == pygame.K_UP:
                 self._choice_index = (self._choice_index - 1) % max(1, len(self.choices))
-                self.engine.play_sound("assets/sfx/ui_navigate.ogg")
+                self.engine.play_sound("assets/audio/sfx/swap_option.ogg")
             elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
                 self._choose(self._choice_index)
+                self.engine.play_sound("assets/audio/sfx/option_selected.ogg")
 
     def _advance(self):
         # Advance to the next line or show choices
@@ -122,10 +123,11 @@ class Scene:
         
         choice = self.choices[idx]
 
-        # Play choice SFX (if any)
+        # Play choice SFX (if any) and at specified volume
         sfx = choice.get("sfx")
+        volume = choice.get("sfx_volume", 1.0)
         if sfx:
-            self.engine.play_sound(sfx)
+            self.engine.play_sound(sfx, volume=volume)
 
         # Apply choice effects
         self.engine.apply_effects(choice.get("effects", [])) 

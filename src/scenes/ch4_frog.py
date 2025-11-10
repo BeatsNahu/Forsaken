@@ -2,7 +2,7 @@ SCENE = {
     "id": "ch4_rana",
     "title": "Chapter 2: Croar de la Victoria",
     "background": "assets/backgrounds/Frog_scenary.png",
-    "music": "assets/Sounds/soundtrack.ogg", 
+    "music": "assets/audio/music/soundtrack.ogg",
     "sfx_on_enter": None,
     "lines": [
         {"speaker": "Narrator", "text": "En una esquina ves una rana."},

@@ -1,16 +1,16 @@
 import pygame
-from engine import Engine
-from scene_manager import SceneManager
-from scene import Scene
-from transition_manager import TransitionManager
-from battle_manager import BattleManager
+from core.engine import Engine                 
+from core.scene_manager import SceneManager    
+from core.scene import Scene                   
+from systems.transition_manager import TransitionManager 
+from systems.battle_manager import BattleManager
 
 def main():
     # Screen setup
     pygame.init()
     screen = pygame.display.set_mode((1920, 1080))
     pygame.display.set_caption("Forsaken")
-    icono = pygame.image.load("assets/button/logo.png")
+    icono = pygame.image.load("assets/ui/logo.png")
     pygame.display.set_icon(icono)
     logo = pygame.transform.scale(icono, (96, 96))
     clock = pygame.time.Clock()
@@ -31,7 +31,7 @@ def main():
     escene_manager = SceneManager(engine, scene_classes) # Create an instance of the SceneManager using the Engine and Scene classes
     engine.scene_manager = escene_manager # Assign the scene manager to the engine 
     
-    escene_manager.load_scene("scripts.main_menu") # Load the main menu scene
+    escene_manager.load_scene("scenes.main_menu") # Load the main menu scene
     # Main game loop
     running = True
     while running and not getattr(engine, "quit_flag", False): # While running is True and the quit_flag is not set from any scene

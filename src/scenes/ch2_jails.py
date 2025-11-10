@@ -1,21 +1,20 @@
-
 SCENE = {
-    "id": "ch2_celdas",
-    "background": "assets/backgrounds/Doors_scenary.png", 
-    "music": "assets/sounds/soundtrack.ogg", 
+    "id": "ch2_jails",
+    "background": "assets/backgrounds/doors_scenery.png",
+    "music": "assets/audio/music/soundtrack.ogg", 
     "sfx_on_enter": None,
     "lines": [
         {"speaker": "Narrator", "text": "Al acercarte, miras alrededor y no ves nada destacable."},
         {"speaker": "Narrator", "text": "Sales de tu celda y vas a otra."},
     ],
-    "choises": [
+    "choices": [
         {
             "text": "Revisar la celda Nª 002.",
-            "target": "scripts.ch3_pelearata",
+            "target": "scenes.ch3_rat_fight",
         },
         {
             "text": "Revisar la celda Nª XXX.",
-            "target": "scripts.ch3_cama",
+            "target": "scenes.ch3_bed",
         }
     ]
 }

@@ -1,7 +1,7 @@
 import pygame
 import random
-from scene import Scene
-from ui import BattleHUD
+from core.scene import Scene
+from systems.ui_manager import BattleHUD
 
 class BattleManager(Scene):
     def __init__(self, engine, data=None):

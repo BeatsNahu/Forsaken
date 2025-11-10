@@ -2,7 +2,7 @@ import pygame
 import os
 
 class DialogueBox:
-    def __init__(self, engine, image_path="assets/UI/Box_dialogue.png"):
+    def __init__(self, engine, image_path="assets/ui/box_dialogue.png"):
         self.engine = engine
         
         # Load the dialogue box image
@@ -52,15 +52,25 @@ class DialogueBox:
         self.target_alpha = 0.0    
         self.fade_speed = 400.0
 
+        # SFX of typing
+        self.typing_sfx_path = "assets/audio/sfx/type_writing.ogg"
+        self.last_char_sound = 0
+
     def update(self, dt):
         # Update typing effect
+        self.text_timer += dt
+
         if self.is_typing:
-            self.text_timer += dt # Increment timer by delta time
-            self.visible_chars = self.text_timer * self.text_speed # Calculate number of visible characters based on time and speed
-            
-            if self.visible_chars >= len(self.current_full_text): # All characters are visible
-                self.is_typing = False # Stop typing effect
-                self.visible_chars = len(self.current_full_text) # Clamp to full length
+            self.visible_chars = self.text_timer * self.text_speed # characters to show
+
+            # Logic to play typing sound effect
+            if int(self.visible_chars) > self.last_char_sound:
+                self.last_char_sound = int(self.visible_chars)
+                self.engine.play_sound(self.typing_sfx_path, volume=0.3)
+            # Logic to finish typing
+            if self.visible_chars >= len(self.current_full_text):
+                self.is_typing = False
+                self.visible_chars = len(self.current_full_text)
 
         # Update fade effect
         if self.alpha != self.target_alpha:
@@ -107,6 +117,7 @@ class DialogueBox:
                 self.visible_chars = 0.0
                 self.text_timer = 0.0
                 self.is_typing = True
+                self.last_char_sound = 0
             
             # Show speaker name if provided
             if speaker and self.speaker_font:
@@ -136,6 +147,7 @@ class DialogueBox:
 
     def is_fade_complete(self):
         return self.alpha == self.target_alpha
+    
 class BattleHUD:
     def __init__(self, engine):
         self.engine = engine
@@ -147,7 +159,7 @@ class BattleHUD:
         self.hp_font = self.engine.load_font(font_path, 20)
         
         # Load stats panel image
-        self.img_stats_panel = self.engine.load_image("assets/layers_battle/panel_stats.png")
+        self.img_stats_panel = self.engine.load_image("assets/ui/battle/panel_stats.png")
         if self.img_stats_panel:
             # 1. Definir un ancho (ej: 90% de la pantalla)
             target_width = int(self.engine.screen.get_width() * 0.9)
@@ -184,7 +196,8 @@ class BattleHUD:
             text = skill.get("text")
             color = (255, 255, 0) if i == selected_skill_idx else (255, 255, 255)
             lbl = self.font.render(text, True, color)
-            surface.blit(lbl, (base_x, base_y + i * 40)) 
+            surface.blit(lbl, (base_x, base_y + i * 40))
+
 class ChapterTitle:
     def __init__(self, engine, text, duration=3.0, fade_time=0.5):
         # Initialize chapter title 

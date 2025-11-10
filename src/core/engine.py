@@ -1,6 +1,6 @@
 import pygame
 import os
-from transition_manager import TransitionManager
+from systems.transition_manager import TransitionManager
 
 class Engine:
     def __init__(self): # Buiilder of the engine
@@ -102,7 +102,7 @@ class Engine:
             print(f"Error al cargar imagen {path}: {e}") # Print an error message if loading fails
             return None
         
-    def play_sound(self, path):
+    def play_sound(self, path, volume=0.7):
         # Check cache
         if path not in self._sound_cache:
             if not path or not os.path.exists(path):
@@ -115,6 +115,10 @@ class Engine:
                 print(f"Error al cargar sonido {path}: {e}")
                 return
         
+        # Logic to set volume before playing sound
+        sound_obj = self._sound_cache[path]
+        sound_obj.set_volume(volume)
+
         # Play sound cached
         self._sound_cache[path].play()
 
