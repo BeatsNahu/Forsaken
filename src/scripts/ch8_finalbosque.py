@@ -1,6 +1,6 @@
 SCENE = {
     "id": "ch8_finalbosque",
-    "background": "assets.backgrounds.Jail.png",
+    "background": "assets/backgrounds/riobosque.png",
     "lines": [
         {"speaker": "Narrator", "text": "Después de un par de horas caminando, encuentras un pueblo."},
         {"speaker": "Narrator", "text": "Ahora eres libre."},

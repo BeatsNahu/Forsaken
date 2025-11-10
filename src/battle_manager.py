@@ -6,6 +6,9 @@ from ui import BattleHUD
 class BattleManager(Scene):
     def __init__(self, engine, data=None):
         super().__init__(engine, data) # Get base initialization (Scene, Data, etc.)
+        # font and text for the turn enemy
+        self.font_enemy_turn = self.engine.load_font(None, 64)  # font for fefault, tamaño 64
+        self.enemy_turn_text = self.font_enemy_turn.render("¡Turno de monstruo!", True, (255, 0, 0))  # red
 
         self.ui = BattleHUD(self.engine) # UI for battle
         
@@ -254,5 +257,13 @@ class BattleManager(Scene):
             skills=self.player_skills,
             selected_skill_idx=self.player_selection
         )
+        # Mostrar texto "¡Turno de monstruo!" durante el turno del enemigo
+        if self.ui_state == "ENEMY_TURN" and self._enemy_turn_timer > 0:
+            text_rect = self.enemy_turn_text.get_rect(
+                center=(self.engine.screen.get_width()//2,
+                        self.engine.screen.get_height()//2)
+            )
+            surface.blit(self.enemy_turn_text, text_rect)
+
         
 SCENE_CLASS = BattleManager

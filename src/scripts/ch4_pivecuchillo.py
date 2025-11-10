@@ -3,7 +3,7 @@ SCENE = {
     "title": "Chapter 2: un sonido sangriento",
     "background": "assets/backgrounds/Jail.png", 
     "music": "assets/Sounds/soundtrack.ogg", 
-    "sfx_on_enter": "assets/Sounds/metalicosonido.ogg",
+    "sfx_on_enter": "assets/sounds/metaldraggingarm.ogg",
     "lines": [
         {"speaker": "Narrator", "text": "Escuchas un sonido metálico y de que alguien se acerca.."},
     ],

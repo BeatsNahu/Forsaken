@@ -1,6 +1,6 @@
 SCENE = {
     "id": "ch5_finaltortura",
-    "background": "assets.backgrounds.final_torture.png",
+    "background": "assets/backgrounds/End_torture_lose.png",
     "sfx_on_enter": "assets/Sounds/scream.ogg", 
     "lines": [
         {"speaker": "Narrator", "text": "El señor te atrapa y empieza a torturarte."},

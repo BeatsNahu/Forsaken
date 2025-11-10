@@ -1,13 +1,13 @@
 SCENE = {
     "id": "ch5_finalenvenenado",
-    "background": "assets/backgrounds/Jail.png",
+    "background": "assets/backgrounds/touch_frog.png",
     "lines": [
         {"speaker": "Narrator", "text": "Era venenosa y mueres envenenado."},
     ],
     "choises": [
         {
             "text": "volver a intentar",
-            "target": "ch1_intro",
+            "target": "scripts.ch1_intro",
         }
     ]
 }

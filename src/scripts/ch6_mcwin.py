@@ -1,9 +1,9 @@
 SCENE = {
     "id": "ch6_mcwin",
-    "background": "assets.backgrounds.Jail.png",
+    "background": "assets/backgrounds/map.png",
     "lines": [
-        {"speaker": "Narrator", "text": "Te comes a la rana. Al comerla, te vuelves más fuerte y destruyes la pared"},
-        {"speaker": "Narrator", "text": "Has escapado y has ido en busca de tu familia."},
+        {"speaker": "Narrator", "text": "cruzas un pasillo, al cruzarlo entras en una habitacion."},
+        {"speaker": "Narrator", "text": "En la habitacion habia un mapa del lugar. continuara..."},
     ],
     "choises": [
         {

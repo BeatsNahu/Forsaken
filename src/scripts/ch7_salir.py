@@ -1,6 +1,6 @@
 SCENE = {
     "id": "ch7_salir",
-    "background": "assets.backgrounds.Jail.png",
+    "background": "assets/backgrounds/libertad(interrogante).png",
     "lines": [
         {"speaker": "Narrator", "text": "Vas en la dirección en la que venía el monstruo y a lo lejos"},
         {"speaker": "Narrator", "text": "encuentras una salida al río."},
