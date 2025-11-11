@@ -1,20 +1,21 @@
 SCENE = {
     "id": "ch4_rana",
-    "title": "Chapter 2: Croar de la Victoria",
-    "background": "assets/backgrounds/Frog_scenary.png",
+    "background": "assets/backgrounds/frog_scenery2.png",
     "music": "assets/audio/music/soundtrack.ogg",
     "sfx_on_enter": None,
     "lines": [
-        {"speaker": "Narrator", "text": "En una esquina ves una rana."},
+        {"speaker": "Narrador", "text": "Cuando tratas de continuar con tu camino te das cuenta de que"},
+        {"speaker": "Narrador", "text": "el pequeño compañero ha decidido cortarte el paso."},
+        {"speaker": "Narrador", "text": "Qué harás?"}
     ],
-    "choises": [
+    "choices": [
         {
-            "text": "Acariciar.",
-            "target": "scripts.ch5_envenenado",
+            "text": "Acariciarle.",
+            "target": "scenes.ch5_mutated",
         },
         {
-        "text": "Darle un patada.",
-        "target": "scripts.ch5_pelearana",
+        "text": "Darle una buena patada.",
+        "target": "scenes.ch5_frog_fight",
         }
     ]
 }

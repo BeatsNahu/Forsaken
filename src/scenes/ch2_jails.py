@@ -7,13 +7,16 @@ SCENE = {
         {"type": "notify", "text": "Tu destino empieza a tomar forma.", "duration": 4}
     ],
     "lines": [
-        {"speaker": "Narrator", "text": "Al acercarte, miras alrededor y no ves nada destacable."},
-        {"speaker": "Narrator", "text": "Sales de tu celda y vas a otra."},
+        {"speaker": "Narrador", "text": "Sales de lo que parecia ser una celda"},
+        {"speaker": "Narrador", "text": "y te encuentras con una habitación que se divide en dos pasillos,"},
+        {"speaker": "Narrador", "text": "ambos nombrados como 002 y XXX."},
+        {"speaker": "Narrador", "text": "Teniendo en cuenta el lugar en el que despertaste,"},
+        {"speaker": "Narrador", "text": "supones que ambos pasillos llevan a más celdas."}
     ],
     "choices": [
         {
             "text": "Revisar la celda Nª 002.",
-            "target": "scenes.ch3_rat_fight",
+            "target": "scenes.ch3_rat_food",
         },
         {
             "text": "Revisar la celda Nª XXX.",

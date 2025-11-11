@@ -2,7 +2,8 @@ SCENE = {
     "id": "ch1_intro",
     "title": "Capitulo 1: Los dos caminos",
     "background": "assets/backgrounds/jail_scenery.png",
-    "music": "assets/audio/music/soundtrack.ogg", "volume": 0.05,
+    "music": "assets/audio/music/soundtrack.ogg", 
+    "volume": 0.1,
     "sfx_on_enter": None, 
     "lines": [
         {"speaker": "Narrador", "text": "Abres los ojos y te encuentras en un lugar que no reconoces,"},
