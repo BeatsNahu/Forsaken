@@ -1,4 +1,14 @@
 # Ignore cache of src and src/scripts
-
 src/__pycache__/
-src/scripts/__pycache__/
+
+# Ignore cache of src/systems
+src/systems/__pycache__/
+
+# Ignore cache of src/scenes
+src/scenes/__pycache__/
+
+# Ignore cache of src/core
+src/core/__pycache__/
+
+# Ignore cache of Forsake
+__pycache__
