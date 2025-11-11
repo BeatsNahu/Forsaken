@@ -1,8 +1,7 @@
 SCENE = {
     "id": "ch3_pelearata",
     "class": "BattleManager",  # Tell the engine to use BattleManager for this scene
-    "music": "assets/audio/music/battle_theme.ogg",
-
+    "music": "assets/audio/music/battle_theme.ogg", "volume": 0.5,
     # --- SCENARY SETUP ---
     "static_layers": [
         {"image": "assets/layers_battle/base.png", "pos": [0, 0], "scale_to_screen": True},
@@ -14,8 +13,14 @@ SCENE = {
     "player": {
         # Define the player's skills for this battle
         "skills": [
-            {"id": "punch", "text": "Puño", "type": "ATTACK", "dmg": 5, "cost": 1, "cost_type": "HP"},
-            {"id": "kick", "text": "Patada", "type": "ATTACK", "dmg": 2, "cost": 0},
+            {"id": "punch", "text": "Puño", "type": "ATTACK", "dmg": 5, "cost": 1, "cost_type": "HP",
+             "sfx": "assets/audio/sfx/punch_hit.ogg",
+             "vfx": "assets/vfx/punch_effect.png"},
+
+            {"id": "kick", "text": "Patada", "type": "ATTACK", "dmg": 2, "cost": 0,
+             "sfx": "assets/audio/sfx/kick_hit.ogg",
+             "vfx": "assets/vfx/kick_effect.png"},
+             
             {"id": "defend", "text": "Defensa", "type": "DEFEND"},
             {"id": "item", "text": "Item", "type": "ITEM_MENU"}
         ]

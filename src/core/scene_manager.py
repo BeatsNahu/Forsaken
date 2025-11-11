@@ -65,17 +65,25 @@ class SceneManager: # Create a Game class to manage scene state
     def update(self, dt): # Update the current scene with delta time, so the FPS will be the same on every computer
         # Update the transition manager first
         self.engine.transition_manager.update(dt)
+        self.engine.animation_manager.update(dt)
+        self.engine._update_notifications(dt)
 
         # Only update the current scene if not in transition
         if self.current_scene and not self.engine.transition_manager.is_transitioning():
             self.current_scene.update(dt)
 
     def draw(self, screen): # Draw the current scene
-        # Draw the current scene all the time
+        # 1. Escene draw (Background, UI sprites, text)
         if self.current_scene:
             self.current_scene.draw(screen)
             
-        # Draw/Show the transition effect on top of the current scene
+        # 2. Animation draw (tweens, layers moving)
+        self.engine.animation_manager.draw(screen)    
+
+        # 3. Transition draw (fade in/out, wipes, etc)
         self.engine.transition_manager.draw(screen)
+
+        # 4. Notifications draw (top of all)
+        self.engine._draw_notifications(screen)
 
         

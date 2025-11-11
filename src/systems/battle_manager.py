@@ -137,7 +137,7 @@ class BattleManager(Scene):
             # self.ui_state = "CHOOSE_ITEM"
 
     def _confirm_target(self):
-        """El jugador ha presionado Enter en un objetivo."""
+        # The player has chosen Enter
         skill = self.player_skills[self.player_selection]
         target = self.enemies[self.target_selection]
         
@@ -149,8 +149,25 @@ class BattleManager(Scene):
             target["hp"] -= dmg
             self.life_player -= cost
 
-            self.engine.play_sound("assets/sfx/punch_hit.ogg") # Efecto de sonido de golpe
-            
+            sfx_path = skill.get("sfx")
+            if sfx_path:
+                self.engine.play_sound(sfx_path)
+
+            vfx_path = skill.get("vfx")
+            if vfx_path:
+                vfx_image = self.engine.load_image(vfx_path)
+                if vfx_image:
+                    self.engine.animation_manager.start_animation(
+                        surface=vfx_image,
+                        id="vfx_hit",
+                        start_pos=target["pos"],
+                        end_pos=target["pos"],
+                        duration=0.2,
+                        start_scale=0.5,
+                        end_scale=1.5,
+                        persist=False
+                    )
+                    
             print(f"Jugador usó {skill['text']} en {target['id']} por {dmg} daño.")
 
         # 2. Comprobar si el objetivo murió

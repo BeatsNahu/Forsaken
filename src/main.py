@@ -3,7 +3,9 @@ from core.engine import Engine
 from core.scene_manager import SceneManager    
 from core.scene import Scene                   
 from systems.transition_manager import TransitionManager 
+from systems.animation_manager import AnimationManager
 from systems.battle_manager import BattleManager
+
 
 def main():
     # Screen setup
@@ -21,6 +23,7 @@ def main():
     engine.clock = clock # Assign the clock to the engine
     # Now that the engine has a screen, create the TransitionManager which needs screen size
     engine.transition_manager = TransitionManager(engine)
+    engine.animation_manager = AnimationManager(engine)
 
     # Dictionary of scene classes available in the game
     scene_classes = {

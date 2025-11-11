@@ -66,13 +66,14 @@ class MainMenu(Scene):
                 setattr(self.engine, "quit_flag", True)
             elif event.key == pygame.K_DOWN: # If the down arrow key is pressed
                 self.selection = (self.selection + 1) % len(self.options) # Move selection down, wrapping around
-                self.engine.play_sound("assets/audio/sfx/swap_option.ogg") # Play option select sound
+                self.engine.play_sound("assets/audio/sfx/swap_option.ogg", volume=0.05) # Play option select sound
             elif event.key == pygame.K_UP: # If the up arrow key is pressed
                 self.selection = (self.selection - 1) % len(self.options) # Move selection up, wrapping around
-                self.engine.play_sound("assets/audio/sfx/swap_option.ogg") # Play option select sound
+                self.engine.play_sound("assets/audio/sfx/swap_option.ogg", volume=0.05) # Play option select sound
             elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER): # If the enter key is pressed
                 self.options[self.selection]["action"]() # Execute the action of the selected option
-                self.engine.play_sound("assets/audio/sfx/option_selected.ogg") # Play option select sound
+                self.engine.play_sound("assets/audio/sfx/option_selected.ogg", volume=0.05) # Play option select sound
+                self.engine.show_notification("¡Has empezado el juego!" if self.selection == 0 else "¡Has salido del juego!", duration=2.0)
 
     def draw(self, surface):
         if self.bg:

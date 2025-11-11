@@ -1,4 +1,4 @@
-from tween import Tween
+from systems.tween import Tween
 
 class AnimationManager:
     def __init__(self, engine):
@@ -15,9 +15,13 @@ class AnimationManager:
             id = self._generate_id()
             
         tween = Tween(
-            surface, start_pos, end_pos, duration, 
+            surface, 
+            start_pos, 
+            end_pos, 
+            duration, 
             id, 
-            start_scale, end_scale, 
+            start_scale, 
+            end_scale, 
             persist
         )
         self.active_tweens[id] = tween
@@ -36,7 +40,8 @@ class AnimationManager:
         for id in list(self.active_tweens.keys()):
             tween = self.active_tweens[id]
             tween.update(dt)
-            if tween.is_finished:
+
+            if tween.is_finished and not tween.persist:
                 del self.active_tweens[id]
                 
     def draw(self, surface):

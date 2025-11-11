@@ -53,7 +53,7 @@ class DialogueBox:
         self.fade_speed = 400.0
 
         # SFX of typing
-        self.typing_sfx_path = "assets/audio/sfx/type_writing.ogg"
+        self.typing_sfx_path = "assets/audio/sfx/type_writing1.ogg"
         self.last_char_sound = 0
 
     def update(self, dt):
@@ -148,6 +148,27 @@ class DialogueBox:
     def is_fade_complete(self):
         return self.alpha == self.target_alpha
     
+class ChoiceBox:
+    def __init__(self, engine):
+        self.engine = engine
+        # For simplicity, we can use DialogueBox for choices as well
+        self.dialogue_box = DialogueBox(engine)
+
+    def update(self, dt):
+        self.dialogue_box.update(dt)
+
+    def draw(self, surface, choices, selected_idx):
+        self.dialogue_box.draw(surface, text=None, choices=choices, choice_idx=selected_idx)
+
+    def fade_in(self):
+        self.dialogue_box.fade_in()
+
+    def fade_out(self):
+        self.dialogue_box.fade_out()
+
+    def is_fade_complete(self):
+        return self.dialogue_box.is_fade_complete()
+    
 class BattleHUD:
     def __init__(self, engine):
         self.engine = engine
@@ -183,21 +204,30 @@ class BattleHUD:
     def draw(self, surface, player_hp, enemies, skills, selected_skill_idx):
         
         # Draw stats panel
+        if self.pos_stats_panel:
+            # Posiciones relativas al panel
+            base_x = self.pos_stats_panel[0] + 40
+            skill_base_y = self.pos_stats_panel[1] + 100 
+            hp_pos = (base_x, self.pos_stats_panel[1] + 50)
+        else:
+            # Fallback si no hay panel
+            base_x = 50
+            skill_base_y = surface.get_height() - 200
+            hp_pos = (50, 50) # Fallback HP
+
+        # 2. Dibujar el panel
         if self.img_stats_panel:
             surface.blit(self.img_stats_panel, self.pos_stats_panel)
-        # Draw HP and skills
-        surface.blit(self.hp_font.render(f"Player HP: {player_hp}", True, (255, 255, 255)), (50, 50))
         
-        # Menu positions
-        base_x = self.pos_stats_panel[0] + 40 if self.pos_stats_panel else 50
-        base_y = self.pos_stats_panel[1] + 50 if self.pos_stats_panel else surface.get_height() - 200
+        # 3. Dibujar HP del Jugador
+        surface.blit(self.hp_font.render(f"Player HP: {player_hp}", True, (255, 255, 255)), hp_pos) #
         
+        # 4. Dibujar Habilidades
         for i, skill in enumerate(skills):
             text = skill.get("text")
             color = (255, 255, 0) if i == selected_skill_idx else (255, 255, 255)
             lbl = self.font.render(text, True, color)
-            surface.blit(lbl, (base_x, base_y + i * 40))
-
+            surface.blit(lbl, (base_x, skill_base_y + i * 40))
 class ChapterTitle:
     def __init__(self, engine, text, duration=3.0, fade_time=0.5):
         # Initialize chapter title 

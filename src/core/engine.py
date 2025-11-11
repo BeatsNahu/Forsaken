@@ -1,6 +1,8 @@
 import pygame
 import os
 from systems.transition_manager import TransitionManager
+from systems.animation_manager import AnimationManager
+from systems.tween import Tween
 
 class Engine:
     def __init__(self): # Buiilder of the engine
@@ -16,6 +18,7 @@ class Engine:
 
         # TransitionManager requires engine.screen to be available.
         self.transition_manager = None
+        self.animation_manager = None
 
         # Simple resource caches
         self._font_cache = {}
@@ -23,6 +26,10 @@ class Engine:
         self._sound_cache = {}
 
         self._current_music_path = None
+
+        # Notification system
+        self.notifications = []
+        self.notifications_font = self.load_font(None, 24) # Default font for notifications
 
     def play_music(self, path, loop=-1, volume=0.7):
         # Play background music from a given path
@@ -117,10 +124,9 @@ class Engine:
         
         # Logic to set volume before playing sound
         sound_obj = self._sound_cache[path]
-        sound_obj.set_volume(volume)
-
-        # Play sound cached
-        self._sound_cache[path].play()
+        channel = sound_obj.play()
+        if channel:
+            channel.set_volume(volume)
 
     def add_item(self, item_id):
         # Add an item to the inventory
@@ -157,3 +163,33 @@ class Engine:
                 # The battle module to load is specified in the effect
                 if e.get("battle_module"):
                     self.scene_manager.load_scene(e.get("battle_module"))
+            
+            elif t == "notify":
+                text = e.get("text", "¡Algo ha cambiado!")
+                duration = e.get("duration", 3.0)
+                self.show_notification(text, duration)
+
+    def show_notification(self, text, duration=2.0):
+        # Show a notification on the screen for a certain duration (in seconds)
+        self.notifications.append({"text": text, "timer": duration})
+    
+    def _update_notifications(self, dt):
+        # Update the notification timers and remove expired ones
+        new_list = []
+        for notif in self.notifications[:]:
+            notif["timer"] -= dt
+            if notif["timer"] > 0:
+                new_list.append(notif)
+        self.notifications = new_list
+
+    def _draw_notifications(self, surface):
+        # Draw notifications on the screen
+        if not self.notifications:
+            return
+        
+        notif = self.notifications[0]  # Show only the first notification for simplicity
+        text_surf = self.notifications_font.render(notif["text"], True, (255, 255, 255))
+
+        # Position at top-left corner with some padding
+        pos_x = (surface.get_width() - text_surf.get_width()) // 2
+        surface.blit(text_surf, (pos_x, 10))
