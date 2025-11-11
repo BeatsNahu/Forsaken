@@ -1,5 +1,5 @@
 SCENE = {
-    "id": "ch3_pelearata",
+    "id": "ch3_rat_fight",
     "class": "BattleManager",  # Tell the engine to use BattleManager for this scene
     "music": "assets/audio/music/battle_theme.ogg",
 
@@ -63,6 +63,6 @@ SCENE = {
         ]
     },
     
-    "on_victory_target": "scripts.ch4_pivecuchillo",
-    "on_defeat_target": "scripts.ch4_ratatecome"
+    "on_victory_target": "scenes.ch4_knife_guy",
+    "on_defeat_target": "scenes.ch4_rat_lose"
 }
