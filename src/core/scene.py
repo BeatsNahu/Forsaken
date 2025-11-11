@@ -34,6 +34,7 @@ class Scene:
             self.state = "TITLE" # Start showing chapter title first
         else:
             self.state = "FADE_IN_DIALOGUE" # Directly fade in dialogue box
+            
 
     def enter(self):
         # Load background image

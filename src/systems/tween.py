@@ -27,7 +27,7 @@ class Tween:
         self.is_finished = False
 
         # Persist
-        self.persist = False
+        self.persist = persist
         
     def update(self, dt):
         """Actualiza la posición Y la escala."""
@@ -58,9 +58,6 @@ class Tween:
             self.surface = pygame.transform.scale(self.original_surface, (new_width, new_height))
 
     def draw(self, surface_destino):
-        """
-        Dibuja la superficie escalada, centrada en su posición actual.
-        """
         # Calcular la esquina superior izquierda (top-left) para que la
         # imagen quede centrada en self.current_pos
         draw_x = int(self.current_pos.x - self.surface.get_width() // 2)

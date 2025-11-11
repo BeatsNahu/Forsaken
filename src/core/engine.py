@@ -1,8 +1,5 @@
 import pygame
 import os
-from systems.transition_manager import TransitionManager
-from systems.animation_manager import AnimationManager
-from systems.tween import Tween
 
 class Engine:
     def __init__(self): # Buiilder of the engine

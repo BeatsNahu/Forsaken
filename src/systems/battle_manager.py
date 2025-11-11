@@ -27,6 +27,17 @@ class BattleManager(Scene):
         # Temp variables for enemy turn timing
         self._enemy_turn_timer = 0.0
         self._enemy_action_pending = False
+        self._enemy_anim_timer = 0.0
+
+        # Attack effects
+        self.damage_flash_timer = 0.0
+        self.damage_flash_duration = 0.3
+        self.flash_veil = pygame.Surface(self.engine.screen.get_size(), pygame.SRCALPHA)
+
+        # Log battle outcome
+        self.battle_log_text = ""
+        self.battle_log_timer = 0.0
+        self.log_font = self.engine.load_font(None, 24)
 
     def enter(self):
         # Load static layers
@@ -159,20 +170,19 @@ class BattleManager(Scene):
                 if vfx_image:
                     self.engine.animation_manager.start_animation(
                         surface=vfx_image,
-                        id="vfx_hit",
                         start_pos=target["pos"],
                         end_pos=target["pos"],
                         duration=0.2,
-                        start_scale=0.5,
-                        end_scale=1.5,
+                        start_scale=1.0,
+                        end_scale=4.0,
                         persist=False
                     )
                     
-            print(f"Jugador usó {skill['text']} en {target['id']} por {dmg} daño.")
+            self.battle_log_text = f"¡Golpeas a {target['id']} por {dmg} daño!"
 
         # 2. Comprobar si el objetivo murió
         if target["hp"] <= 0:
-            print(f"{target['id']} ha sido derrotado.")
+            self.battle_log_text = f"{target['id']} ha sido derrotado."
             self.enemies.pop(self.target_selection) # Eliminar de la lista de vivos
 
         # 3. Comprobar si la batalla terminó
@@ -191,34 +201,68 @@ class BattleManager(Scene):
 
     def _execute_enemy_turn(self):
         print("--- Turno Enemigo ---")
+        self._enemy_action_pending = False # Evita que se ejecute de nuevo
+
         for enemy in self.enemies:
-            # Lógica de IA simple: usar la primera habilidad
             if not enemy["skills"]:
                 continue
-            
-            skill = enemy["skills"][0]
-            
+
+            skill = enemy["skills"][0] # IA Simple
+
             if skill["type"] == "ATTACK":
                 dmg = random.randint(skill.get("dmg_min", 1), skill.get("dmg_max", 1))
-                
-                # Aplicar defensa del jugador
+
                 if self.player_is_defending:
-                    dmg = dmg // 2 # 50% de daño
-                    
+                    dmg = dmg // 2 
+
                 self.life_player -= dmg
                 print(f"{enemy['id']} usó {skill['text']} por {dmg} daño.")
 
-        # 2. Comprobar derrota del jugador
+                self.damage_flash_timer = self.damage_flash_duration
+
+                # 1. Muestra una notificación (usa tu sistema de engine.py)
+                self.battle_log_text = f"{enemy['id']} te ataca por {dmg} daño."
+                self.battle_log_timer = 2.0
+
+                # 2. Reproduce el SFX del enemigo (si lo tiene)
+                sfx_path = skill.get("sfx")
+                if sfx_path:
+                    self.engine.play_sound(sfx_path)
+
+                # 3. Inicia el VFX del enemigo (si lo tiene)
+                vfx_path = skill.get("vfx")
+                if vfx_path:
+                    vfx_image = self.engine.load_image(vfx_path)
+                    if vfx_image:
+                        # (Asegúrate de NO poner un 'id' estático aquí)
+                        self.engine.animation_manager.start_animation(
+                            surface=vfx_image,
+                            start_pos=enemy["pos"], # O la posición del jugador
+                            end_pos=[960, 540],     # Ejemplo: el centro de la pantalla
+                            duration=0.5,
+                            start_scale=1.0,
+                            end_scale=3.0,
+                            persist=False
+                        )
+
+                # 4. Inicia el temporizador de "cooldown"
+                # (Dale tiempo a los efectos para que se vean)
+                self._enemy_anim_timer = 1.0 # 1 segundo de espera
+
+        if self._enemy_anim_timer == 0.0:
+            self._return_to_player_turn()
+
+    def _return_to_player_turn(self):
+        # 1. Comprobar derrota del jugador
         if self.life_player <= 0:
             self._on_defeat()
             return
-            
-        # 3. Volver al turno del jugador
+
+        # 2. Volver al turno del jugador
         self.turn = 0
         self.ui_state = "CHOOSE_ACTION"
         self.player_selection = 0
-        self.player_is_defending = False # Resetear defensa
-        self._enemy_action_pending = False
+        self.player_is_defending = False
 
     def _on_victory(self):
         print("¡VICTORIA!")
@@ -247,7 +291,25 @@ class BattleManager(Scene):
             if self._enemy_turn_timer <= 0:
                 self._execute_enemy_turn()
 
+        # Update enemy animation timer
+        if self._enemy_anim_timer > 0:
+            self._enemy_anim_timer -= dt
+            if self._enemy_anim_timer <= 0:
+                self._return_to_player_turn()
+
+        # Update damage flash timer
+        if self.damage_flash_timer > 0:
+            self.damage_flash_timer -= dt
+
+        # Update battle log timer
+        if self.battle_log_timer > 0:
+            self.battle_log_timer -= dt
+        else:
+            self.battle_log_text = ""
+
     def draw(self, surface):
+        surface.fill((0, 0, 0)) # Clear screen
+        
         # 1. Stage Layers (base, light, floor)
         for surf, pos in self.static_layers:
             surface.blit(surf, pos)
@@ -263,7 +325,16 @@ class BattleManager(Scene):
                 # (Here's how to draw the red HP bar:
                 # based on enemy["hp"] / enemy["max_hp"])
 
-        # 3. Fixed UI Layer (Stats Panel, Skills Text, Player HP)
+        # 3. Damage flash effect
+        if self.damage_flash_timer > 0:
+            # Calcula la opacidad (alpha). Se desvanece de 150 a 0.
+            progress = self.damage_flash_timer / self.damage_flash_duration
+            alpha = int(progress * 150) # 150 es el alpha máximo (0-255)
+
+            self.flash_veil.fill((255, 0, 0, max(0, alpha))) # Rellena con rojo translúcido
+            surface.blit(self.flash_veil, (0, 0))
+
+        # 4. Fixed UI Layer (Stats Panel, Skills Text, Player HP)
         self.ui.draw(
             surface,
             player_hp=self.life_player,
@@ -271,5 +342,28 @@ class BattleManager(Scene):
             skills=self.player_skills,
             selected_skill_idx=self.player_selection
         )
-        
+        # 5. Battle Log
+        if self.battle_log_timer > 0 and self.battle_log_text:
+            padding = 10
+
+            # Renderizar texto
+            text_surf = self.log_font.render(self.battle_log_text, True, (255, 255, 255))
+
+            # Definir tamaño del fondo
+            bg_width = text_surf.get_width() + padding * 2
+            bg_height = text_surf.get_height() + padding * 2
+
+            # Posición (Superior Derecha)
+            screen_w = self.engine.screen.get_width()
+            pos_x = screen_w - bg_width - 20 # 20px de margen
+            pos_y = 20
+
+            # Dibujar fondo translúcido
+            bg_surf = pygame.Surface((bg_width, bg_height), pygame.SRCALPHA)
+            bg_surf.fill((0, 0, 0, 150)) # Negro, 150 de alpha
+            surface.blit(bg_surf, (pos_x, pos_y))
+
+            # Dibujar texto encima del fondo
+            surface.blit(text_surf, (pos_x + padding, pos_y + padding))
+
 SCENE_CLASS = BattleManager
