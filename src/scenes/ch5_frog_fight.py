@@ -25,8 +25,8 @@ SCENE = {
         {
             "id": "frog", 
             "type": "frog", 
-            "hp": 10, 
-            "max_hp": 10,
+            "hp": 60, 
+            "max_hp": 60,
             "sprite": "assets/characters/combat_frog1.png", # Sprite path
             "pos": [150, 100], # Position on screen
             "hp_bar_sprite": "assets/layers_battle/hp_frog.png", 
