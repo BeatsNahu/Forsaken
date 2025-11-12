@@ -16,11 +16,19 @@ SCENE = {
     "choices": [
         {
             "text": "Revisar la celda Nª 002.",
-            "target": "scenes.ch3_rat_food",
+            "target": "scenes.ch3_bed",
+            "post_choice_lines": [
+                {"speaker": "Narrador", "text": "El otro pasillo no te llama demasiado la atención,"},
+                {"speaker": "Narrador", "text": "asi que decides continuar hacia la celda 002."},
+            ]
         },
         {
             "text": "Revisar la celda Nª XXX.",
-            "target": "scenes.ch3_bed",
+            "target": "scenes.ch3_rat_food",
+            "post_choice_lines": [
+                {"speaker": "Narrador", "text": "Sientes una extraña curiosidad por el pasillo XXX,"},
+                {"speaker": "Narrador", "text": "asi que decides caminar hacia esa dirección."},
+            ]
         }
     ]
 }

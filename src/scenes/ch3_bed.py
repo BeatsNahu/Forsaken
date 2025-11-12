@@ -5,7 +5,7 @@ SCENE = {
     "music": "assets/audio/music/soundtrack.ogg", 
     "sfx_on_enter": None,
     "lines": [
-        {"speaker": "Narrador", "text": "La celda XXX rapidamente te llama la atención,"},
+        {"speaker": "Narrador", "text": "La celda 002 rapidamente te llama la atención,"},
         {"speaker": "Narrador", "text": "a diferencia de tu solitaria celda,"},
         {"speaker": "Narrador", "text": "esta tiene una cama y una mascota de compañia."},
         {"speaker": "Narrador", "text": "Algo debajo de la cama te llama la atención."},

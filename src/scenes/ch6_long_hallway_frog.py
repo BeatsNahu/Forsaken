@@ -12,6 +12,9 @@ SCENE = {
         {
             "text": "Continuar caminando.",
             "target": "scenes.ch7_continue_frog",
+            "post_choice_lines": [
+                {"speaker": "Narrador", "text": "Sin dudarlo, decides continuar avanzando por el pasillo."}
+            ]
         }
     ]
 }
