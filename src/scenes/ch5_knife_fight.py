@@ -27,11 +27,11 @@ SCENE = {
             "type": "knife_guy", 
             "hp": 10, 
             "max_hp": 10,
-            "sprite": "assets/characters/combat_frog1.png", # Sprite path
-            "pos": [150, 100], # Position on screen
+            "sprite": "assets/characters/knife_guy.png", # Sprite path
+            "pos": [640, 100], # Position on screen
             "hp_bar_sprite": "assets/layers_battle/hp_frog.png", 
             "hp_bar_pos": [360, 100],
-            "sprite_scale_factor": 5.0, # <--- ¡NUEVO! (Multiplica el tamaño por 6)
+            "sprite_scale_factor": 7.0, # <--- ¡NUEVO! (Multiplica el tamaño por 6)
             "hp_bar_scale_factor": 5.0, 
 
             "skills": [
@@ -49,10 +49,12 @@ SCENE = {
     
     # --- DIALOGUE ---
     "pre_battle_dialogue": [
-        {"speaker":"Narrator","text":"¡Una rata mutante aparece!"}
+        {"speaker":"Narrator","text":"¡Acaba de aparecer el Sr. Cuchillos!"}
     ],
     "post_battle_dialogue": [
-        {"speaker":"Narrator","text":"La rata cae. Encuentras comida."}
+        {"speaker":"Narrator","text":"Has perdi... HAS GANADO?!"},
+        {"speaker":"Narrator","text":"Felicidades!!!"},
+
     ],
 
       # --- NEXT SCENES ---
