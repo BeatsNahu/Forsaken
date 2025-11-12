@@ -20,10 +20,10 @@ class ItemRewardOverlay:
         # Escalar imágenes para que se vean bien
         if self.item_image:
             # Scale the item (e.g. from small sprites to a larger display)
-            self.item_image = pygame.transform.scale(self.item_image, (2048, 2048))
+            self.item_image = pygame.transform.scale(self.item_image, (512, 512))
         if self.light_image_orig:
             # Background light should be larger
-            self.light_image_orig = pygame.transform.scale(self.light_image_orig, (512, 512))
+            self.light_image_orig = pygame.transform.scale(self.light_image_orig, (2048, 2048))
         
         # --- Animation and control logic ---
         self.angle = 0.0

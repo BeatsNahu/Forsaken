@@ -19,12 +19,22 @@ ITEM_DB = {
     },
 
     "Medkit": {
-        "name": "Botiquín Básico",
-        "image": "assets/items/medkit.png",
+        "name": "Pastillas Basicas",
+        "image": "assets/items/pastillas.png",
         "description": "Recupera 50 HP. Huele a hospital.",
         "on_use_effects": [
             {"type": "set_var", "name": "player_hp", "value": "+50"},
             {"type": "notify", "text": "Recuperaste 50 HP"}
         ]
-    }
+    },
+
+    "Metal_bar": {
+        "name": "Barra de Metal",
+        "image": "assets/items/tubooxidado.png",
+        "description": "Daño permanente +2. Es un poco tosco de usar",
+        "on_use_effects": [
+            {"type": "set_var", "name": "player_base_damage", "value": "+2"},
+            {"type": "notify", "text": "daño +2"}
+        ]
+    },
 }

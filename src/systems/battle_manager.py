@@ -46,6 +46,10 @@ class BattleManager(Scene):
         self.log_font = self.engine.load_font(None, 24)
 
     def enter(self):
+        # Inicializa bonus de daño del jugador si no existe
+        if "player_base_damage" not in self.engine.state:
+            self.engine.state["player_base_damage"] = 0
+        
         # Load static layers
         self.static_layers = [] # (base, light, floor) 
         screen_size = self.engine.screen.get_size() 
@@ -167,10 +171,13 @@ class BattleManager(Scene):
         
         # 1. Apply skill logic
         if skill["type"] == "ATTACK":
-            dmg = skill.get("dmg", 0)
+            base_dmg = skill.get("dmg", 0)
+            bonus_dmg = self.engine.state.get("player_base_damage", 0)
+            total_dmg = base_dmg + bonus_dmg
+            print(f"DEBUG: Base damage={base_dmg}, bonus={bonus_dmg}, total={total_dmg}")
             cost = skill.get("cost", 0)
             
-            target["hp"] -= dmg
+            target["hp"] -= total_dmg
             self.life_player -= cost
 
             sfx_path = skill.get("sfx")
@@ -193,7 +200,7 @@ class BattleManager(Scene):
                         persist=False
                     )
                     
-            self.battle_log_text = f"¡Golpeas a {target['id']} por {dmg} daño!"
+            self.battle_log_text = f"¡Golpeas a {target['id']} por {total_dmg} daño!"
 
         # 2. Check if the target died
         if target["hp"] <= 0:
