@@ -7,7 +7,7 @@ class MainMenu(Scene):
     def __init__(self, engine): # Initialize the scene with a reference to the engine
         super().__init__(engine, {"id":"menu"}) # Call the parent constructor with the engine and scene data
         self.options = [
-            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scenes.ch3_rat_fight")},
+            {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scenes.ch1_intro")},
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)}
         ]
         # Preload fonts via engine cache to avoid recreating them every frame

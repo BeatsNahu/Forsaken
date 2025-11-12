@@ -50,7 +50,7 @@ class BattleManager(Scene):
             self.static_layers.append( (surf, pos) ) # Store tuple (surface, position)
 
         # Load player data 
-        self.life_player = self.engine.state.get("player_hp", 10)
+        self.life_player = self.engine.state.get("player_hp", 30)
         self.player_skills = self.data.get("player", {}).get("skills", [])
 
         # Load music

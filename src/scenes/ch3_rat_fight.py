@@ -34,8 +34,8 @@ SCENE = {
         {
             "id": "rat", 
             "type": "rat", 
-            "hp": 10, 
-            "max_hp": 10,
+            "hp": 100, 
+            "max_hp": 100,
             "sprite": "assets/characters/rat_mutant.png", # Sprite path
             "pos": [600, 160], # Position on screen
             "sprite_scale_factor": 10.0,
