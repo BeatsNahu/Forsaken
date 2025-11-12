@@ -35,7 +35,10 @@ SCENE = {
             "hp_bar_scale_factor": 5.0, 
 
             "skills": [
-                {"type": "ATTACK", "dmg_min": 2, "dmg_max": 4, "text": "Bite"}
+                {"type": "ATTACK", "dmg_min": 2, "dmg_max": 4, "text": "Bite",
+                 "sfx": "assets/audio/sfx/rat.ogg",
+                 "vfx": "assets/vfx/bite_effect.png",
+                 }
             ]
         }
     ],
