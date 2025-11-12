@@ -54,7 +54,11 @@ SCENE = {
     "post_battle_dialogue": [
         {"speaker":"Narrator","text":"La rata cae. Encuentras comida."}
     ],
-
+    "rewards_on_victory": {
+        "effects": [
+            {"type": "give_item", "item": "lengua_rana"},   #falta que se pueda poner en un inventario para poder usarlo
+        ]
+    },
       # --- NEXT SCENES ---
     "on_victory_target": "scenes.ch6_long_hallway",
     "on_defeat_target": "scenes.ch6_frog_lose"
