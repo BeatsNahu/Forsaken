@@ -56,6 +56,6 @@ SCENE = {
     ],
 
       # --- NEXT SCENES ---
-    "on_victory_target": "scenes.ch6_long_stairs",
+    "on_victory_target": "scenes.ch6_long_hallway_knife",
     "on_defeat_target": "scenes.ch6_knife_lose"
 }

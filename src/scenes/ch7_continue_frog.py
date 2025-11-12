@@ -1,6 +1,6 @@
 SCENE = {
     "id": "ch7_continue_frog",
-    "background": "assets/backgrounds/end_mutated_lose.png",
+    "background": "assets/backgrounds/continue.png",
     "lines": [
         {"speaker": "Narrador", "text": "Finalmente, después de caminar un buen rato,"},
         {"speaker": "Narrador", "text": "llegas hasta una habitación bastante iluminada,"},
