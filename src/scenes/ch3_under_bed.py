@@ -12,8 +12,13 @@ SCENE = {
         {
             "text": "Sí",
             "effects": [
-                {"type": "give_item", "id": "Tenedor"},
-                {"type": "add_fragment", "id": "frag_A"}
+                {"type": "give_item", "item": "Lata_alubias"},
+                
+                {
+                    "type": "show_item_overlay",
+                    "item_name": "Lata de Alubias",
+                    "item_image": "assets/items/Lata_alubias.png"
+                }
             ],
             "target": "scenes.ch4_frog",
         },
