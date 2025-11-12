@@ -1,6 +1,7 @@
 SCENE = {
     "id": "ch6_long_stairs",
     "background": "assets/backgrounds/hall_scenery.png",
+    "music": "assets/audio/music/soundtrack.ogg",
     "lines": [
         {"speaker": "Narrator", "text": "Contra todo pronóstico logras derrotar al señor cuchillos."},
         {"speaker": "Narrator", "text": "La emoción de esa victoria completamente inesperada"},

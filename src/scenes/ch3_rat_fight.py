@@ -13,7 +13,7 @@ SCENE = {
     "player": {
         # Define the player's skills for this battle
         "skills": [
-            {"id": "punch", "text": "Puño", "type": "ATTACK", "dmg": 3, "cost": 2, "cost_type": "HP",
+            {"id": "punch", "text": "Puño", "type": "ATTACK", "dmg": 10, "cost": 2, "cost_type": "HP",
              "sfx": "assets/audio/sfx/punch_hit.ogg", 
              "vfx": "assets/vfx/punch_effect.png",
              "start_pos": [960, 540],
