@@ -1,6 +1,6 @@
 SCENE = {
     "id": "ch7_continue_knife_guy",
-    "background": "assets.backgrounds.Jail.png",
+    "background": "assets/backgrounds/araunitnoC.png",
     "lines": [
         {"speaker": "Narrator", "text": "Pero finalmente consigues atravesar la extraña zona y"},
         {"speaker": "Narrator", "text": "te encuentras en una sala mucho mas iluminada y amplia."},
