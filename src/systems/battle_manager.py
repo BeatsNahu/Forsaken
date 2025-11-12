@@ -174,7 +174,6 @@ class BattleManager(Scene):
             base_dmg = skill.get("dmg", 0)
             bonus_dmg = self.engine.state.get("player_base_damage", 0)
             total_dmg = base_dmg + bonus_dmg
-            print(f"DEBUG: Base damage={base_dmg}, bonus={bonus_dmg}, total={total_dmg}")
             cost = skill.get("cost", 0)
             
             target["hp"] -= total_dmg
@@ -204,15 +203,17 @@ class BattleManager(Scene):
 
         # 2. Check if the target died
         if target["hp"] <= 0:
-            self.battle_log_text = f"{target['id']} has been defeated."
-            self.enemies.pop(self.target_selection) # Remove from the alive list
+            target["hp"] = 0
+            target["dead"] = True
+            self.battle_log_text = f"{target['id']} ha sido derrotado."
+            self.enemies.pop(self.target_selection)
 
         # 3. Check if the battle ended
         if not self.enemies:
             self._on_victory()
             return
 
-        # 4. End the player's turn
+        # --- END PLAYER TURN ---
         self._end_player_turn()
 
     def _end_player_turn(self):

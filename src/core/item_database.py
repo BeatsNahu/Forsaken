@@ -12,8 +12,8 @@ ITEM_DB = {
         "image": "assets/items/Lata_alubias.png",
         "description": "Recupera 10 HP. Sabe a óxido y esperanza.",
         "on_use_effects": [
-            {"type": "set_var", "name": "player_hp", "value": "+4"},
-            {"type": "notify", "text": "Recuperaste 4 HP"}
+            {"type": "set_var", "name": "player_hp", "value": "+10"},
+            {"type": "notify", "text": "Recuperaste 10 HP"}
             # Sound: {"sfx": "assets/audio/sfx/aa" }
         ]
     },
@@ -31,10 +31,19 @@ ITEM_DB = {
     "Metal_bar": {
         "name": "Barra de Metal",
         "image": "assets/items/tubooxidado.png",
-        "description": "Daño permanente +2. Es un poco tosco de usar",
+        "description": "Daño permanente +5. Es un poco tosco de usar",
         "on_use_effects": [
-            {"type": "set_var", "name": "player_base_damage", "value": "+2"},
-            {"type": "notify", "text": "daño +2"}
+            {"type": "set_var", "name": "player_base_damage", "value": "+5"},
+            {"type": "notify", "text": "daño +5"}
+        ]
+    },
+    "fork": {
+        "name": "Tenedor Oxidado",
+        "image": "assets/items/fork.png",
+        "description": "Daño permanente +4. Es un poco pintiagudo",
+        "on_use_effects": [
+            {"type": "set_var", "name": "player_base_damage", "value": "+4"},
+            {"type": "notify", "text": "daño +4"}
         ]
     },
 }

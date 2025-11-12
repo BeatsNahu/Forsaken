@@ -94,7 +94,21 @@ class InventoryMenu:
         # 4. Apply the effects
         print(f"Usando item: {item_id}, aplicando efectos: {effects}")
         self.engine.apply_effects(effects)
-        
+        # 4.1. Apply bonus de damage permanente si lo tiene
+        for effect in effects:
+            if effect["type"] == "set_var":
+                var_name = effect["name"]
+                value = effect["value"]
+                if isinstance(value, str) and value.startswith("+"):
+                    # Incrementar el valor actual
+                    increment = int(value[1:])
+                    self.engine.state[var_name] = self.engine.state.get(var_name, 0) + increment
+                else:
+                    self.engine.state[var_name] = value
+            elif effect["type"] == "notify":
+                text = effect["text"]
+                self.engine.show_notification(text)
+        print("player_base_damage ahora es:", self.engine.state.get("player_base_damage", 0))
         # 5. Remove the item from the global inventory
         self.engine.state["inventory"].pop(self.selected_idx)
 
