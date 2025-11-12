@@ -21,10 +21,19 @@ SCENE = {
                 }
             ],
             "target": "scenes.ch4_frog",
+            "post_choice_lines": [
+                {"speaker": "Narrador", "text": "Sin perder el tiempo, metes la mano debajo de la cama."},
+                {"speaker": "Narrador", "text": "Mueves la mano entre el polvo y la suciedad..."},
+                {"speaker": "Narrador", "text": "y consigues un tenedor oxidado!!"},
+            ]
         },
         {
             "text": "No",
             "target": "scenes.ch4_frog",
+            "post_choice_lines": [
+                {"speaker": "Narrador", "text": "Decides no arriesgarte a meter la mano en la oscuridad,"},
+                {"speaker": "Narrador", "text": "y continúas explorando la habitación."},
+            ]
         }
     ]
 }

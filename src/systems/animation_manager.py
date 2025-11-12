@@ -22,7 +22,7 @@ class AnimationManager:
             id, 
             start_scale, 
             end_scale, 
-            persist
+            persist,
         )
         self.active_tweens[id] = tween
         print(f"[AnimManager] Iniciando animación: {id}")

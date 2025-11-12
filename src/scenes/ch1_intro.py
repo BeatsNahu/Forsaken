@@ -19,8 +19,9 @@ SCENE = {
             "target": "scenes.ch2_jails",
             "sfx": "assets/audio/sfx/swap_option.ogg",
             "post_choice_lines": [
-                {"speaker": "Narrador", "text": "AAAAAAAAAAAAAAAAA"},
-                {"speaker": "Narrador", "text": "Nooooooo"} 
+                {"speaker": "Narrador", "text": "A pesar de tu confusión, decides acercarte a la puerta,"},
+                {"speaker": "Narrador", "text": "pero como no ves nada interesante a tu alrededor,"},
+                {"speaker": "Narrador", "text": "caminas directamente hacia el pasillo frente a ti."}
             ]
         }
     ]

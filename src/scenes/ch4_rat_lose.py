@@ -1,6 +1,6 @@
 SCENE = {
     "id": "ch4_rat_lose",
-    "background": "assets/backgrounds/jail_scenery.png",
+    "background": "assets/backgrounds/end_rat_lose.png",
     "music": "assets/audio/music/soundtrack.ogg",
     "sfx_on_enter": "assets/audio/sfx/flesh_rip_sound.ogg",
     "lines": [
