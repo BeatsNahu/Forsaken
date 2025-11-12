@@ -12,8 +12,13 @@ SCENE = {
         {
             "text": "Sí",
             "effects": [
-                {"type": "give_item", "id": "Tenedor"},
-                {"type": "add_fragment", "id": "frag_A"}
+                {"type": "give_item", "item": "fork"},
+                
+                {
+                    "type": "show_item_overlay",
+                    "item_name": "Tenedor Oxidado",
+                    "item_image": "assets/items/fork.png"
+                }
             ],
             "target": "scenes.ch4_frog",
             "post_choice_lines": [

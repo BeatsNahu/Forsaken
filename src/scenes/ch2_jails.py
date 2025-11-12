@@ -24,15 +24,10 @@ SCENE = {
         },
         {
             "text": "Revisar la celda Nª XXX.",
-            "target": "scenes.ch3_bed",
-            "effects": [
-                {"type": "give_item", "item": "Lata_alubias"},
-                
-                {
-                    "type": "show_item_overlay",
-                    "item_name": "Lata de Alubias",
-                    "item_image": "assets/items/Lata_alubias.png"
-                }
+            "target": "scenes.ch3_rat_food",
+            "post_choice_lines": [
+                {"speaker": "Narrador", "text": "Sientes una extraña curiosidad por el pasillo XXX,"},
+                {"speaker": "Narrador", "text": "asi que decides caminar hacia esa dirección."},
             ]
         }
     ]

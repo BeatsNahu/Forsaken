@@ -136,10 +136,21 @@ class Engine:
             print(f"[Engine] Item añadido: {item_id}")
 
     def set_var(self, var_name, value):
-        # Set a global state variable for example, "has_key" = True or "player_health" = 100
-        if var_name:
+        if not var_name or value is None:
+            return
+
+        # Si es un string que empieza con '+' o '-', lo interpretamos como incremento
+        if isinstance(value, str) and value.startswith(("+", "-")):
+            current = self.state["game_vars"].get(var_name, 0)
+            try:
+                self.state["game_vars"][var_name] = current + int(value)
+            except ValueError:
+                print(f"[Engine] Valor inválido para set_var: {value}")
+        else:
+            # Sobrescribe directamente
             self.state["game_vars"][var_name] = value
-            print(f"[Engine] Variable: {var_name} = {value}")
+        print(f"[Engine] Variable: {var_name} = {self.state['game_vars'][var_name]}")
+
     
     def get_var(self, var_name):
         # Get a global state variable

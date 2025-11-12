@@ -22,7 +22,7 @@ class BattleManager(Scene):
         # Battle data
         self.player_skills = [] # List of player skills (from data)
         self.enemies = []       # List of enemy dicts (from data)
-        self.life_player = 10
+        self.life_player = 50
 
         # Visual elements
         self.static_layers = [] # For (base, light, floor)
@@ -46,6 +46,10 @@ class BattleManager(Scene):
         self.log_font = self.engine.load_font(None, 24)
 
     def enter(self):
+        # Inicializa bonus de daño del jugador si no existe
+        if "player_base_damage" not in self.engine.state:
+            self.engine.state["player_base_damage"] = 0
+        
         # Load static layers
         self.static_layers = [] # (base, light, floor) 
         screen_size = self.engine.screen.get_size() 
@@ -64,7 +68,7 @@ class BattleManager(Scene):
             self.static_layers.append( (surf, pos) ) # Store tuple (surface, position)
 
         # Load player data 
-        self.life_player = self.engine.state.get("player_hp", 10)
+        self.life_player = self.engine.state.get("player_hp", 50)
         self.player_skills = self.data.get("player", {}).get("skills", [])
 
         # Load music
@@ -167,10 +171,12 @@ class BattleManager(Scene):
         
         # 1. Apply skill logic
         if skill["type"] == "ATTACK":
-            dmg = skill.get("dmg", 0)
+            base_dmg = skill.get("dmg", 0)
+            bonus_dmg = self.engine.state.get("player_base_damage", 0)
+            total_dmg = base_dmg + bonus_dmg
             cost = skill.get("cost", 0)
             
-            target["hp"] -= dmg
+            target["hp"] -= total_dmg
             self.life_player -= cost
 
             sfx_path = skill.get("sfx")
@@ -193,19 +199,21 @@ class BattleManager(Scene):
                         persist=False
                     )
                     
-            self.battle_log_text = f"¡Golpeas a {target['id']} por {dmg} daño!"
+            self.battle_log_text = f"¡Golpeas a {target['id']} por {total_dmg} daño!"
 
         # 2. Check if the target died
         if target["hp"] <= 0:
-            self.battle_log_text = f"{target['id']} has been defeated."
-            self.enemies.pop(self.target_selection) # Remove from the alive list
+            target["hp"] = 0
+            target["dead"] = True
+            self.battle_log_text = f"{target['id']} ha sido derrotado."
+            self.enemies.pop(self.target_selection)
 
         # 3. Check if the battle ended
         if not self.enemies:
             self._on_victory()
             return
 
-        # 4. End the player's turn
+        # --- END PLAYER TURN ---
         self._end_player_turn()
 
     def _end_player_turn(self):
