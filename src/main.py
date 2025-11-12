@@ -1,20 +1,23 @@
 import pygame
+import config
 from core.engine import Engine                 
 from core.scene_manager import SceneManager    
 from core.scene import Scene                   
-from systems.transition_manager import TransitionManager 
+from systems.transition_manager import TransitionManager
 from systems.animation_manager import AnimationManager
 from systems.battle_manager import BattleManager
+from overlays.pause_menu import PauseMenu
 
 
 def main():
     # Screen setup
     pygame.init()
-    screen = pygame.display.set_mode((1920, 1080))
-    pygame.display.set_caption("Forsaken")
-    icono = pygame.image.load("assets/ui/logo.png")
+    screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
+    pygame.display.set_caption(config.GAME_TITLE)
+
+    icono = pygame.image.load(config.GAME_ICON_PATH)
     pygame.display.set_icon(icono)
-    logo = pygame.transform.scale(icono, (96, 96))
+
     clock = pygame.time.Clock()
 
     # With this part we avoid repeated code in every scene, because all scenes will have access to the screen and clock initialized in "Screen setup"
@@ -38,21 +41,55 @@ def main():
     # Main game loop
     running = True
     while running and not getattr(engine, "quit_flag", False): # While running is True and the quit_flag is not set from any scene
+        # Event processing
+        events = pygame.event.get()
+        top_overlay = engine.get_top_overlay()
         # Process all events and forward each one to the current scene
-        for event in pygame.event.get(): # collect events
+        for event in events: # collect events
             if event.type == pygame.QUIT:
                 running = False
                 break
-            escene_manager.handle_event(event) # forward every event immediately to the scene manager
+            
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                if top_overlay:
+                # If there is an overlay, ESC closes it
+                    engine.pop_overlay()
+                else:
+                    # If there is no overlay, ESC opens the pause menu
+                    # (Don't open it in the main menu!)
+                    if engine.scene_manager.current_scene.id != "menu":
+                        engine.push_overlay(PauseMenu(engine))
+                continue # The ESC event has been handled
 
+            if top_overlay:
+                # If the top overlay has an event handler, forward the event to it
+                if hasattr(top_overlay, "handle_event"):
+                    top_overlay.handle_event(event)
+            else:
+                escene_manager.handle_event(event) # forward every event immediately to the scene manager
+        
+        if not running:
+            break
+    
         # Delta time should be computed once per frame, after processing events
-        dt = clock.tick(60) / 1000.0  # Delta time is used to make the game frame rate independent of the cpu speed
+        dt = clock.tick(config.FPS) / 1000.0  # Delta time is used to make the game frame rate independent of the cpu speed
 
         # Update game state
-        escene_manager.update(dt) # The update method of the scene manager will call the update method of the current scene, passing the delta time as argument
+        if top_overlay:
+            engine.update_overlays(dt)
+        else:
+            escene_manager.update(dt) # The update method of the scene manager will call the update method of the current scene, passing the delta time as argument
 
         # Screen rendering
+        engine.transition_manager.update(dt)
+        engine.animation_manager.update(dt)
+        engine._update_notifications(dt)
+
         escene_manager.draw(screen) # The draw method of the scene manager will call the draw method of the current scene
+        engine.animation_manager.draw(screen)
+        engine.draw_overlays(screen)
+        engine.transition_manager.draw(screen)
+        engine._draw_notifications(screen)
         pygame.display.flip() # Display the updated screen
     # Finalize
     pygame.quit()

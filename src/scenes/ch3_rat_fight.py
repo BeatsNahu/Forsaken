@@ -44,7 +44,10 @@ SCENE = {
             "hp_bar_scale_factor": 5.0, 
 
             "skills": [
-                {"type": "ATTACK", "dmg_min": 1, "dmg_max": 3, "text": "Bite"}
+                {"type": "ATTACK", "dmg_min": 1, "dmg_max": 3, "text": "Bite",
+                 "sfx": "assets/audio/sfx/rat.ogg",
+                 "vfx": "assets/vfx/bite_effect.png",
+                 }
             ]
         }
     ],
@@ -64,11 +67,20 @@ SCENE = {
         {"speaker":"Narrator","text":"La rata cae. Encuentras comida."}
     ],
 
-    # --- REWARDS AND NEXT SCENES ---
     "rewards_on_victory": {
         "effects": [
+            # 1. El efecto LÓGICO (añade al inventario)
             {"type": "give_item", "item": "Lata_alubias"},
-            {"type": "set_var", "name": "player_hp", "value": "+10"} # Heal player by 10 HP
+            
+            # 2. El efecto de curación
+            {"type": "set_var", "name": "player_hp", "value": "+10"},
+            
+            # --- ¡NUEVO EFECTO VISUAL! ---
+            {
+                "type": "show_item_overlay",
+                "item_name": "Lata de Alubias",
+                "item_image": "assets/items/bean_can.png"
+            }
         ]
     },
     

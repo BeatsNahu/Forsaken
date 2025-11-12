@@ -21,6 +21,15 @@ SCENE = {
         {
             "text": "Revisar la celda Nª XXX.",
             "target": "scenes.ch3_bed",
+            "effects": [
+                {"type": "give_item", "item": "Lata_alubias"},
+                
+                {
+                    "type": "show_item_overlay",
+                    "item_name": "Lata de Alubias",
+                    "item_image": "assets/items/Lata_alubias.png"
+                }
+            ]
         }
     ]
 }

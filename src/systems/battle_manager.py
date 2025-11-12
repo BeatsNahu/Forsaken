@@ -1,16 +1,19 @@
 import pygame
 import random
+import config
 from core.scene import Scene
-from systems.ui_manager import BattleHUD
-
+from systems.ui_components import BattleHUD
+from systems.dialogue_player import DialoguePlayer
+from overlays.inventory_menu import InventoryMenu
 class BattleManager(Scene):
     def __init__(self, engine, data=None):
         super().__init__(engine, data) # Get base initialization (Scene, Data, etc.)
 
         self.ui = BattleHUD(self.engine) # UI for battle
-        
+        self._dialogue_player = None # Dialogue player for managing dialogue
+
         # State variables of the battle
-        self.ui_state = "CHOOSE_ACTION"  # CHOOSE_ACTION, CHOOSE_TARGET, CHOOSE_ITEM
+        self.ui_state = "PRE_BATTLE"  # CHOOSE_ACTION, CHOOSE_TARGET, CHOOSE_ITEM
         self.player_selection = 0        # Index of selected player action
         self.target_selection = 0
         self.player_is_defending = False
@@ -28,6 +31,9 @@ class BattleManager(Scene):
         self._enemy_turn_timer = 0.0
         self._enemy_action_pending = False
         self._enemy_anim_timer = 0.0
+
+        # Dialogue UI
+        self._pending_target_scene = None
 
         # Attack effects
         self.damage_flash_timer = 0.0
@@ -65,20 +71,30 @@ class BattleManager(Scene):
         music_path = self.data.get("music")
         if music_path:
             self.engine.play_music(music_path, loop=-1)
+
+        # Load dialogue
+        pre_dialogue = self.data.get("pre_battle_dialogue")
+
+        if pre_dialogue:
+            self.ui_state = "PRE_BATTLE"
+            self._dialogue_player = DialoguePlayer(self.engine, pre_dialogue)
+        else:
+            # If there's no dialogue, jump straight into the battle
+            self.ui_state = "BATTLE"
+            self._return_to_player_turn()   
         
         # Load enemies
         self.enemies = []
         for enemy_data in self.data.get("enemies", []):
-            
-            # Cargar y escalar Sprite de Enemigo
+            # Load and scale enemy sprite
             sprite_surf = self.engine.load_image(enemy_data.get("sprite"))
-            scale_factor_s = enemy_data.get("sprite_scale_factor", 1.0) # Default 1 (sin escala)
+            scale_factor_s = enemy_data.get("sprite_scale_factor", 1.0) # Default 1 (no scale)
             if sprite_surf and scale_factor_s != 1.0:
                 new_size = (int(sprite_surf.get_width() * scale_factor_s), 
                             int(sprite_surf.get_height() * scale_factor_s))
                 sprite_surf = pygame.transform.scale(sprite_surf, new_size)
 
-            # Cargar y escalar Barra de HP
+            # Load and scale HP bar
             hp_bar_surf = self.engine.load_image(enemy_data.get("hp_bar_sprite"))
             scale_factor_hp = enemy_data.get("hp_bar_scale_factor", 1.0)
             if hp_bar_surf and scale_factor_hp != 1.0:
@@ -97,33 +113,32 @@ class BattleManager(Scene):
                 # Store the loaded and scaled surfaces
                 "sprite": sprite_surf,
                 "hp_bar_sprite": hp_bar_surf,
-                "hp_bar_pos": enemy_data.get("hp_bar_pos", [1500, 250])
+                "hp_bar_pos": enemy_data.get("hp_bar_pos", [1500, 250]),
+                "hp_bar_pos": enemy_data.get("hp_bar_pos", [1500, 250]),
+                "hp_bar_scale": scale_factor_hp
             }
             self.enemies.append(enemy)
         
-        # Starting turn
         self.rules = self.data.get("rules", {})
         if self.rules.get("turn_order") == "player_first":
             self.turn = 0
         else:
             self.turn = 1
-            
-        self.ui_state = "CHOOSE_ACTION"
-        self.player_selection = 0
-        self.target_selection = 0
 
     def handle_event(self, event):
         if event.type != pygame.KEYDOWN:
             return
-        if event.key == pygame.K_ESCAPE:
-            setattr(self.engine, "quit_flag", True)
             
         # Block input if it's not the player's turn
         if self.turn != 0:
             return
         
-        if self.ui_state == "CHOOSE_ACTION":
-            # Navegar por el menú de habilidades
+        # If a dialogue player exists, it handles the event.
+        if self._dialogue_player:
+            self._dialogue_player.handle_event(event)
+        
+        # Otherwise the battle handles the event
+        elif self.ui_state == "CHOOSE_ACTION":
             if event.key == pygame.K_DOWN:
                 self.player_selection = (self.player_selection + 1) % len(self.player_skills)
             elif event.key == pygame.K_UP:
@@ -132,7 +147,6 @@ class BattleManager(Scene):
                 self._select_action()
 
     def _select_action(self):
-        """The player has selected an action from the menu."""
         skill = self.player_skills[self.player_selection]
         
         if skill["type"] == "ATTACK":
@@ -144,15 +158,14 @@ class BattleManager(Scene):
             self._end_player_turn()
 
         elif skill["type"] == "ITEM_MENU":
-            print("UI: Abriendo menú de items (no implementado)")
-            # self.ui_state = "CHOOSE_ITEM"
+            self.engine.push_overlay(InventoryMenu(self.engine))
 
     def _confirm_target(self):
         # The player has chosen Enter
         skill = self.player_skills[self.player_selection]
         target = self.enemies[self.target_selection]
         
-        # 1. Aplicar lógica de la habilidad
+        # 1. Apply skill logic
         if skill["type"] == "ATTACK":
             dmg = skill.get("dmg", 0)
             cost = skill.get("cost", 0)
@@ -168,140 +181,167 @@ class BattleManager(Scene):
             if vfx_path:
                 vfx_image = self.engine.load_image(vfx_path)
                 if vfx_image:
+                    center_pos = [960, 540]
+
                     self.engine.animation_manager.start_animation(
                         surface=vfx_image,
-                        start_pos=target["pos"],
-                        end_pos=target["pos"],
+                        start_pos=center_pos,
+                        end_pos=center_pos,
                         duration=0.2,
                         start_scale=1.0,
-                        end_scale=4.0,
+                        end_scale=5.0,
                         persist=False
                     )
                     
             self.battle_log_text = f"¡Golpeas a {target['id']} por {dmg} daño!"
 
-        # 2. Comprobar si el objetivo murió
+        # 2. Check if the target died
         if target["hp"] <= 0:
-            self.battle_log_text = f"{target['id']} ha sido derrotado."
-            self.enemies.pop(self.target_selection) # Eliminar de la lista de vivos
+            self.battle_log_text = f"{target['id']} has been defeated."
+            self.enemies.pop(self.target_selection) # Remove from the alive list
 
-        # 3. Comprobar si la batalla terminó
+        # 3. Check if the battle ended
         if not self.enemies:
             self._on_victory()
             return
-            
-        # 4. Terminar el turno
+
+        # 4. End the player's turn
         self._end_player_turn()
 
     def _end_player_turn(self):
         self.turn = 1
         self._enemy_action_pending = True
-        self._enemy_turn_timer = 0.5 # 500ms de retraso
+        self._enemy_turn_timer = 0.5 # 500ms delay
         self.ui_state = "ENEMY_TURN"
 
     def _execute_enemy_turn(self):
-        print("--- Turno Enemigo ---")
-        self._enemy_action_pending = False # Evita que se ejecute de nuevo
+        print("--- Enemy Turn ---")
+        self._enemy_action_pending = False # Prevent it from running again
 
         for enemy in self.enemies:
             if not enemy["skills"]:
                 continue
 
-            skill = enemy["skills"][0] # IA Simple
+            skill = enemy["skills"][0] # Simple AI
 
             if skill["type"] == "ATTACK":
-                dmg = random.randint(skill.get("dmg_min", 1), skill.get("dmg_max", 1))
+                dmg = random.randint(skill.get("dmg_min", 2), skill.get("dmg_max", 6))
 
                 if self.player_is_defending:
                     dmg = dmg // 2 
 
                 self.life_player -= dmg
-                print(f"{enemy['id']} usó {skill['text']} por {dmg} daño.")
+                print(f"{enemy['id']} used {skill['text']} for {dmg} damage.")
 
                 self.damage_flash_timer = self.damage_flash_duration
 
-                # 1. Muestra una notificación (usa tu sistema de engine.py)
-                self.battle_log_text = f"{enemy['id']} te ataca por {dmg} daño."
+                # 1. Show a notification (use your engine system)
+                self.battle_log_text = f"{enemy['id']} attacks you for {dmg} damage."
                 self.battle_log_timer = 2.0
 
-                # 2. Reproduce el SFX del enemigo (si lo tiene)
+                # 2. Play the enemy SFX (if any)
                 sfx_path = skill.get("sfx")
                 if sfx_path:
                     self.engine.play_sound(sfx_path)
 
-                # 3. Inicia el VFX del enemigo (si lo tiene)
+                # 3. Start the enemy VFX (if any)
                 vfx_path = skill.get("vfx")
                 if vfx_path:
                     vfx_image = self.engine.load_image(vfx_path)
                     if vfx_image:
-                        # (Asegúrate de NO poner un 'id' estático aquí)
                         self.engine.animation_manager.start_animation(
                             surface=vfx_image,
-                            start_pos=enemy["pos"], # O la posición del jugador
-                            end_pos=[960, 540],     # Ejemplo: el centro de la pantalla
+                            start_pos=[960, 540],
+                            end_pos=[960, 540],     
                             duration=0.5,
                             start_scale=1.0,
-                            end_scale=3.0,
+                            end_scale=5.0,
                             persist=False
                         )
-
-                # 4. Inicia el temporizador de "cooldown"
-                # (Dale tiempo a los efectos para que se vean)
-                self._enemy_anim_timer = 1.0 # 1 segundo de espera
+                # 4. Start the 'cooldown' timer
+                self._enemy_anim_timer = 1.0
 
         if self._enemy_anim_timer == 0.0:
             self._return_to_player_turn()
 
     def _return_to_player_turn(self):
-        # 1. Comprobar derrota del jugador
+        # 1. Check player defeat
         if self.life_player <= 0:
             self._on_defeat()
             return
 
-        # 2. Volver al turno del jugador
+        # 2. Return to player's turn
         self.turn = 0
         self.ui_state = "CHOOSE_ACTION"
         self.player_selection = 0
         self.player_is_defending = False
 
     def _on_victory(self):
-        print("¡VICTORIA!")
-        # Aplicar recompensas
+        print("VICTORY!")
+        # Apply rewards (unchanged)
         rewards = self.data.get("rewards_on_victory", {})
         self.engine.apply_effects(rewards.get("effects", []))
-        
-        # Ir a la siguiente escena
-        target = self.data.get("on_victory_target")
-        if target:
-            self.engine.scene_manager.load_scene(target)
-            
+
+        # Store the target scene
+        self._pending_target_scene = self.data.get("on_victory_target")
+        post_dialogue = self.data.get("post_battle_dialogue")
+
+        if post_dialogue:
+            self.ui_state = "POST_BATTLE_VICTORY"
+            self._dialogue_player = DialoguePlayer(self.engine, post_dialogue)
+        else:
+            if self._pending_target_scene:
+                self.engine.scene_manager.load_scene(self._pending_target_scene)
+
     def _on_defeat(self):
-        print("DERROTA...")
-        # (Lógica de perder corazón, si la tuvieras)
-        # self.engine.lose_heart()
-        
-        target = self.data.get("on_defeat_target")
-        if target:
-            self.engine.scene_manager.load_scene(target)
+        print("DEFEAT...")
+        self._pending_target_scene = self.data.get("on_defeat_target")
 
-    def update(self, dt: float):
-        # Update enemy turn timer
-        if self._enemy_action_pending:
-            self._enemy_turn_timer -= dt
-            if self._enemy_turn_timer <= 0:
-                self._execute_enemy_turn()
+        post_dialogue = self.data.get("post_defeat_dialogue") 
 
-        # Update enemy animation timer
-        if self._enemy_anim_timer > 0:
-            self._enemy_anim_timer -= dt
-            if self._enemy_anim_timer <= 0:
-                self._return_to_player_turn()
+        if post_dialogue:
+            self.ui_state = "POST_BATTLE_DEFEAT"
+            self._dialogue_player = DialoguePlayer(self.engine, post_dialogue)
+        else:
+            if self._pending_target_scene:
+                self.engine.scene_manager.load_scene(self._pending_target_scene)
 
-        # Update damage flash timer
+    def update(self, dt: float): 
+        # If a dialogue is playing, update it.
+        if self._dialogue_player:
+            self._dialogue_player.update(dt)
+            
+            # Check if it has finished
+            if self._dialogue_player.is_finished():
+                current_state = self.ui_state
+                self._dialogue_player = None # Destroy it
+
+                # Decide what to do next
+                if current_state == "PRE_BATTLE":
+                    self.ui_state = "BATTLE"
+                    self._return_to_player_turn()
+                
+                elif current_state == "POST_BATTLE_VICTORY" or current_state == "POST_BATTLE_DEFEAT":
+                    if self._pending_target_scene:
+                        self.engine.scene_manager.load_scene(self._pending_target_scene)
+            
+        # If no dialogue, update battle logic
+        elif self.ui_state in ("CHOOSE_ACTION", "ENEMY_TURN", "CHOOSE_TARGET"):
+            if self._enemy_action_pending:
+                self._enemy_turn_timer -= dt
+                if self._enemy_turn_timer <= 0:
+                    self._execute_enemy_turn()
+
+            if self._enemy_anim_timer > 0:
+                self._enemy_anim_timer -= dt
+                if self._enemy_anim_timer <= 0:
+                    self._return_to_player_turn()
+
+        # 1. Update damage flash
         if self.damage_flash_timer > 0:
             self.damage_flash_timer -= dt
 
-        # Update battle log timer
+        # 2. Update battle log
         if self.battle_log_timer > 0:
             self.battle_log_timer -= dt
         else:
@@ -321,49 +361,86 @@ class BattleManager(Scene):
             
             # Draw the HP bar
             if enemy["hp_bar_sprite"]:
+                # 1. Draw the base of the bar
                 surface.blit(enemy["hp_bar_sprite"], enemy["hp_bar_pos"])
-                # (Here's how to draw the red HP bar:
-                # based on enemy["hp"] / enemy["max_hp"])
+                try:
+                    # 2. Calculate HP percentage
+                    hp_percent = max(0, enemy["hp"] / enemy["max_hp"])
 
-        # 3. Damage flash effect
+                    # 3. Get scale and positions
+                    scale = enemy.get("hp_bar_scale", 1.0) # Use the stored value
+                    base_x = enemy["hp_bar_pos"][0]
+                    base_y = enemy["hp_bar_pos"][1]
+
+                    # 4. Calculate offsets (from config) scaled
+                    offset_x = config.ENEMY_HP_BAR_OFFSET_X * scale
+                    offset_y = config.ENEMY_HP_BAR_OFFSET_Y * scale
+                    max_width = config.ENEMY_HP_BAR_WIDTH * scale
+                    height = config.ENEMY_HP_BAR_HEIGHT * scale
+
+                    # 5. Compute current width of the red bar
+                    current_width = int(max_width * hp_percent)
+
+                    # 6. Define the Rect for the red bar
+                    bar_rect = pygame.Rect(
+                        base_x + offset_x,  # X position of the bar
+                        base_y + offset_y,  # Y position of the bar
+                        current_width,      # Width (based on HP)
+                        height              # Height
+                    )
+
+                    # 7. Draw the red rectangle
+                    pygame.draw.rect(surface, config.COLOR_RED, bar_rect)
+
+                except Exception as e:
+                    print(f"Error drawing HP bar: {e}")
+
+        if self.ui_state in ("PRE_BATTLE", "POST_BATTLE_VICTORY", "POST_BATTLE_DEFEAT"):
+            if self._dialogue_player:
+                self._dialogue_player.draw(surface)
+            
+        # 3: We're in Battle
+        elif self.ui_state in ("CHOOSE_ACTION", "ENEMY_TURN", "CHOOSE_TARGET", "CHOOSE_ITEM"):
+            # Draw the stats and skills panel
+            self.ui.draw(
+                surface,
+                player_hp=self.life_player,
+                enemies=self.enemies,
+                skills=self.player_skills,
+                selected_skill_idx=self.player_selection
+            )
+
+        # 4. Damage flash effect
         if self.damage_flash_timer > 0:
-            # Calcula la opacidad (alpha). Se desvanece de 150 a 0.
+            # Calculate opacity (alpha). Fades from 150 to 0.
             progress = self.damage_flash_timer / self.damage_flash_duration
-            alpha = int(progress * 150) # 150 es el alpha máximo (0-255)
+            alpha = int(progress * 150) # 150 is the max alpha (0-255)
 
-            self.flash_veil.fill((255, 0, 0, max(0, alpha))) # Rellena con rojo translúcido
+            self.flash_veil.fill((255, 0, 0, max(0, alpha))) # Fill with translucent red
             surface.blit(self.flash_veil, (0, 0))
 
-        # 4. Fixed UI Layer (Stats Panel, Skills Text, Player HP)
-        self.ui.draw(
-            surface,
-            player_hp=self.life_player,
-            enemies=self.enemies,
-            skills=self.player_skills,
-            selected_skill_idx=self.player_selection
-        )
         # 5. Battle Log
         if self.battle_log_timer > 0 and self.battle_log_text:
             padding = 10
 
-            # Renderizar texto
+            # Render text
             text_surf = self.log_font.render(self.battle_log_text, True, (255, 255, 255))
 
-            # Definir tamaño del fondo
+            # Compute background size
             bg_width = text_surf.get_width() + padding * 2
             bg_height = text_surf.get_height() + padding * 2
 
-            # Posición (Superior Derecha)
+            # Position (Top Right)
             screen_w = self.engine.screen.get_width()
             pos_x = screen_w - bg_width - 20 # 20px de margen
             pos_y = 20
 
-            # Dibujar fondo translúcido
+            # Draw translucent background
             bg_surf = pygame.Surface((bg_width, bg_height), pygame.SRCALPHA)
-            bg_surf.fill((0, 0, 0, 150)) # Negro, 150 de alpha
+            bg_surf.fill((0, 0, 0, 150)) # Black, alpha 150
             surface.blit(bg_surf, (pos_x, pos_y))
 
-            # Dibujar texto encima del fondo
+            # Draw text on top of the background
             surface.blit(text_surf, (pos_x + padding, pos_y + padding))
 
 SCENE_CLASS = BattleManager

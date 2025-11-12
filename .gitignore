@@ -10,5 +10,8 @@ src/scenes/__pycache__/
 # Ignore cache of src/core
 src/core/__pycache__/
 
+# Ignore cache of overlays
+overlays/__pycache__/
+
 # Ignore cache of Forsake
 __pycache__

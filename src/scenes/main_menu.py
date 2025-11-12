@@ -1,6 +1,7 @@
 # Description: Main menu scene for the game
 import pygame
 import os
+import config
 from core.scene import Scene
 
 class MainMenu(Scene):
@@ -10,16 +11,13 @@ class MainMenu(Scene):
             {"text": "Start Game", "action": lambda: self.engine.scene_manager.load_scene("scenes.ch1_intro")},
             {"text": "Exit", "action": lambda: setattr(self.engine, "quit_flag", True)}
         ]
-        # Preload fonts via engine cache to avoid recreating them every frame
-        font_path = "assets/fonts/press-start.k.ttf"
-        # keep path on self so other methods (draw) can reference it
-        self._font_path = font_path
-        # body font (used for menu options)
+        # body font (used 
         try:
-            self.font = self.engine.load_font(self._font_path, 50)
-        except Exception:
-            # fallback: create directly
-            self.font = pygame.font.Font(self._font_path if os.path.exists(self._font_path) else None, 50)
+            self.font = self.engine.load_font(config.FONT_PATH_DEFAULT, config.FONT_SIZE_MENU)
+        except Exception as e:
+            print(f"Error al cargar fuente de menú (fallback): {e}")
+            self.font = pygame.font.Font(None, config.FONT_SIZE_MENU)
+
         self.selection = 0 # Selected option index
 
         # Used images 
@@ -66,14 +64,13 @@ class MainMenu(Scene):
                 setattr(self.engine, "quit_flag", True)
             elif event.key == pygame.K_DOWN: # If the down arrow key is pressed
                 self.selection = (self.selection + 1) % len(self.options) # Move selection down, wrapping around
-                self.engine.play_sound("assets/audio/sfx/swap_option.ogg", volume=0.05) # Play option select sound
+                self.engine.play_sound(config.SFX_UI_SWAP, volume=0.05) # Play option select sound
             elif event.key == pygame.K_UP: # If the up arrow key is pressed
                 self.selection = (self.selection - 1) % len(self.options) # Move selection up, wrapping around
-                self.engine.play_sound("assets/audio/sfx/swap_option.ogg", volume=0.05) # Play option select sound
+                self.engine.play_sound(config.SFX_UI_SWAP, volume=0.05) # Play option select sound
             elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER): # If the enter key is pressed
                 self.options[self.selection]["action"]() # Execute the action of the selected option
-                self.engine.play_sound("assets/audio/sfx/option_selected.ogg", volume=0.05) # Play option select sound
-                self.engine.show_notification("¡Has empezado el juego!" if self.selection == 0 else "¡Has salido del juego!", duration=2.0)
+                self.engine.play_sound(config.SFX_UI_CONFIRM, volume=0.05) # Play option select sound
 
     def draw(self, surface):
         if self.bg:
