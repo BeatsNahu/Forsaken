@@ -1,8 +1,9 @@
 import pygame
 import os
-
+import config
+from overlays.item_reward import ItemRewardOverlay
 class Engine:
-    def __init__(self): # Buiilder of the engine
+    def __init__(self): # Builder of the engine
         self.name = None # Name of the engine
         self.scene_manager = None # Scene manager of the engine
         self.screen = None # Screen of the engine
@@ -17,6 +18,9 @@ class Engine:
         self.transition_manager = None
         self.animation_manager = None
 
+        # Overlays
+        self.overlay_stack = []
+
         # Simple resource caches
         self._font_cache = {}
         self._image_cache = {}
@@ -26,9 +30,9 @@ class Engine:
 
         # Notification system
         self.notifications = []
-        self.notifications_font = self.load_font(None, 24) # Default font for notifications
+        self.notifications_font = self.load_font(config.FONT_PATH_DEFAULT, config.FONT_SIZE_LOG) # Default font for notifications
 
-    def play_music(self, path, loop=-1, volume=0.7):
+    def play_music(self, path, loop=-1, volume=config.DEFAULT_MUSIC_VOLUME):
         # Play background music from a given path
         if not path:
             return
@@ -105,8 +109,8 @@ class Engine:
         except Exception as e:
             print(f"Error al cargar imagen {path}: {e}") # Print an error message if loading fails
             return None
-        
-    def play_sound(self, path, volume=0.7):
+
+    def play_sound(self, path, volume=config.DEFAULT_SFX_VOLUME):
         # Check cache
         if path not in self._sound_cache:
             if not path or not os.path.exists(path):
@@ -166,6 +170,16 @@ class Engine:
                 duration = e.get("duration", 3.0)
                 self.show_notification(text, duration)
 
+            elif t == "show_item_overlay":
+                item_name = e.get("item_name", "???")
+                item_image = e.get("item_image")
+                
+                # Only show overlay if we have an image
+                if item_image:
+                    self.push_overlay(ItemRewardOverlay(self, item_name, item_image))
+                else:
+                    print(f"Error: show_item_overlay no tiene 'item_image'")
+
     def show_notification(self, text, duration=2.0):
         # Show a notification on the screen for a certain duration (in seconds)
         self.notifications.append({"text": text, "timer": duration})
@@ -185,8 +199,40 @@ class Engine:
             return
         
         notif = self.notifications[0]  # Show only the first notification for simplicity
-        text_surf = self.notifications_font.render(notif["text"], True, (255, 255, 255))
+        text_surf = self.notifications_font.render(notif["text"], True, config.COLOR_WHITE)  # White color
 
         # Position at top-left corner with some padding
         pos_x = (surface.get_width() - text_surf.get_width()) // 2
-        surface.blit(text_surf, (pos_x, 10))
+        surface.blit(text_surf, (pos_x, config.NOTIFICATION_PADDING_Y))
+
+    # Overlays management
+    def push_overlay(self, overlay):
+        # Añade un overlay a la cima de la pila.
+        print(f"[Engine] Pushing overlay: {overlay.__class__.__name__}")
+        self.overlay_stack.append(overlay)
+
+    def pop_overlay(self):
+        # Elimina el overlay de la cima de la pila.
+        if self.overlay_stack:
+            overlay = self.overlay_stack.pop()
+            print(f"[Engine] Popping overlay: {overlay.__class__.__name__}")
+            return overlay
+        return None
+
+    def get_top_overlay(self):
+        # Devuelve el overlay de la cima (el que está activo) sin quitarlo.
+        if self.overlay_stack:
+            return self.overlay_stack[-1]
+        return None
+
+    def update_overlays(self, dt):
+        # Actualiza SÓLO el overlay que está en la cima.
+        top_overlay = self.get_top_overlay()
+        if top_overlay and hasattr(top_overlay, "update"):
+            top_overlay.update(dt)
+
+    def draw_overlays(self, surface):
+        # Dibuja TODOS los overlays, de abajo hacia arriba.
+        for overlay in self.overlay_stack:
+            if hasattr(overlay, "draw"):
+                overlay.draw(surface)

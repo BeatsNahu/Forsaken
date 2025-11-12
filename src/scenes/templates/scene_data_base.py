@@ -32,7 +32,12 @@ CENE = {
             # --- Efectos al elegir ---
             "effects": [
                 {"type": "notify", "text": "Has elegido el CAMINO 1", "duration": 4},
-                {"type": "give_item", "item": "llave_simple"}
+                {"type": "give_item", "item": "llave_simple"},
+                {
+                    "type": "show_item_overlay",
+                    "item_name": "Lata de Alubias",
+                    "item_image": "assets/items/Lata_alubias.png"
+                }
             ],
             # --- Diálogo después de elegir ---
             "post_choice_lines": [

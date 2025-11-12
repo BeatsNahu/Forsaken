@@ -1,5 +1,5 @@
 import pygame
-
+import config
 class TransitionManager:
     def __init__(self, engine):
         self.engine = engine
@@ -8,7 +8,7 @@ class TransitionManager:
         # State: "idle", "fading_out", "fading_in"
         self.state = "idle"
         self.alpha = 0  # Level of oscurity (255 = Totally dark) 
-        self.speed = 500 # Velocity the fade 
+        self.speed = config.TRANSITION_SPEED # Velocity the fade 
         
         self.target_scene = None # The scene to load after fade out
         
