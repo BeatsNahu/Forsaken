@@ -29,15 +29,15 @@ SCENE = {
             "max_hp": 73,
             "sprite": "assets/characters/knife_guy.png", # Sprite path
             "pos": [640, 100], # Position on screen
-            "hp_bar_sprite": "assets/layers_battle/hp_knife.png", 
-            "hp_bar_pos": [360, 100],
+            "hp_bar_sprite": "assets/ui/battle/hp_knife.png", 
+            "hp_bar_pos": [0, 20],
             "sprite_scale_factor": 7.0, # <--- ¡NUEVO! (Multiplica el tamaño por 6)
             "hp_bar_scale_factor": 5.0, 
 
             "skills": [
                 {"type": "ATTACK", "dmg_min": 2, "dmg_max": 4, "text": "Bite",
-                 "sfx": "assets/audio/sfx/rat.ogg",
-                 "vfx": "assets/vfx/bite_effect.png",
+                 "sfx": "assets/audio/sfx/knife.ogg",
+                 "vfx": "assets/vfx/knife_effect.png",
                  }
             ]
         }

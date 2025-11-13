@@ -49,9 +49,9 @@ NOTIFICATION_PADDING_Y = 10
 
 # --- 8. Battle HUD Layout ---
 # Relative positions within the battle HUD panel
-BATTLE_HUD_PADDING_X = 500
-BATTLE_HUD_HP_POS_Y = 500
-BATTLE_HUD_SKILL_START_Y = 500
+BATTLE_HUD_PADDING_X = 950
+BATTLE_HUD_HP_POS_Y = 700
+BATTLE_HUD_SKILL_START_Y = 750
 BATTLE_HUD_LINE_SPACING = 40
 
 # Enemy HP bar within enemy panel

@@ -1,8 +1,9 @@
 SCENE = {
     "id": "ch6_frog_lose",
     "background": "assets/backgrounds/end_frog_lose.png",
+    "music": "assets/audio/music/soundtrack.ogg",
     "lines": [
-        {"speaker": "Narrator", "text": "Aunque lo diste todo, no fuiste capaz de vencer a la rana mutante."},
+        {"speaker": "Narrator", "text": "Aunque lo diste todo, no fuiste capaz de vencer a la rana gigante."},
         {"speaker": "Narrator", "text": "Pero no te preocupes,"},
         {"speaker": "Narrator", "text": "tras tu muerte, ella, aprovechó cada parte de tu cuerpo,"},
         {"speaker": "Narrator", "text": "hasta aquello que no era capaz de digerir..."},
