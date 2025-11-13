@@ -25,8 +25,8 @@ SCENE = {
         {
             "id": "knife_guy", 
             "type": "knife_guy", 
-            "hp": 10, 
-            "max_hp": 10,
+            "hp": 73, 
+            "max_hp": 73,
             "sprite": "assets/characters/knife_guy.png", # Sprite path
             "pos": [640, 100], # Position on screen
             "hp_bar_sprite": "assets/layers_battle/hp_knife.png", 
@@ -35,7 +35,10 @@ SCENE = {
             "hp_bar_scale_factor": 5.0, 
 
             "skills": [
-                {"type": "ATTACK", "dmg_min": 1, "dmg_max": 3, "text": "Bite"}
+                {"type": "ATTACK", "dmg_min": 2, "dmg_max": 4, "text": "Bite",
+                 "sfx": "assets/audio/sfx/rat.ogg",
+                 "vfx": "assets/vfx/bite_effect.png",
+                 }
             ]
         }
     ],
