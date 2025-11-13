@@ -29,7 +29,7 @@ SCENE = {
             "max_hp": 10,
             "sprite": "assets/characters/knife_guy.png", # Sprite path
             "pos": [640, 100], # Position on screen
-            "hp_bar_sprite": "assets/layers_battle/hp_frog.png", 
+            "hp_bar_sprite": "assets/layers_battle/hp_knife.png", 
             "hp_bar_pos": [360, 100],
             "sprite_scale_factor": 7.0, # <--- ¡NUEVO! (Multiplica el tamaño por 6)
             "hp_bar_scale_factor": 5.0, 

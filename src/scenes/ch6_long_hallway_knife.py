@@ -10,7 +10,7 @@ SCENE = {
     ],
     "choices": [
         {
-            "text": "Continuar subiendo.",
+            "text": "Continuar caminando.",
             "target": "scenes.ch7_continue_knife_guy",
             "post_choice_lines": [
                 {"speaker": "Narrator", "text": "Sientes una extraña presión en el pecho mientras avanzas,"},
