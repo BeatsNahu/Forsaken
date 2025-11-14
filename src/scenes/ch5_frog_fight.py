@@ -29,15 +29,16 @@ SCENE = {
             "max_hp": 60,
             "sprite": "assets/characters/combat_frog1.png", # Sprite path
             "pos": [150, 100], # Position on screen
-            "hp_bar_sprite": "assets/layers_battle/hp_frog.png", 
-            "hp_bar_pos": [360, 100],
+            "hp_bar_sprite": "assets/ui/battle/hp_frog.png", 
+            "hp_bar_pos": [0, 20],
             "sprite_scale_factor": 5.0, # <--- ¡NUEVO! (Multiplica el tamaño por 6)
             "hp_bar_scale_factor": 5.0, 
 
             "skills": [
                 {"type": "ATTACK", "dmg_min": 1, "dmg_max": 3, "text": "Bite",
-                 "sfx": "assets/audio/sfx/rat.ogg",
+                 "sfx": "assets/audio/sfx/frog.ogg",
                  "vfx": "assets/vfx/bite_effect.png",
+                 "vfx": "assets/characters/combat_frog2.png",
                  }
             ]
         }
@@ -52,10 +53,10 @@ SCENE = {
     
     # --- DIALOGUE ---
     "pre_battle_dialogue": [
-        {"speaker":"Narrator","text":"¡Una rata mutante aparece!"}
+        {"speaker":"Narrator","text":"¡Una rana gigante aparece!"}
     ],
     "post_battle_dialogue": [
-        {"speaker":"Narrator","text":"La rata cae. Encuentras comida."}
+        {"speaker":"Narrator","text":"Has derrotado a la rana, felicidades!"}
     ],
     "rewards_on_victory": {
         "effects": [

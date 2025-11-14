@@ -1,7 +1,7 @@
 SCENE = {
     "id": "ch6_knife_lose",
     "background": "assets/backgrounds/end_torture_lose.png",
-    "music": "",
+    "music": "assets/audio/music/soundtrack.ogg",
     "sfx_on_enter": "", 
     "lines": [
         {"speaker": "Narrator", "text": "Los profundes cortes que recibiste fueron demasiado,"},
