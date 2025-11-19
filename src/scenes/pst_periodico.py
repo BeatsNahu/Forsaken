@@ -5,12 +5,12 @@ SCENE = {
     "volume": 0.1,
     "sfx_on_enter": None, 
     "lines": [
-        {"speaker": "Narrador", "text": "Abres los ojos y te encuentras en un lugar que no reconoces,"},
-        {"speaker": "Narrador", "text": "tratas de recordar como o cuando llegaste aqui,"},
-        {"speaker": "Narrador", "text": "pero cuanto mas lo intentas,"},
-        {"speaker": "Narrador", "text": "te vas dando cuenta de que no eres capaz de recordar nada,"},
-        {"speaker": "Narrador", "text": "nisiquiera tu propio nombre."},
-        {"speaker": "Narrador", "text": "La situación te hace sentir un escalofrio."}
+        {"speaker": "Narrador", "text": "Despues de la falta de avances del doctor Waos,"},
+        {"speaker": "Narrador", "text": "diversas personas critican si de verdad estaba"},
+        {"speaker": "Narrador", "text": "hablando en serio sobre la evolucion de la humanidad."},
+        {"speaker": "Narrador", "text": "Devido a las recientes desapariciones se cree que"},
+        {"speaker": "Narrador", "text": "el doctor Waos secuestró a varias personas para"},
+        {"speaker": "Narrador", "text": "dibersos experimentos."},
     ],
     "choices": [
         {
