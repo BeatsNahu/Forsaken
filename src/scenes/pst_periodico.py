@@ -1,27 +1,22 @@
 SCENE = {
-    "id": "ch1_intro",
-    "background": "assets/backgrounds/periodico.png",
+    "id": "pst_periodico",
+    "background": "assets/backgrounds/doctor_decadencia.png",
     "music": "assets/audio/music/soundtrack.ogg", 
     "volume": 0.1,
     "sfx_on_enter": None, 
     "lines": [
-        {"speaker": "Narrador", "text": "Despues de la falta de avances del doctor Waos,"},
-        {"speaker": "Narrador", "text": "diversas personas critican si de verdad estaba"},
-        {"speaker": "Narrador", "text": "hablando en serio sobre la evolucion de la humanidad."},
-        {"speaker": "Narrador", "text": "Devido a las recientes desapariciones se cree que"},
-        {"speaker": "Narrador", "text": "el doctor Waos secuestró a varias personas para"},
-        {"speaker": "Narrador", "text": "dibersos experimentos."},
+        {"speaker": "Narrador", "text": "Però la gent volia miracles,"},
+        {"speaker": "Narrador", "text": "ell no podia complir amb les seves expectatives"},
+        {"speaker": "Narrador", "text": "i els experiments van començar a no donar els resultats esperats,"},
+        {"speaker": "Narrador", "text": "així que ell va començar a prendre mesures desesperades."},
+        {"speaker": "Narrador", "text": "Faria el que sigui necessari per a avançar amb els seus experiments"},
+        {"speaker": "Narrador", "text": " i demostrar-li al món que el no és un mentider..."},
     ],
     "choices": [
         {
-            "text": "Acércate a la puerta",
-            "target": "scenes.pst_20",
+            "text": "-->",
+            "target": "scenes.pst_decadencia",
             "sfx": "assets/audio/sfx/swap_option.ogg",
-            "post_choice_lines": [
-                {"speaker": "Narrador", "text": "A pesar de tu confusión, decides acercarte a la puerta,"},
-                {"speaker": "Narrador", "text": "pero como no ves nada interesante a tu alrededor,"},
-                {"speaker": "Narrador", "text": "caminas directamente hacia el pasillo frente a ti."}
-            ]
         }
     ]
 }
