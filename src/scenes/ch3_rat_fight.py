@@ -26,7 +26,7 @@ SCENE = {
              "end_pos": [960, 540]
             },
             {"id": "defend", "text": "Defensa", "type": "DEFEND"},
-            {"id": "item", "text": "Item", "type": "ITEM_MENU"}
+            {"id": "item", "text": "Ítem", "type": "ITEM_MENU"}
         ]
     },
     "enemies": [

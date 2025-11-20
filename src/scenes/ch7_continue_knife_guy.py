@@ -3,13 +3,13 @@ SCENE = {
     "background": "assets/backgrounds/araunitnoC.png",
     "lines": [
         {"speaker": "Narrator", "text": "Pero finalmente consigues atravesar la extraña zona y"},
-        {"speaker": "Narrator", "text": "te encuentras en una sala mucho mas iluminada y amplia."},
-        {"speaker": "Narrator", "text": "Rapidamente te das cuenta del mapa que hay en la pared,"},
+        {"speaker": "Narrator", "text": "te encuentras en una sala mucho más iluminada y amplia."},
+        {"speaker": "Narrator", "text": "Rápidamente te das cuenta del mapa que hay en la pared,"},
         {"speaker": "Narrator", "text": "pero algo no se siente del todo bien..."},
     ],
     "choices": [
         {
-            "text": "Continuará...?",
+            "text": "¿Continuará...?",
             "target": "scenes.ch8_thanks",
         }
     ]

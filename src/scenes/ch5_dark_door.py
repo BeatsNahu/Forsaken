@@ -6,7 +6,7 @@ SCENE = {
         {"speaker": "Narrador", "text": "No te das cuenta inmediatamente,"},
         {"speaker": "Narrador", "text": "pero cuando tu vista se acostumbra a la oscuridad,"},
         {"speaker": "Narrador", "text": "logras distinguir una figura que te observa en silencio."},
-        {"speaker": "Narrador", "text": "Ya estas aqui, asi que toca plantarle cara."}
+        {"speaker": "Narrador", "text": "Ya estás aquí, así que toca plantarle cara."}
     ],
     "choices": [
         {

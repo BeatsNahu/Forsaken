@@ -8,7 +8,7 @@ SCENE = {
     ],
     "choices": [
         {
-            "text": "Continuará...?",
+            "text": "¿Continuará...?",
             "target": "scenes.ch8_thanks",
         }
     ]

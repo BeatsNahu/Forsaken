@@ -4,9 +4,9 @@ SCENE = {
     "music": "assets/audio/music/soundtrack.ogg", 
     "sfx_on_enter": None,
     "lines": [
-        {"speaker": "Narrador", "text": "Rápidamente te acercas a la cama para ver debajo de ella,"},
+        {"speaker": "Narrador", "text": "Rápidamente te acercas a la cama para ver debajo de ella;"},
         {"speaker": "Narrador", "text": "está tan oscuro que no puedes ver bien lo que hay."},
-        {"speaker": "Narrador", "text": "Quieres meter la mano?"},
+        {"speaker": "Narrador", "text": "¿Quieres meter la mano?"},
     ],
     "choices": [
         {
@@ -24,7 +24,7 @@ SCENE = {
             "post_choice_lines": [
                 {"speaker": "Narrador", "text": "Sin perder el tiempo, metes la mano debajo de la cama."},
                 {"speaker": "Narrador", "text": "Mueves la mano entre el polvo y la suciedad..."},
-                {"speaker": "Narrador", "text": "y consigues un tenedor oxidado!!"},
+                {"speaker": "Narrador", "text": "¡¡y consigues un tenedor oxidado!!"},
             ]
         },
         {

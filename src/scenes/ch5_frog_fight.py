@@ -56,7 +56,7 @@ SCENE = {
         {"speaker":"Narrator","text":"¡Una rana gigante aparece!"}
     ],
     "post_battle_dialogue": [
-        {"speaker":"Narrator","text":"Has derrotado a la rana, felicidades!"}
+        {"speaker":"Narrator","text":"¡Has derrotado a la rana, felicidades!"}
     ],
     "rewards_on_victory": {
         "effects": [

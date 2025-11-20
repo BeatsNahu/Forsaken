@@ -55,8 +55,8 @@ SCENE = {
         {"speaker":"Narrator","text":"¡Acaba de aparecer el Sr. Cuchillos!"}
     ],
     "post_battle_dialogue": [
-        {"speaker":"Narrator","text":"Has perdi... HAS GANADO?!"},
-        {"speaker":"Narrator","text":"Felicidades!!!"},
+        {"speaker":"Narrator","text":"Has perdi... ¿¡HAS GANADO?!"},
+        {"speaker":"Narrator","text":"¡¡¡Felicidades!!!"},
 
     ],
 

@@ -5,7 +5,7 @@ SCENE = {
     "lines": [
         {"speaker": "Narrador", "text": "Tras una intensa batalla,"},
         {"speaker": "Narrador", "text": "logras vencer a la rana mutante y te adentras por el pasillo."},
-        {"speaker": "Narrador", "text": "Caminas con cuidado por el oscuro y largo corredor,"},
+        {"speaker": "Narrador", "text": "Caminas con cuidado por el oscuro y largo corredor;"},
         {"speaker": "Narrador", "text": "el pasillo se alarga y te adentras aún más en la oscuridad..."},
     ],
     "choices": [
