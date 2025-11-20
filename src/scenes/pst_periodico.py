@@ -1,7 +1,7 @@
 SCENE = {
     "id": "pst_periodico",
     "background": "assets/backgrounds/doctor_decadencia.png",
-    "music": "assets/audio/music/soundtrack.ogg", 
+    "music": "assets/audio/music/presentation.ogg", 
     "volume": 0.1,
     "sfx_on_enter": None, 
     "lines": [
