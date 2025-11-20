@@ -12,19 +12,18 @@ SCENE = {
         {
             "text": "Sí",
             "effects": [
-                {"type": "give_item", "item": "fork"},
+                {"type": "give_item", "item": "Metal_bar"},
                 
                 {
                     "type": "show_item_overlay",
-                    "item_name": "Tenedor Oxidado",
-                    "item_image": "assets/items/fork.png"
+                    "item_name": "Barra de metal",
+                    "item_image": "assets/items/tubooxidado.png"
                 }
             ],
             "target": "scenes.ch4_frog",
             "post_choice_lines": [
-                {"speaker": "Narrador", "text": "Sin perder el tiempo, metes la mano debajo de la cama."},
-                {"speaker": "Narrador", "text": "Mueves la mano entre el polvo y la suciedad..."},
-                {"speaker": "Narrador", "text": "¡¡y consigues un tenedor oxidado!!"},
+                {"speaker": "Narrador", "text": "Notas un movimiento extraño así que"},
+                {"speaker": "Narrador", "text": "coges el primer objeto que ves para defenderte."}
             ]
         },
         {
