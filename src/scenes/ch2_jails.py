@@ -24,7 +24,7 @@ SCENE = {
         },
         {
             "text": "Revisar la celda n.º XXX.",
-            "target": "scenes.ch3_rat_food",
+            "target": "scenes.ch3_bed",
             "post_choice_lines": [
                 {"speaker": "Narrador", "text": "Sientes una extraña curiosidad por el pasillo XXX,"},
                 {"speaker": "Narrador", "text": "así que decides caminar hacia esa dirección."},
